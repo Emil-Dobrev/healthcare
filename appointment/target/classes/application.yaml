@@ -1,0 +1,21 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: appointment
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:5432/appointment
+    username: emildobrev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  rabbitmq:
+    addresses: localhost:5672
+  profiles:
+    active: default
