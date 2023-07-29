@@ -1,8 +1,9 @@
 package emil.dobrev.services.controller;
 
+import emil.dobrev.services.dto.AuthenticationRequest;
 import emil.dobrev.services.dto.DoctorDTO;
 import emil.dobrev.services.dto.DoctorRegistrationRequest;
-import emil.dobrev.services.dto.RegistrationResponse;
+import emil.dobrev.services.dto.AuthenticationResponse;
 import emil.dobrev.services.service.interfaces.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,14 @@ import org.springframework.web.bind.annotation.*;
 public class DoctorController {
     private final DoctorService doctorService;
 
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(doctorService.authenticate(request));
+    }
+
     @PostMapping
-    public ResponseEntity<RegistrationResponse> register(@Valid @RequestBody DoctorRegistrationRequest doctorRegistrationRequest) {
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody DoctorRegistrationRequest doctorRegistrationRequest) {
         log.info("Doctor registration request");
         return ResponseEntity.ok().body(doctorService.register(doctorRegistrationRequest));
     }

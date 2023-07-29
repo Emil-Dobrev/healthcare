@@ -7,9 +7,10 @@ spring:
     password: password
     url: jdbc:postgresql://localhost:5432/register
     username: emildobrev
+    secret: kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -19,3 +20,5 @@ spring:
     addresses: localhost:5672
   profiles:
     active: default
+
+

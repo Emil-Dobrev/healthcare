@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JwtSecret {
-    @Value("${secret}")
-    public String secret;
+//    @Value("${spring.secret}")
+    public String secret = "kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao";
 }

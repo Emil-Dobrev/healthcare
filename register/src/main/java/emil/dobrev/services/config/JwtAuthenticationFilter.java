@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,11 +19,22 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
     private final JwtService jwtService;
-    private final UserDetailsService userDetailsService;
+    @Qualifier("doctorDetailsService")
+    private final UserDetailsService doctorUserDetailService;
+    @Qualifier("patientDetailsService")
+    private final UserDetailsService patientUserDetailService;
+
+    public JwtAuthenticationFilter(
+            JwtService jwtService,
+            @Qualifier("doctorDetailsService") UserDetailsService doctorUserDetailService,
+            @Qualifier("patientDetailsService") UserDetailsService patientUserDetailService
+    ) {
+        this.jwtService = jwtService;
+        this.doctorUserDetailService = doctorUserDetailService;
+        this.patientUserDetailService = patientUserDetailService;
+    }
 
     @Override
     protected void doFilterInternal(
@@ -42,7 +55,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         userEmail = jwtService.extractUsername(jwt);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = null;
+            if (request.getRequestURI().startsWith("/api/v1/doctors")) {
+                userDetails = doctorUserDetailService.loadUserByUsername(userEmail);
+            } else if (request.getRequestURI().startsWith("/api/v1/patients")) {
+                userDetails = patientUserDetailService.loadUserByUsername(userEmail);
+            }
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
