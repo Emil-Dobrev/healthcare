@@ -31,8 +31,6 @@ Yappointment/src/main/java/emil/dobrev/services/service/interfaces/AppointmentSe
 Qappointment/src/main/java/emil/dobrev/services/service/AppointmentServiceImp.java,2/2/22a06f367f1cc557747f2ab732e56d6a0ad1f9a0
 x
 Happointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java,d/b/dbad7289a1857cd6fabfea0f19fdd75a27c9c15d
-@
-register/pom.xml,6/f/6faabbe10f004a0e56125970a09d898d5f627da4
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 ƒ
