@@ -13,8 +13,6 @@ u
 Eappointment/src/main/java/emil/dobrev/services/model/Appointment.java,9/8/986b0f2067b8a4143d2a8a7fd1b8edde37f88447
 x
 Happointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java,d/b/dbad7289a1857cd6fabfea0f19fdd75a27c9c15d
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 k
 ;register/src/main/java/emil/dobrev/services/enums/Role.java,8/f/8feaa340d253fb3119bd591e1414e840571ea03b
 n

@@ -16,3 +16,7 @@ go to localhost:5050 (PGAdmin) and create the connection:
 8:Password - password
 9:Click save
 10:Create DB with name appointment and register
+
+Start Discovery service
+
+Start API Gateway
