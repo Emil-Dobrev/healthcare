@@ -1,8 +1,8 @@
 package emil.dobrev.services.service;
 
 
-//import emil.dobrev.services.config.JwtService;
-//import emil.dobrev.services.dto.AuthenticationRequest;
+import emil.dobrev.services.config.JwtService;
+import emil.dobrev.services.dto.AuthenticationRequest;
 import emil.dobrev.services.dto.AuthenticationResponse;
 import emil.dobrev.services.dto.DoctorRegistrationRequest;
 import emil.dobrev.services.dto.PatientRegistrationRequest;
@@ -14,6 +14,10 @@ import emil.dobrev.services.repository.PatientRepository;
 import emil.dobrev.services.service.interfaces.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +30,8 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final JwtService jwtService;
-//    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public AuthenticationResponse register(DoctorRegistrationRequest doctorRegistrationRequest) {
@@ -41,11 +45,11 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .roles(List.of(Role.DOCTOR))
                 .build();
 
-//        var jwtToken = jwtService.generateToken(doctor);
+        var jwtToken = jwtService.generateToken(doctor);
 
         doctorRepository.save(doctor);
         return AuthenticationResponse.builder()
-                .token("jwtToken")
+                .token(jwtToken)
                 .build();
     }
 
@@ -60,36 +64,36 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .build();
 
         patientRepository.save(patient);
-//        var jwtToken = jwtService.generateToken(patient);
+        var jwtToken = jwtService.generateToken(patient);
 
         return AuthenticationResponse.builder()
-                .token("jwtToken")
+                .token(jwtToken)
                 .build();
     }
 
-//    @Override
-//    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-//        UsernamePasswordAuthenticationToken authenticationToken =
-//                new UsernamePasswordAuthenticationToken(
-//                        request.email(),
-//                        request.password()
-//                );
-//        authenticationManager.authenticate(authenticationToken);
-//
-//        String jwtToken = getToken(request);
-//        return new AuthenticationResponse(jwtToken);
-//    }
-//
-//    private String getToken(AuthenticationRequest request) {
-//        UserDetails user;
-//        if(request.isDoctor()) {
-//             user = doctorRepository.findByEmail(request.email())
-//                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//        } else {
-//             user = patientRepository.findByEmail(request.email())
-//                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-//        }
-//
-//        return jwtService.generateToken(user);
-//    }
+    @Override
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(
+                        request.email(),
+                        request.password()
+                );
+        authenticationManager.authenticate(authenticationToken);
+
+        String jwtToken = getToken(request);
+        return new AuthenticationResponse(jwtToken);
+    }
+
+    private String getToken(AuthenticationRequest request) {
+        UserDetails user;
+        if(request.isDoctor()) {
+             user = doctorRepository.findByEmail(request.email())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        } else {
+             user = patientRepository.findByEmail(request.email())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        }
+
+        return jwtService.generateToken(user);
+    }
 }

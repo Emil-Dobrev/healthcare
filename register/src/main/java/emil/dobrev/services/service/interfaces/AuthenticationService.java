@@ -10,7 +10,7 @@ public interface AuthenticationService {
 
     AuthenticationResponse register(PatientRegistrationRequest patientRegistrationRequest);
 
-//    AuthenticationResponse authenticate(AuthenticationRequest request);
+    AuthenticationResponse authenticate(AuthenticationRequest request);
 
 
 }

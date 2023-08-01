@@ -1,0 +1,80 @@
+[2023-08-01 18:49:10,919][DEBUG][freemarker.cache] Couldn't find template in cache for "eureka/status.ftlh"("en_GB", UTF-8, parsed); will try to load it.
+[2023-08-01 18:49:10,921][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status_en_GB.ftlh"): Not found
+[2023-08-01 18:49:10,921][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status_en.ftlh"): Not found
+[2023-08-01 18:49:10,922][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status.ftlh"): Found
+[2023-08-01 18:49:10,922][DEBUG][freemarker.cache] Loading template for "eureka/status.ftlh"("en_GB", UTF-8, parsed) from "class path resource [templates/eureka/status.ftlh]"
+[2023-08-01 18:49:10,970][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:10,980][DEBUG][freemarker.cache] Couldn't find template in cache for "spring.ftl"("en_GB", UTF-8, parsed); will try to load it.
+[2023-08-01 18:49:10,980][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring_en_GB.ftl"): Not found
+[2023-08-01 18:49:10,981][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring_en.ftl"): Not found
+[2023-08-01 18:49:10,981][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring.ftl"): Found
+[2023-08-01 18:49:10,981][DEBUG][freemarker.cache] Loading template for "spring.ftl"("en_GB", UTF-8, parsed) from "jar:file:/Users/dobreve/.m2/repository/org/springframework/spring-webmvc/6.0.11/spring-webmvc-6.0.11.jar!/org/springframework/web/servlet/view/freemarker/spring.ftl"
+[2023-08-01 18:49:10,995][DEBUG][freemarker.cache] Couldn't find template in cache for "eureka/header.ftlh"("en_GB", UTF-8, parsed); will try to load it.
+[2023-08-01 18:49:10,995][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header_en_GB.ftlh"): Not found
+[2023-08-01 18:49:10,995][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header_en.ftlh"): Not found
+[2023-08-01 18:49:10,995][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header.ftlh"): Found
+[2023-08-01 18:49:10,996][DEBUG][freemarker.cache] Loading template for "eureka/header.ftlh"("en_GB", UTF-8, parsed) from "class path resource [templates/eureka/header.ftlh]"
+[2023-08-01 18:49:10,996][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:10,997][DEBUG][freemarker.cache] Couldn't find template in cache for "eureka/navbar.ftlh"("en_GB", UTF-8, parsed); will try to load it.
+[2023-08-01 18:49:10,997][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar_en_GB.ftlh"): Not found
+[2023-08-01 18:49:10,997][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar_en.ftlh"): Not found
+[2023-08-01 18:49:10,997][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar.ftlh"): Found
+[2023-08-01 18:49:10,997][DEBUG][freemarker.cache] Loading template for "eureka/navbar.ftlh"("en_GB", UTF-8, parsed) from "class path resource [templates/eureka/navbar.ftlh]"
+[2023-08-01 18:49:12,936][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:12,937][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:12,937][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:12,940][DEBUG][freemarker.cache] "eureka/header.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:12,940][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:12,941][DEBUG][freemarker.cache] "eureka/navbar.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:14,648][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:14,648][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:14,649][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:14,649][DEBUG][freemarker.cache] "eureka/header.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:14,649][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:14,649][DEBUG][freemarker.cache] "eureka/navbar.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:17,816][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status_en_GB.ftlh"): Not found
+[2023-08-01 18:49:17,817][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status_en.ftlh"): Not found
+[2023-08-01 18:49:17,817][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status.ftlh"): Found
+[2023-08-01 18:49:17,818][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed): using cached since class path resource [templates/eureka/status.ftlh] hasn't changed.
+[2023-08-01 18:49:17,818][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:17,818][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring_en_GB.ftl"): Not found
+[2023-08-01 18:49:17,818][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring_en.ftl"): Not found
+[2023-08-01 18:49:17,818][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring.ftl"): Found
+[2023-08-01 18:49:17,818][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed): using cached since jar:file:/Users/dobreve/.m2/repository/org/springframework/spring-webmvc/6.0.11/spring-webmvc-6.0.11.jar!/org/springframework/web/servlet/view/freemarker/spring.ftl hasn't changed.
+[2023-08-01 18:49:17,819][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header_en_GB.ftlh"): Not found
+[2023-08-01 18:49:17,819][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header_en.ftlh"): Not found
+[2023-08-01 18:49:17,819][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header.ftlh"): Found
+[2023-08-01 18:49:17,819][DEBUG][freemarker.cache] "eureka/header.ftlh"("en_GB", UTF-8, parsed): using cached since class path resource [templates/eureka/header.ftlh] hasn't changed.
+[2023-08-01 18:49:17,819][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:17,820][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar_en_GB.ftlh"): Not found
+[2023-08-01 18:49:17,820][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar_en.ftlh"): Not found
+[2023-08-01 18:49:17,820][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar.ftlh"): Found
+[2023-08-01 18:49:17,820][DEBUG][freemarker.cache] "eureka/navbar.ftlh"("en_GB", UTF-8, parsed): using cached since class path resource [templates/eureka/navbar.ftlh] hasn't changed.
+[2023-08-01 18:49:32,714][DEBUG][freemarker.cache] Couldn't find template in cache for "eureka/lastn.ftlh"("en_GB", UTF-8, parsed); will try to load it.
+[2023-08-01 18:49:32,717][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/lastn_en_GB.ftlh"): Not found
+[2023-08-01 18:49:32,718][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/lastn_en.ftlh"): Not found
+[2023-08-01 18:49:32,719][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/lastn.ftlh"): Found
+[2023-08-01 18:49:32,719][DEBUG][freemarker.cache] Loading template for "eureka/lastn.ftlh"("en_GB", UTF-8, parsed) from "class path resource [templates/eureka/lastn.ftlh]"
+[2023-08-01 18:49:32,725][DEBUG][freemarker.cache] "eureka/lastn.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:32,726][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring_en_GB.ftl"): Not found
+[2023-08-01 18:49:32,726][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring_en.ftl"): Not found
+[2023-08-01 18:49:32,726][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("spring.ftl"): Found
+[2023-08-01 18:49:32,726][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed): using cached since jar:file:/Users/dobreve/.m2/repository/org/springframework/spring-webmvc/6.0.11/spring-webmvc-6.0.11.jar!/org/springframework/web/servlet/view/freemarker/spring.ftl hasn't changed.
+[2023-08-01 18:49:32,727][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header_en_GB.ftlh"): Not found
+[2023-08-01 18:49:32,727][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header_en.ftlh"): Not found
+[2023-08-01 18:49:32,728][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/header.ftlh"): Found
+[2023-08-01 18:49:32,728][DEBUG][freemarker.cache] "eureka/header.ftlh"("en_GB", UTF-8, parsed): using cached since class path resource [templates/eureka/header.ftlh] hasn't changed.
+[2023-08-01 18:49:32,728][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:32,728][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar_en_GB.ftlh"): Not found
+[2023-08-01 18:49:32,729][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar_en.ftlh"): Not found
+[2023-08-01 18:49:32,729][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/navbar.ftlh"): Found
+[2023-08-01 18:49:32,729][DEBUG][freemarker.cache] "eureka/navbar.ftlh"("en_GB", UTF-8, parsed): using cached since class path resource [templates/eureka/navbar.ftlh] hasn't changed.
+[2023-08-01 18:49:37,192][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status_en_GB.ftlh"): Not found
+[2023-08-01 18:49:37,193][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status_en.ftlh"): Not found
+[2023-08-01 18:49:37,193][DEBUG][freemarker.cache] TemplateLoader.findTemplateSource("eureka/status.ftlh"): Found
+[2023-08-01 18:49:37,193][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed): using cached since class path resource [templates/eureka/status.ftlh] hasn't changed.
+[2023-08-01 18:49:37,193][DEBUG][freemarker.cache] "eureka/status.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:37,193][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:37,194][DEBUG][freemarker.cache] "eureka/header.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:37,194][DEBUG][freemarker.cache] "spring.ftl"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.
+[2023-08-01 18:49:37,194][DEBUG][freemarker.cache] "eureka/navbar.ftlh"("en_GB", UTF-8, parsed) cached copy not yet stale; using cached.

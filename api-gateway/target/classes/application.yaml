@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: api-gateway
@@ -15,17 +14,23 @@ spring:
         - id: register-route
           uri: lb://register
           predicates:
-            - Path=/api/v1/doctors
+            - Method=GET,POST
+          filters:
+            - AuthenticationFilter
 
         - id: discovery-route-static
           uri: http://localhost:8761
           predicates:
             - Path=/eureka/**
+          filters:
+            - AuthenticationFilter
 
         - id: appointment-route
           uri: lb://appointment
           predicates:
-            - Path=/api/v1/
+            - Path=/api/v1/appointment
+          filters:
+            - AuthenticationFilter
 
   security:
     oauth2:
