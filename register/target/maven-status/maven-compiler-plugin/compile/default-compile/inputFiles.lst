@@ -1,0 +1,15 @@
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/service/DoctorServiceImp.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/config/AppConfig.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/dto/DoctorRegistrationResponse.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/dto/DoctorRegistrationRequest.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/controller/DoctorController.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/enums/DoctorSpecialization.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/exception/InvalidInputException.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/entity/User.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/exception/ErrorResponse.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/service/interfaces/DoctorService.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/repository/DoctorRepository.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/exception/RegisterExceptionHandler.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/RegisterApplication.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/dto/DoctorDTO.java
+/Users/dobreve/healthcare/healtcare/register/src/main/java/emil/dobrev/services/entity/Doctor.java

@@ -1,7 +1,5 @@
 package emil.dobrev.services.exception;
 
-import emil.dobrev.services.exception.ErrorResponse;
-import emil.dobrev.services.exception.InvalidInputException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -54,5 +52,15 @@ public class RegisterExceptionHandler {
                 HttpStatus.BAD_REQUEST.getReasonPhrase()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorResponse> handleNoSuchElementException(NoSuchElementException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }

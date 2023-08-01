@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: api-gateway
+  datasource:
+      password: password
+      url: jdbc:postgresql://localhost:5432/register
+      username: emildobrev
+  secret: kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      routes:
+        - id: register-route
+          uri: lb://register
+          predicates:
+            - Method=GET,POST
+          filters:
+            - AuthenticationFilter
+
+        - id: discovery-route-static
+          uri: http://localhost:8761
+          predicates:
+            - Path=/eureka/**
+          filters:
+            - AuthenticationFilter
+
+        - id: appointment-route
+          uri: lb://appointment
+          predicates:
+            - Path=/api/v1/appointment
+          filters:
+            - AuthenticationFilter
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+        route:
+          RouteDefinitionLocator: info
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
