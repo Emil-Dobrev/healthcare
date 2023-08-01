@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   application:
     name: register
@@ -7,7 +7,7 @@ spring:
     password: password
     url: jdbc:postgresql://localhost:5432/register
     username: emildobrev
-    secret: kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao
+  secret: kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,5 +20,8 @@ spring:
     addresses: localhost:5672
   profiles:
     active: default
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 

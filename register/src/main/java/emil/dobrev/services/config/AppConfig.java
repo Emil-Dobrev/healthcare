@@ -7,12 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.authentication.AuthenticationProvider;
+//import org.springframework.security.authentication.ProviderManager;
+//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -35,40 +35,40 @@ public class AppConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    public UserDetailsService doctorDetailsService() {
-        return username -> doctorRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
-
-    @Bean
-    public UserDetailsService patientDetailsService() {
-        return username -> patientRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Patient not found"));
-    }
-
-    @Bean
-    public AuthenticationProvider doctorAuthenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(doctorDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
-
-    @Bean
-    public AuthenticationProvider patientAuthenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(patientDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager() {
-        List<AuthenticationProvider> providers = List.of(
-                doctorAuthenticationProvider(),
-                patientAuthenticationProvider()
-        );
-        return new ProviderManager(providers);
-    }
+//    @Bean
+//    public UserDetailsService doctorDetailsService() {
+//        return username -> doctorRepository.findByEmail(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+//    }
+//
+//    @Bean
+//    public UserDetailsService patientDetailsService() {
+//        return username -> patientRepository.findByEmail(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("Patient not found"));
+//    }
+//
+//    @Bean
+//    public AuthenticationProvider doctorAuthenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setUserDetailsService(doctorDetailsService());
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+//        return authenticationProvider;
+//    }
+//
+//    @Bean
+//    public AuthenticationProvider patientAuthenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setUserDetailsService(patientDetailsService());
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+//        return authenticationProvider;
+//    }
+//
+//    @Bean
+//    public AuthenticationManager authenticationManager() {
+//        List<AuthenticationProvider> providers = List.of(
+//                doctorAuthenticationProvider(),
+//                patientAuthenticationProvider()
+//        );
+//        return new ProviderManager(providers);
+//    }
 }

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,13 +17,14 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping
+//    @PreAuthorize("hasAnyAuthority(PATIENT)")
     public ResponseEntity<HttpStatus> createAppointment(@RequestBody CreateAppointmentRequest createAppointmentRequest) {
-        log.info("Creating appointment request");
+        log.info("Creating appointment for doctor request");
         appointmentService.create(createAppointmentRequest);
      return ResponseEntity.noContent().build();
     }
 
-    @PostMapping void createDoctorSchedule(Authentication authentication) {
-
-    }
+//    @PostMapping void createDoctorSchedule(Authentication authentication) {
+//
+//    }
 }
