@@ -36,14 +36,16 @@ public class AppConfig {
     }
 
     @Bean
+    @Qualifier("doctorDetailsService")
     public UserDetailsService doctorDetailsService() {
-        return username -> doctorRepository.findByEmail(username)
+        return email -> doctorRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean
+    @Qualifier("patientDetailsService")
     public UserDetailsService patientDetailsService() {
-        return username -> patientRepository.findByEmail(username)
+        return email -> patientRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Patient not found"));
     }
 

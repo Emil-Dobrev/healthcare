@@ -28,7 +28,7 @@ spring:
         - id: appointment-route
           uri: lb://appointment
           predicates:
-            - Path=/api/v1/appointment
+            - Method=GET,POST
           filters:
             - AuthenticationFilter
 

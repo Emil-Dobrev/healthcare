@@ -55,6 +55,7 @@ public abstract class User implements UserDetails {
                 .toList();
     }
 
+
     @Override
     public String getPassword() {
         return password;

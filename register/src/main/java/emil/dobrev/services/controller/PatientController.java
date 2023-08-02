@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/patients")
+@RequestMapping("/api/v1/patients")
 @RequiredArgsConstructor
 @Slf4j
 @Validated

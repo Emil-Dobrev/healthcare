@@ -2,9 +2,9 @@ spring:
   application:
     name: api-gateway
   datasource:
-      password: password
-      url: jdbc:postgresql://localhost:5432/register
-      username: emildobrev
+    password: password
+    url: jdbc:postgresql://localhost:5432/register
+    username: emildobrev
   secret: kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao
   main:
     allow-bean-definition-overriding: true
@@ -28,15 +28,10 @@ spring:
         - id: appointment-route
           uri: lb://appointment
           predicates:
-            - Path=/api/v1/appointment
+            - Method=GET,POST
           filters:
             - AuthenticationFilter
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri:
 logging:
   level:
     root: info

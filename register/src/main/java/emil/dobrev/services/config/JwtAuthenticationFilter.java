@@ -4,9 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        final String userEmail;
+        final String userId;
 
         if (authHeader == null || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response);
@@ -52,14 +50,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(jwt);
+        userId = jwtService.extractUsername(jwt);
 
-        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = null;
             if (request.getRequestURI().startsWith("/api/v1/doctors")) {
-                userDetails = doctorUserDetailService.loadUserByUsername(userEmail);
+                userDetails = doctorUserDetailService.loadUserByUsername(userId);
             } else if (request.getRequestURI().startsWith("/api/v1/patients")) {
-                userDetails = patientUserDetailService.loadUserByUsername(userEmail);
+                userDetails = patientUserDetailService.loadUserByUsername(userId);
             }
 
             if (jwtService.isTokenValid(jwt, userDetails)) {

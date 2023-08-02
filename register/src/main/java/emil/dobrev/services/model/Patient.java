@@ -12,6 +12,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "patients")
+@Table(name = "users")
 public class Patient extends User{
 }

@@ -19,10 +19,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true,
-        securedEnabled = true,
-        jsr250Enabled = true)
 public class SecurityConfig {
 
 
@@ -49,9 +45,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) ->
                                 authz
                                         .requestMatchers(API_V_1_AUTH_REGISTER, API_V_1_AUTH_LOGIN).permitAll()
-                                        .requestMatchers(HttpMethod.GET, API_V_1_DOCTORS).permitAll()
-//                                        .requestMatchers(HttpMethod.POST, API_V_1_DOCTORS, API_V_1_PATIENTS).permitAll()
-                                        .anyRequest().permitAll()
+//                                        .requestMatchers(HttpMethod.GET, API_V_1_DOCTORS).permitAll()
+                                        .anyRequest().authenticated()
 
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

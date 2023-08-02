@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "doctors")
+@Table(name = "users")
 public class Doctor extends User {
 
     @Enumerated(EnumType.STRING)

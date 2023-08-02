@@ -17,7 +17,6 @@ public class AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping
-//    @PreAuthorize("hasAnyAuthority(PATIENT)")
     public ResponseEntity<HttpStatus> createAppointment(@RequestBody CreateAppointmentRequest createAppointmentRequest) {
         log.info("Creating appointment for doctor request");
         appointmentService.create(createAppointmentRequest);

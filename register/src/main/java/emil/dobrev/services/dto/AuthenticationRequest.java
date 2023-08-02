@@ -5,7 +5,6 @@ import lombok.NonNull;
 
 public record AuthenticationRequest(
         @NonNull String email,
-        @NonNull String password,
-        @NonNull boolean isDoctor
+        @NonNull String password
 ) {
 }
