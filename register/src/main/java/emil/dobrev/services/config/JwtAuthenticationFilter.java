@@ -19,19 +19,13 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
-    @Qualifier("doctorDetailsService")
-    private final UserDetailsService doctorUserDetailService;
-    @Qualifier("patientDetailsService")
-    private final UserDetailsService patientUserDetailService;
+    private final UserDetailsService userDetailsService;
 
     public JwtAuthenticationFilter(
             JwtService jwtService,
-            @Qualifier("doctorDetailsService") UserDetailsService doctorUserDetailService,
-            @Qualifier("patientDetailsService") UserDetailsService patientUserDetailService
-    ) {
+            @Qualifier("userDetailService") UserDetailsService userDetailsService) {
         this.jwtService = jwtService;
-        this.doctorUserDetailService = doctorUserDetailService;
-        this.patientUserDetailService = patientUserDetailService;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -42,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        final String userId;
+        final String userEmail;
 
         if (authHeader == null || !authHeader.startsWith("Bearer")) {
             filterChain.doFilter(request, response);
@@ -50,15 +44,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
-        userId = jwtService.extractUsername(jwt);
+        userEmail = jwtService.extractUsername(jwt);
 
-        if (userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = null;
-            if (request.getRequestURI().startsWith("/api/v1/doctors")) {
-                userDetails = doctorUserDetailService.loadUserByUsername(userId);
-            } else if (request.getRequestURI().startsWith("/api/v1/patients")) {
-                userDetails = patientUserDetailService.loadUserByUsername(userId);
-            }
+        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

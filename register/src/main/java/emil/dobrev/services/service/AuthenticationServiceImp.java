@@ -10,8 +10,7 @@ import emil.dobrev.services.enums.Role;
 import emil.dobrev.services.model.Doctor;
 import emil.dobrev.services.model.Patient;
 import emil.dobrev.services.model.User;
-import emil.dobrev.services.repository.DoctorRepository;
-import emil.dobrev.services.repository.PatientRepository;
+import emil.dobrev.services.repository.UserRepository;
 import emil.dobrev.services.service.interfaces.AuthenticationService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthenticationServiceImp implements AuthenticationService {
 
-    private final DoctorRepository doctorRepository;
-    private final PatientRepository patientRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -48,7 +46,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
 
         var jwtToken = jwtService.generateToken(doctor);
 
-        doctorRepository.save(doctor);
+        userRepository.save(doctor);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -64,7 +62,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .roles(List.of(Role.PATIENT))
                 .build();
 
-        patientRepository.save(patient);
+        userRepository.save(patient);
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(
                         patientRegistrationRequest.email(),
@@ -94,7 +92,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private String getToken(AuthenticationRequest request) {
         User user;
 
-            user = doctorRepository.findByEmail(request.email())
+            user = userRepository.findByEmail(request.email())
                     .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 

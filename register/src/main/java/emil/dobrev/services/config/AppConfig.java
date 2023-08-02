@@ -1,7 +1,6 @@
 package emil.dobrev.services.config;
 
-import emil.dobrev.services.repository.DoctorRepository;
-import emil.dobrev.services.repository.PatientRepository;
+import emil.dobrev.services.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,8 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppConfig {
 
-    private final PatientRepository patientRepository;
-    private final DoctorRepository doctorRepository;
+    private final UserRepository userRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -35,32 +33,17 @@ public class AppConfig {
         return new ModelMapper();
     }
 
-    @Bean
-    @Qualifier("doctorDetailsService")
-    public UserDetailsService doctorDetailsService() {
-        return email -> doctorRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
 
     @Bean
-    @Qualifier("patientDetailsService")
-    public UserDetailsService patientDetailsService() {
-        return email -> patientRepository.findByEmail(email)
+    public UserDetailsService userDetailsService() {
+        return email -> userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Patient not found"));
     }
 
     @Bean
-    public AuthenticationProvider doctorAuthenticationProvider() {
+    public AuthenticationProvider userAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(doctorDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    }
-
-    @Bean
-    public AuthenticationProvider patientAuthenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(patientDetailsService());
+        authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
@@ -68,8 +51,7 @@ public class AppConfig {
     @Bean
     public AuthenticationManager authenticationManager() {
         List<AuthenticationProvider> providers = List.of(
-                doctorAuthenticationProvider(),
-                patientAuthenticationProvider()
+                userAuthenticationProvider()
         );
         return new ProviderManager(providers);
     }

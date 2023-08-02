@@ -1,10 +1,4 @@
 
-{
-Kregister/src/main/java/emil/dobrev/services/enums/DoctorSpecialization.java,8/9/89e3d0f5fb3fb7ee960a309fae458006ece4bdf0
-Å
-Qregister/src/main/java/emil/dobrev/services/exception/NoSuchElementException.java,5/6/5647fc07e205faaf3f25c2285a3cd8258f81abe5
-É
-Sregister/src/main/java/emil/dobrev/services/exception/RegisterExceptionHandler.java,d/7/d7cbdf7c9a2a96e2b74919fdfa91680a79f98aa5
 Ñ
 Tappointment/src/main/java/emil/dobrev/services/repository/AppointmentRepository.java,0/3/03b2819656dc74c689af094e3f4c89eb4f13252e
 C
@@ -13,14 +7,6 @@ u
 Eappointment/src/main/java/emil/dobrev/services/model/Appointment.java,9/8/986b0f2067b8a4143d2a8a7fd1b8edde37f88447
 x
 Happointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java,d/b/dbad7289a1857cd6fabfea0f19fdd75a27c9c15d
-k
-;register/src/main/java/emil/dobrev/services/enums/Role.java,8/f/8feaa340d253fb3119bd591e1414e840571ea03b
-
-Oregister/src/main/java/emil/dobrev/services/dto/PatientRegistrationRequest.java,3/6/36102e6dadaf22cf097593e264bbfc1ba8e0f60e
-n
->register/src/main/java/emil/dobrev/services/dto/DoctorDTO.java,0/9/093a90b3b9d9ad25c73ebd6a3e7f59aef4428fe5
-o
-?register/src/main/java/emil/dobrev/services/dto/PatientDTO.java,b/b/bb180c50137f923d0ec1520b41d0c5d539ee172b
 Ç
 Rregister/src/main/java/emil/dobrev/services/service/interfaces/PatientService.java,f/3/f32e8407f26f1562a5dee673150aca34f3ed0444
 Å
