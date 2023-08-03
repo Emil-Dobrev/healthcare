@@ -14,7 +14,13 @@ spring:
         - id: register-route
           uri: lb://register
           predicates:
-            - Method=GET,POST
+          - Path=/api/v1/auth
+          filters:
+            - AuthenticationFilter
+        - id: user-interaction-route
+          uri: lb://user-interaction
+          predicates:
+          - Path=/api/v1/doctors,/api/v1/patients
           filters:
             - AuthenticationFilter
 
@@ -28,7 +34,7 @@ spring:
         - id: appointment-route
           uri: lb://appointment
           predicates:
-            - Method=GET,POST
+          - Path=/appointment
           filters:
             - AuthenticationFilter
 
