@@ -19,12 +19,8 @@ t
 Dappointment/src/main/java/emil/dobrev/services/config/AppConfig.java,1/b/1bfe766f864271bedff9a869e4d9fd04c07d6dcf
 É
 Sappointment/src/main/java/emil/dobrev/services/controler/AppointmentController.java,a/5/a5d1b8cc88613988bccbe349f6393caf7ca31316
-r
-Bapi-gateway/src/main/java/emil/dobrev/services/util/JwtSecret.java,b/c/bca66cb53cd008f5f92fa72e263c415874af38c0
 z
 Jappointment/src/main/java/emil/dobrev/services/AppointmentApplication.java,0/5/05757e8567235accf8d4822c122c263940f1909d
-É
-Sapi-gateway/src/main/java/emil/dobrev/services/exception/InvalidTokenException.java,c/0/c06b534618b6351fff2e9e4e4b6e9cf319aaac6b
 ;
 public/logs,3/c/3ca439f305c92041f7036b1180a441a2df6045f1
 ~
@@ -59,8 +55,6 @@ Kuser-interaction-service/src/main/java/emil/dobrev/services/model/User.java,7/
 [user-interaction-service/src/main/java/emil/dobrev/services/enums/DoctorSpecialization.java,2/b/2b7dc28530f2f10042d784281f74e74e6dd99a6d
 }
 Muser-interaction-service/src/main/java/emil/dobrev/services/model/Doctor.java,d/f/df50db423dccd7a1b3cc2b9d56f53706f9a57ad0
-p
-@api-gateway/src/main/java/emil/dobrev/services/util/JwtUtil.java,0/f/0ff443280e371fbe5a8a66f73afbd523230a644c
 Å
 Quser-interaction-service/src/main/java/emil/dobrev/services/config/AppConfig.java,0/0/008c8f11e0f06a546720c2882cc941f934b77650
 P

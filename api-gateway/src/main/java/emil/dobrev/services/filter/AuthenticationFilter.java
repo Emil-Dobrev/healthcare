@@ -38,8 +38,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                         jwtUtil.validateToken(token);
                         exchange.getRequest()
                                 .mutate()
-                                .header("userId", jwtUtil.extractUserId(token))
-                                .header("Roles", jwtUtil.extractClaim(token, Claims::getAudience));
+                                .header("userId", jwtUtil.extractUserId(token));
                     } catch (Exception exception) {
                         throw new InvalidTokenException("Invalid token");
                     }
