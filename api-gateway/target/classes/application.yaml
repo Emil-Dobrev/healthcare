@@ -11,30 +11,22 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: register-route
-          uri: lb://register
+        - id: user-route
+          uri: lb://user
           predicates:
-          - Path=/api/v1/auth
+          - Path=/api/v1/auth/**,/api/v1/doctors/**
           filters:
             - AuthenticationFilter
-        - id: user-interaction-route
-          uri: lb://user-interaction
-          predicates:
-          - Path=/api/v1/doctors,/api/v1/patients
-          filters:
-            - AuthenticationFilter
-
         - id: discovery-route-static
           uri: http://localhost:8761
           predicates:
             - Path=/eureka/**
           filters:
             - AuthenticationFilter
-
         - id: appointment-route
           uri: lb://appointment
           predicates:
-          - Path=/appointment
+            - Path=/appointment
           filters:
             - AuthenticationFilter
 
@@ -54,4 +46,5 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
+  instance:
+    hostname: localhost

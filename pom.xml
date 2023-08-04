@@ -13,11 +13,10 @@
 
     <url>http://www.example.com</url>
     <modules>
-        <module>register</module>
+        <module>user</module>
         <module>appointment</module>
         <module>api-gateway</module>
         <module>discovery-server</module>
-        <module>user-interaction-service</module>
     </modules>
 
     <properties>

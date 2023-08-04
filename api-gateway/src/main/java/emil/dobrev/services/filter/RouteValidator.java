@@ -13,10 +13,15 @@ public class RouteValidator {
 
     public static final List<String> openApiEndPoints = List.of(
             "/api/v1/doctors",
+            "/api/v1/doctors/{id}",
             "api/v1/auth/register/doctor",
             "api/v1/auth/register/patient",
             "api/v1/auth/login",
             "/eureka"
+    );
+
+    public static final List<String> adminRoleEndPoints = List.of(
+            "api/v1/patients"
     );
 
     public Predicate<ServerHttpRequest> isSecured =

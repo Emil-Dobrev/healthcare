@@ -1,9 +1,0 @@
-
-P
-java:S1611-"3Remove the parentheses around the "authz" parameter(äœ‚¤8ûÖİ”›1
-W
-java:S16112"5Remove the parentheses around the "session" parameter(Î‹Öëıÿÿÿÿ8ıÖİ”›1
-b
-java:S1128"@Remove this unused import 'org.springframework.http.HttpMethod'.(Ê¨Ä¡øÿÿÿÿ8ÆÿÂª›1
-˜
-java:S1128	"{Remove this unused import 'org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity'.(Ô¦ø8î¤¸¨›1

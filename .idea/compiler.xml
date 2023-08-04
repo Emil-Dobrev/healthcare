@@ -10,9 +10,11 @@
         <module name="api-gateway" />
         <module name="appointment" />
         <module name="discovery-server" />
-        <module name="user-interaction-service" />
-        <module name="register" />
+        <module name="user" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="user-interaction-service" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -6,11 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.Type;
 
-
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,7 +17,7 @@ import java.util.List;
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 @MappedSuperclass
-public abstract class User{
+public abstract class User {
 
     @Id
     @SequenceGenerator(
@@ -42,7 +40,8 @@ public abstract class User{
     @Column(nullable = false)
     @NotBlank
     protected String lastName;
-
+    protected LocalDate birthDate;
+    protected int age;
     @Enumerated(EnumType.STRING)
     protected List<Role> roles;
 }
