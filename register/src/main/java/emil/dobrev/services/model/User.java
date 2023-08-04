@@ -6,14 +6,14 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 
 @Data
@@ -22,6 +22,7 @@ import java.util.List;
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 @MappedSuperclass
+
 public abstract class User implements UserDetails {
 
     @Id
@@ -45,8 +46,12 @@ public abstract class User implements UserDetails {
     @Column(nullable = false)
     @NotBlank
     protected String lastName;
-    @NonNull
-    private List<Role> roles;
+    @Enumerated(EnumType.STRING)
+    @Column(
+            name = "roles",
+            columnDefinition = "text[]"
+    )
+    protected List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

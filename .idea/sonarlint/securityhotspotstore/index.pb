@@ -35,8 +35,6 @@ r
 Bregister/src/main/java/emil/dobrev/services/config/JwtService.java,4/9/49d2d371fd65936f784bb68be9ec899ad53d64e3
 q
 Aregister/src/main/java/emil/dobrev/services/config/JwtSecret.java,8/f/8fc84c2b398e4578a29395ce1c391ca7e5bd07e8
-k
-;register/src/main/java/emil/dobrev/services/enums/Role.java,8/f/8feaa340d253fb3119bd591e1414e840571ea03b
 ;
 public/logs,3/c/3ca439f305c92041f7036b1180a441a2df6045f1
 N
@@ -57,18 +55,12 @@ v
 Fregister/src/main/java/emil/dobrev/services/config/SecurityConfig.java,1/9/193b092b62c8ba56815551dfc18f8ac93c8a7469
 ~
 Nuser-interaction-service/src/main/java/emil/dobrev/services/model/Patient.java,c/2/c2ab7ccd2e3610b2348c7422ffd75e0f9aeaf0fc
-{
-Kuser-interaction-service/src/main/java/emil/dobrev/services/enums/Role.java,3/e/3e2c3b4d5e04f2eace407ebf341656a7d86bbd73
-k
-;register/src/main/java/emil/dobrev/services/model/User.java,0/c/0cc52ec9bf67390a475005d09c269073322d1ca2
 n
 >register/src/main/java/emil/dobrev/services/model/Patient.java,1/6/16a64ce52c6b461119a8e1814f41bfbd9d152064
 m
 =register/src/main/java/emil/dobrev/services/model/Doctor.java,c/c/cc9ae00ce9fa7442b46f4cae27cca7ce0a6cfd4a
 }
 Muser-interaction-service/src/main/java/emil/dobrev/services/model/Doctor.java,d/f/df50db423dccd7a1b3cc2b9d56f53706f9a57ad0
-{
-Kuser-interaction-service/src/main/java/emil/dobrev/services/model/User.java,7/0/701a0ff3131e7cbefae0fb0c7078c113374f3a55
 H
 discovery-server/pom.xml,2/c/2c58c7878e43d126fc56cae853d5b06de57d0b3e
 q
@@ -79,8 +71,6 @@ Kregister/src/main/java/emil/dobrev/services/enums/DoctorSpecialization.java,8/
 Yregister/src/main/java/emil/dobrev/services/service/interfaces/AuthenticationService.java,a/7/a78eea2f9eb4a4b07c60a0f6ff5d0ccf9eb3a5a0
 Ñ
 Tregister/src/main/java/emil/dobrev/services/controller/AuthenticationController.java,0/1/014980a29f4a3234132e0ef1f138cf52c7bf6d06
-Å
-Qregister/src/main/java/emil/dobrev/services/service/AuthenticationServiceImp.java,3/6/3676255ba266229332f836f71a7adde3cb8a6c26
 à
 Xuser-interaction-service/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,c/3/c3ed0475c6843fce0dfe2890a126d78d046038ad
 ê
@@ -89,8 +79,6 @@ Xuser-interaction-service/src/main/java/emil/dobrev/services/exception/ErrorResp
 auser-interaction-service/src/main/java/emil/dobrev/services/exception/NoSuchElementException.java,b/a/ba6c57484dcf7d5b7dc65dec982311bc00b69c52
 ì
 cuser-interaction-service/src/main/java/emil/dobrev/services/exception/RegisterExceptionHandler.java,f/4/f47809e7a7ed84940a344a4a8bfa3a211f233095
-
-Oregister/src/main/java/emil/dobrev/services/config/JwtAuthenticationFilter.java,9/4/947c7e43245768e337f6aadb3844931bb9c765ff
 ä
 Zuser-interaction-service/src/main/java/emil/dobrev/services/service/PatientServiceImp.java,0/3/038e095b449e0062f3881240734a9afdeac605da
 Å
@@ -105,10 +93,6 @@ z
 Jregister/src/main/java/emil/dobrev/services/repository/UserRepository.java,5/8/5847b432517aca2af6cde588be63343e050063d0
 ç
 ]user-interaction-service/src/main/java/emil/dobrev/services/repository/PatientRepository.java,b/6/b621f29d6a9729da89d0cf648ff2621005883744
-å
-\user-interaction-service/src/main/java/emil/dobrev/services/repository/DoctorRepository.java,0/3/03919e091677924df7055f9c56f8a5304e251944
-â
-Yuser-interaction-service/src/main/java/emil/dobrev/services/service/DoctorServiceImp.java,c/3/c36481f9cf79e5c76e7c15bc49b491b1e0ef970b
 @
 register/pom.xml,6/f/6faabbe10f004a0e56125970a09d898d5f627da4
 7
