@@ -20,9 +20,6 @@ public class RouteValidator {
             "/eureka"
     );
 
-    public static final List<String> adminRoleEndPoints = List.of(
-            "api/v1/patients"
-    );
 
     public Predicate<ServerHttpRequest> isSecured =
             request -> openApiEndPoints

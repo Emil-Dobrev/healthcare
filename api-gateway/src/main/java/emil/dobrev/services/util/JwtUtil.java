@@ -6,6 +6,7 @@ import jakarta.xml.bind.DatatypeConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.function.Function;
 
 @RequiredArgsConstructor
@@ -25,6 +26,13 @@ public class JwtUtil {
         return extractClaim(token,
                 claims ->
                         claims.get("userId", Long.class));
+    }
+
+    public List<String> extractRoles(String token) {
+        return extractClaim(token,
+                claims ->
+                        claims.get("Roles", List.class)
+                );
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

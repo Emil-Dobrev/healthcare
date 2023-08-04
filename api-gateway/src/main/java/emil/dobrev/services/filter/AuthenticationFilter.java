@@ -31,16 +31,20 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 if (!exchange.getRequest().getHeaders().containsKey(AUTHORIZATION)) {
                     throw new MissingTokenException("Missing token");
                 }
-                String token = exchange.getRequest().getHeaders().get(AUTHORIZATION).get(0);
+                String token = exchange.getRequest().getHeaders().getFirst(AUTHORIZATION);
                 if (token != null && token.startsWith(BEARER)) {
                     try {
                         token = token.substring(7);
+                        //validates token
                         jwtUtil.validateToken(token);
                         String id = String.valueOf(jwtUtil.extractUserId(token));
+                        var roles = jwtUtil.extractRoles(token);
 
                         exchange.getRequest()
                                 .mutate()
-                                .header("userId", id );
+                                .header("userId", id )
+                                .header("roles", String.valueOf(roles));
+
                     } catch (Exception exception) {
                         throw new InvalidTokenException("Invalid token");
                     }
