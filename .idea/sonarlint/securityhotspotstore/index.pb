@@ -44,8 +44,6 @@ Kuser/src/main/java/emil/dobrev/services/dto/PatientRegistrationRequest.java,a/
 }
 Muser-interaction-service/src/main/java/emil/dobrev/services/model/Doctor.java,d/f/df50db423dccd7a1b3cc2b9d56f53706f9a57ad0
 {
-Kuser/src/main/java/emil/dobrev/services/config/JwtAuthenticationFilter.java,b/a/bae07f92ac67979f81bb065b5227223e8f1e8e2f
-{
 Kuser-interaction-service/src/main/java/emil/dobrev/services/model/User.java,7/0/701a0ff3131e7cbefae0fb0c7078c113374f3a55
 ‹
 [user-interaction-service/src/main/java/emil/dobrev/services/enums/DoctorSpecialization.java,2/b/2b7dc28530f2f10042d784281f74e74e6dd99a6d

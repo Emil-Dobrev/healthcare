@@ -16,7 +16,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,9 +51,9 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .roles(List.of(Role.DOCTOR))
                 .build();
 
-        var jwtToken = jwtService.generateToken(doctor);
+        doctor = userRepository.save(doctor);
 
-        userRepository.save(doctor);
+        var jwtToken = jwtService.generateToken(doctor);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -77,12 +76,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .build();
 
         userRepository.save(patient);
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(
-                        patientRegistrationRequest.email(),
-                        patientRegistrationRequest.password()
-                );
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
         var jwtToken = jwtService.generateToken(patient);
 
         return AuthenticationResponse.builder()

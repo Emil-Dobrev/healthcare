@@ -33,9 +33,9 @@ public class DoctorController {
     }
 
     @PatchMapping
-    public ResponseEntity<DoctorDTO> updateDoctor(@RequestHeader("userEmail") String email,
+    public ResponseEntity<DoctorDTO> updateDoctor(@RequestHeader("userId") Long id,
                                                   @RequestBody UpdateDoctorRequest updateDoctorRequest) {
         log.info("Update doctor request");
-        return ResponseEntity.ok().body(doctorService.updateDoctor(email,updateDoctorRequest));
+        return ResponseEntity.ok().body(doctorService.updateDoctor(id,updateDoctorRequest));
     }
 }

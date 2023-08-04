@@ -3,6 +3,7 @@ package emil.dobrev.services.service;
 import emil.dobrev.services.dto.DoctorDTO;
 import emil.dobrev.services.dto.UpdateDoctorRequest;
 import emil.dobrev.services.exception.NoSuchElementException;
+import emil.dobrev.services.exception.NotFoundException;
 import emil.dobrev.services.repository.DoctorRepository;
 import emil.dobrev.services.service.interfaces.DoctorService;
 import lombok.AllArgsConstructor;
@@ -38,21 +39,29 @@ public class DoctorServiceImp implements DoctorService {
     }
 
     @Override
-    public DoctorDTO updateDoctor(String email, UpdateDoctorRequest updateDoctorRequest) {
-        var exiStingDoctor = doctorRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("USER_NOT_FOUND"));
-        if (!exiStingDoctor.getFirstName().equals(updateDoctorRequest.firstName())) {
-            exiStingDoctor.setFirstName(updateDoctorRequest.firstName());
+    public DoctorDTO updateDoctor(Long id, UpdateDoctorRequest updateDoctorRequest) {
+        var existingDoctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
+        if (!existingDoctor.getFirstName().equals(updateDoctorRequest.firstName())) {
+            existingDoctor.setFirstName(updateDoctorRequest.firstName());
         }
-        if (!exiStingDoctor.getLastName().equals(updateDoctorRequest.lastName())) {
-            exiStingDoctor.setLastName(updateDoctorRequest.lastName());
+        if (!existingDoctor.getLastName().equals(updateDoctorRequest.lastName())) {
+            existingDoctor.setLastName(updateDoctorRequest.lastName());
         }
-        if (updateDoctorRequest.password() != null && !passwordEncoder.encode(updateDoctorRequest.password()).matches(exiStingDoctor.getPassword())) {
-            exiStingDoctor.setPassword(passwordEncoder.encode(updateDoctorRequest.password()));
+        if (updateDoctorRequest.password() != null && !passwordEncoder.encode(updateDoctorRequest.password()).matches(existingDoctor.getPassword())) {
+            existingDoctor.setPassword(passwordEncoder.encode(updateDoctorRequest.password()));
         }
-        if (!exiStingDoctor.getBirthdate().equals(updateDoctorRequest.birthdate())) {
-            exiStingDoctor.setBirthdate(updateDoctorRequest.birthdate());
+        if (!existingDoctor.getBirthdate().equals(updateDoctorRequest.birthdate())) {
+            existingDoctor.setBirthdate(updateDoctorRequest.birthdate());
         }
-        doctorRepository.save(exiStingDoctor);
-        return modelMapper.map(exiStingDoctor, DoctorDTO.class);
+        if (!existingDoctor.getSpecialization().equals(updateDoctorRequest.doctorSpecialization())) {
+            existingDoctor.setSpecialization(updateDoctorRequest.doctorSpecialization());
+        }
+        if (!existingDoctor.getPhoneNumber().equals(updateDoctorRequest.phoneNumber())) {
+            existingDoctor.setPhoneNumber(updateDoctorRequest.phoneNumber());
+        }
+        doctorRepository.save(existingDoctor);
+        return modelMapper.map(existingDoctor, DoctorDTO.class);
     }
 }

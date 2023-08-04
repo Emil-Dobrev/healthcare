@@ -1,5 +1,6 @@
 package emil.dobrev.services.config;
 
+import emil.dobrev.services.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -44,13 +45,14 @@ public class JwtService {
                 .compact();
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(User userDetails) {
         HashMap<String, Object> claimsMap = new HashMap<>();
         List<String> roles = userDetails.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
         claimsMap.put(ROLES, roles);
+        claimsMap.put("userId", userDetails.getId());
         return generateToken(claimsMap, userDetails);
     }
 

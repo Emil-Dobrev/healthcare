@@ -15,15 +15,16 @@ public class JwtUtil {
     private final JwtSecret jwtSecret;
 
 
-    public Claims validateToken(String token) {
-      return   Jwts.parserBuilder()
-              .setSigningKey(DatatypeConverter.parseBase64Binary(jwtSecret.secret))
-              .build().parseClaimsJws(token)
-              .getBody();
+    public void validateToken(String token) {
+        Jwts.parserBuilder()
+                .setSigningKey(DatatypeConverter.parseBase64Binary(jwtSecret.secret))
+                .build().parseClaimsJws(token);
     }
 
-    public String extractUserId(String token) {
-        return extractClaim(token, Claims::getSubject);
+    public Long extractUserId(String token) {
+        return extractClaim(token,
+                claims ->
+                        claims.get("userId", Long.class));
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {

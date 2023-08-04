@@ -18,7 +18,9 @@ public record UpdateDoctorRequest(@NonNull String firstName,
                                   @NonNull @DateTimeFormat LocalDate birthdate,
                                   @NonNull
                                   @Enumerated(EnumType.STRING)
-                                  DoctorSpecialization doctorSpecialization
+                                  DoctorSpecialization doctorSpecialization,
+                                  @NonNull
+                                  String phoneNumber
 
 ) {
     public UpdateDoctorRequest(Doctor doctor) {
@@ -26,7 +28,8 @@ public record UpdateDoctorRequest(@NonNull String firstName,
                 doctor.getLastName(),
                 null,
                 doctor.getBirthdate(),
-                doctor.getSpecialization()
+                doctor.getSpecialization(),
+                doctor.getPhoneNumber()
         );
     }
 

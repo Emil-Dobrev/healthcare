@@ -34,11 +34,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 String token = exchange.getRequest().getHeaders().get(AUTHORIZATION).get(0);
                 if (token != null && token.startsWith(BEARER)) {
                     try {
-                        var claims = jwtUtil.validateToken(token.substring(7));
+                        token = token.substring(7);
+                        jwtUtil.validateToken(token);
+                        String id = String.valueOf(jwtUtil.extractUserId(token));
 
                         exchange.getRequest()
                                 .mutate()
-                                .header("userEmail", jwtUtil.extractUserId(token.substring(7)));
+                                .header("userId", id );
                     } catch (Exception exception) {
                         throw new InvalidTokenException("Invalid token");
                     }
