@@ -3,7 +3,6 @@ package emil.dobrev.services.filter;
 import emil.dobrev.services.exception.InvalidTokenException;
 import emil.dobrev.services.exception.MissingTokenException;
 import emil.dobrev.services.util.JwtUtil;
-import io.jsonwebtoken.Claims;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.stereotype.Component;
@@ -35,10 +34,11 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 String token = exchange.getRequest().getHeaders().get(AUTHORIZATION).get(0);
                 if (token != null && token.startsWith(BEARER)) {
                     try {
-                        jwtUtil.validateToken(token);
+                        var claims = jwtUtil.validateToken(token.substring(7));
+
                         exchange.getRequest()
                                 .mutate()
-                                .header("userId", jwtUtil.extractUserId(token));
+                                .header("userEmail", jwtUtil.extractUserId(token.substring(7)));
                     } catch (Exception exception) {
                         throw new InvalidTokenException("Invalid token");
                     }

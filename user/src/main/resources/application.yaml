@@ -7,7 +7,7 @@ spring:
     password: password
     url: jdbc:postgresql://localhost:5432/register
     username: emildobrev
-  secret: kTK1B6V1E4klYEnfjSDOepThdKcb0est4LK3HZLOsao
+  secret: 88deeacc8f37aac01ceeee14d8c2a5976dd3e9405c4b41358428e6e6952c9e0e5b83589e22cec123d84ffb48
   jpa:
     hibernate:
       ddl-auto: update

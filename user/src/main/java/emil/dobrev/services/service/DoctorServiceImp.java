@@ -38,21 +38,21 @@ public class DoctorServiceImp implements DoctorService {
     }
 
     @Override
-    public DoctorDTO updateDoctor(Long id, String role, UpdateDoctorRequest updateDoctorRequest) {
-        var existingUser = doctorRepository.findById(id).orElseThrow(() -> new RuntimeException("USER_NOT_FOUND"));
-        if (!existingUser.getFirstName().equals(updateDoctorRequest.firstName())) {
-            existingUser.setFirstName(updateDoctorRequest.firstName());
+    public DoctorDTO updateDoctor(String email, UpdateDoctorRequest updateDoctorRequest) {
+        var exiStingDoctor = doctorRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("USER_NOT_FOUND"));
+        if (!exiStingDoctor.getFirstName().equals(updateDoctorRequest.firstName())) {
+            exiStingDoctor.setFirstName(updateDoctorRequest.firstName());
         }
-        if (!existingUser.getLastName().equals(updateDoctorRequest.lastName())) {
-            existingUser.setLastName(updateDoctorRequest.lastName());
+        if (!exiStingDoctor.getLastName().equals(updateDoctorRequest.lastName())) {
+            exiStingDoctor.setLastName(updateDoctorRequest.lastName());
         }
-        if (updateDoctorRequest.password() != null && !passwordEncoder.encode(updateDoctorRequest.password()).matches(existingUser.getPassword())) {
-            existingUser.setPassword(passwordEncoder.encode(updateDoctorRequest.password()));
+        if (updateDoctorRequest.password() != null && !passwordEncoder.encode(updateDoctorRequest.password()).matches(exiStingDoctor.getPassword())) {
+            exiStingDoctor.setPassword(passwordEncoder.encode(updateDoctorRequest.password()));
         }
-        if (!existingUser.getBirthdate().equals(updateDoctorRequest.birthdate())) {
-            existingUser.setBirthdate(updateDoctorRequest.birthdate());
+        if (!exiStingDoctor.getBirthdate().equals(updateDoctorRequest.birthdate())) {
+            exiStingDoctor.setBirthdate(updateDoctorRequest.birthdate());
         }
-        doctorRepository.save(existingUser);
-        return new DoctorDTO();
+        doctorRepository.save(exiStingDoctor);
+        return modelMapper.map(exiStingDoctor, DoctorDTO.class);
     }
 }

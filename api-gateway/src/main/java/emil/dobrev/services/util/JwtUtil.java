@@ -2,6 +2,7 @@ package emil.dobrev.services.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import jakarta.xml.bind.DatatypeConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +15,11 @@ public class JwtUtil {
     private final JwtSecret jwtSecret;
 
 
-    public void validateToken(String token) {
-        Jwts.parserBuilder().setSigningKey(jwtSecret.secret).build().parseClaimsJws(token);
+    public Claims validateToken(String token) {
+      return   Jwts.parserBuilder()
+              .setSigningKey(DatatypeConverter.parseBase64Binary(jwtSecret.secret))
+              .build().parseClaimsJws(token)
+              .getBody();
     }
 
     public String extractUserId(String token) {
@@ -30,7 +34,7 @@ public class JwtUtil {
     private Claims extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
-                .setSigningKey(jwtSecret.getSecretKey())
+                .setSigningKey(jwtSecret.secret)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

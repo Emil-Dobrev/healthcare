@@ -25,8 +25,6 @@ Jappointment/src/main/java/emil/dobrev/services/AppointmentApplication.java,0/5
 public/logs,3/c/3ca439f305c92041f7036b1180a441a2df6045f1
 ~
 Nuser-interaction-service/src/main/java/emil/dobrev/services/model/Patient.java,c/2/c2ab7ccd2e3610b2348c7422ffd75e0f9aeaf0fc
-ƒ
-Sdiscovery-server/src/main/java/emil/dobrev/services/DiscoveryServerApplication.java,2/e/2e9a1298630f6eb9fe0ef4d8852ebb44653cadb8
 g
 7user/src/main/java/emil/dobrev/services/enums/Role.java,b/6/b62a8728095ac945de7ef9acf85c3603f282508c
 ‹
@@ -45,10 +43,6 @@ Guser/src/main/java/emil/dobrev/services/dto/AuthenticationResponse.java,1/a/1a
 Kuser/src/main/java/emil/dobrev/services/dto/PatientRegistrationRequest.java,a/1/a1a70ca2732da081798a3b5516b102acb28d6c0a
 }
 Muser-interaction-service/src/main/java/emil/dobrev/services/model/Doctor.java,d/f/df50db423dccd7a1b3cc2b9d56f53706f9a57ad0
-n
->user/src/main/java/emil/dobrev/services/config/JwtService.java,0/d/0d9ac323bdb0d8ec0c6982ec9fa95000bb470e04
-m
-=user/src/main/java/emil/dobrev/services/config/JwtSecret.java,9/2/922da804fba4d19ce664ef385b6eb4dba4155c2a
 {
 Kuser/src/main/java/emil/dobrev/services/config/JwtAuthenticationFilter.java,b/a/bae07f92ac67979f81bb065b5227223e8f1e8e2f
 {

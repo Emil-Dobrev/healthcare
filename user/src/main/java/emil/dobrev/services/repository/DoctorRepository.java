@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
@@ -14,4 +15,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
             nativeQuery = true
     )
     List<Doctor> findAll();
+
+    Optional<Doctor> findByEmail(String email);
 }

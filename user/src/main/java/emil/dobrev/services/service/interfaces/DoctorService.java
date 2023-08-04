@@ -11,5 +11,5 @@ public interface DoctorService  {
 
     List<DoctorDTO> getAllDoctors();
 
-    DoctorDTO updateDoctor(Long id, String role, UpdateDoctorRequest updateDoctorRequest);
+    DoctorDTO updateDoctor(String id, UpdateDoctorRequest updateDoctorRequest);
 }
