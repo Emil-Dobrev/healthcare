@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) ->
                         authz
                                 .requestMatchers(API_V_1_AUTH_REGISTER, API_V_1_AUTH_LOGIN, "/api/v1/doctors/**").permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
