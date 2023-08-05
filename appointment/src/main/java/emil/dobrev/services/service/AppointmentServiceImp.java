@@ -6,8 +6,7 @@ import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
 
 @Service
 @RequiredArgsConstructor

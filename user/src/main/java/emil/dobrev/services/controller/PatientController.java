@@ -1,6 +1,5 @@
 package emil.dobrev.services.controller;
 
-import emil.dobrev.services.dto.DoctorDTO;
 import emil.dobrev.services.dto.PatientDTO;
 import emil.dobrev.services.service.interfaces.PatientService;
 import lombok.RequiredArgsConstructor;

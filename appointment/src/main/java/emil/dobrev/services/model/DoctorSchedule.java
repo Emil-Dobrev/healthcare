@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,8 +27,11 @@ public class DoctorSchedule {
     private Long doctorId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private DayOfWeek dayOfWeek;
+    @Column(
+            name = "workingDays",
+            columnDefinition = "text[]"
+    )
+    private List<DayOfWeek> workingDays;
 
     @Column(nullable = false)
     private LocalTime startTime;
@@ -36,8 +39,15 @@ public class DoctorSchedule {
     @Column(nullable = false)
     private LocalTime endTime;
 
+    @Column(nullable = false)
+    private LocalTime breakFrom;
+
+    @Column(nullable = false)
+    private LocalTime breakTo;
+
     @ElementCollection
-    @CollectionTable(name = "doctor_available_slots", joinColumns = @JoinColumn(name = "doctor_schedule_id"))
-    private List<LocalTime> availableTimeSlots = new ArrayList<>();
+    @CollectionTable(name = "doctor_schedule_holidays", joinColumns = @JoinColumn(name = "doctor_schedule_id"))
+    @Column(name = "holiday")
+    private List<LocalDate> holiday;
 
 }

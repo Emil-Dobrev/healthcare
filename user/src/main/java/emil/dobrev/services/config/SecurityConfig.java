@@ -33,7 +33,8 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .authorizeHttpRequests((authz) ->
                         authz
-                                .requestMatchers(API_V_1_AUTH_REGISTER, API_V_1_AUTH_LOGIN, "/api/v1/doctors/**").permitAll()
+                                .requestMatchers(API_V_1_AUTH_REGISTER, API_V_1_AUTH_LOGIN, "/api/v1/doctors/**",
+                                        "/api/v1/patients/**").permitAll()
                                 .anyRequest().permitAll()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
