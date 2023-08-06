@@ -1,6 +1,5 @@
 package emil.dobrev.services.repository;
 
-import emil.dobrev.services.model.Doctor;
 import emil.dobrev.services.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -2,7 +2,9 @@ package emil.dobrev.services.service;
 
 import emil.dobrev.services.dto.CreateScheduleRequest;
 import emil.dobrev.services.dto.DoctorScheduleDTO;
+import emil.dobrev.services.dto.HolidaysRequest;
 import emil.dobrev.services.exception.UnauthorizedException;
+import emil.dobrev.services.model.DoctorHoliday;
 import emil.dobrev.services.model.DoctorSchedule;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.DoctorScheduleService;
@@ -10,10 +12,6 @@ import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 import static emil.dobrev.services.constant.Constants.DOCTOR;
 import static emil.dobrev.services.constant.Constants.UNAUTHORIZED;
@@ -41,19 +39,35 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     }
 
     @Override
-    public DoctorScheduleDTO getSchedule(Long id) {
-        var schedule = doctorScheduleRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("No schedule with id: " + id));
+    public DoctorScheduleDTO getSchedule(Long doctorId) {
+        var schedule = doctorScheduleRepository.findById(doctorId)
+                .orElseThrow(() -> new NotFoundException("No schedule with id: " + doctorId));
         return modelMapper.map(schedule, DoctorScheduleDTO.class);
     }
 
     @Override
-    public void setHoliday(Long id, String roles, List<LocalDate> holidays) {
+    public void setHolidays(Long userId, String roles, HolidaysRequest request) {
         checkForDoctorPermission(roles);
-        var schedule = doctorScheduleRepository.findByDoctorId(id)
-                .orElseThrow(() -> new NotFoundException("No schedule for doctor with id:" + id));
-        schedule.setHoliday(holidays);
+        var schedule = doctorScheduleRepository.findByDoctorId(userId)
+                .orElseThrow(() -> new NotFoundException("No schedule for doctor with userId:" + userId));
+        schedule.getHoliday().add(
+                DoctorHoliday.builder()
+                        .holidayDate(request.holidays())
+                        .doctor(schedule)
+                        .build()
+        );
         doctorScheduleRepository.save(schedule);
+    }
+
+    @Override
+    public void updateHolidays(Long doctorId, String roles, Long holidayId, HolidaysRequest request) {
+        checkForDoctorPermission(roles);
+        var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
+                .orElseThrow(() -> new NotFoundException("No schedule for doctor with id:" + doctorId));
+        var holiday = doctorScheduleRepository.findByHolidayId(holidayId)
+                .orElseThrow(() -> new NotFoundException("No holiday with id:" + holidayId));
+
+//        schedule.setHoliday(request.holidays());
     }
 
     private void checkForDoctorPermission(String roles) {

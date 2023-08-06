@@ -41,10 +41,6 @@ j
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 …
 Uuser/src/main/java/emil/dobrev/services/service/interfaces/AuthenticationService.java,b/2/b2e6873ae3fcf6c26d185e9f2a70ecaa1e09c6cf
-y
-Iuser/src/main/java/emil/dobrev/services/repository/PatientRepository.java,e/1/e1df21a62fbe9e8864b180726b944bbb51e49d44
-v
-Fuser/src/main/java/emil/dobrev/services/repository/UserRepository.java,8/d/8d9bfb3ffc9dccd6c46f411018a773fc7b2dabd7
 C
 api-gateway/pom.xml,2/b/2bfa2b108f2439e99e004f4085b58c22cf995f73
 m
@@ -63,8 +59,6 @@ t
 Dapi-gateway/src/main/java/emil/dobrev/services/config/AppConfig.java,6/f/6ffa4442a2323ab4c33a3b6cd9667adf90e37721
 r
 Bapi-gateway/src/main/java/emil/dobrev/services/util/JwtSecret.java,b/c/bca66cb53cd008f5f92fa72e263c415874af38c0
-x
-Huser/src/main/java/emil/dobrev/services/repository/DoctorRepository.java,1/b/1bfd2e435dadf8389e42d901e7c4a857b2fec63e
 n
 >user/src/main/java/emil/dobrev/services/config/JwtService.java,0/d/0d9ac323bdb0d8ec0c6982ec9fa95000bb470e04
 p

@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "doctor_schedules")
+@Table(name = "doctor_schedules", uniqueConstraints = @UniqueConstraint(columnNames = "doctorId"))
 public class DoctorSchedule {
 
     @Id
@@ -31,7 +31,7 @@ public class DoctorSchedule {
             name = "workingDays",
             columnDefinition = "text[]"
     )
-    private List<DayOfWeek> workingDays;
+    private List<DayOfWeek> workingDays = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalTime startTime;
@@ -45,9 +45,7 @@ public class DoctorSchedule {
     @Column(nullable = false)
     private LocalTime breakTo;
 
-    @ElementCollection
-    @CollectionTable(name = "doctor_schedule_holidays", joinColumns = @JoinColumn(name = "doctor_schedule_id"))
-    @Column(name = "holiday")
-    private List<LocalDate> holiday;
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DoctorHoliday> holiday = new ArrayList<>();
 
 }
