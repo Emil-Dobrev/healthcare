@@ -12,6 +12,7 @@ import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import static emil.dobrev.services.constant.Constants.DOCTOR;
 import static emil.dobrev.services.constant.Constants.UNAUTHORIZED;
@@ -46,10 +47,10 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     }
 
     @Override
-    public void setHolidays(Long userId, String roles, HolidaysRequest request) {
+    public void setHolidays(Long doctorId, String roles, HolidaysRequest request) {
         checkForDoctorPermission(roles);
-        var schedule = doctorScheduleRepository.findByDoctorId(userId)
-                .orElseThrow(() -> new NotFoundException("No schedule for doctor with userId:" + userId));
+        var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
+                .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
         schedule.getHoliday().add(
                 DoctorHoliday.builder()
                         .holidayDate(request.holidays())
@@ -59,15 +60,12 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
         doctorScheduleRepository.save(schedule);
     }
 
+    @Transactional
     @Override
     public void updateHolidays(Long doctorId, String roles, Long holidayId, HolidaysRequest request) {
         checkForDoctorPermission(roles);
-        var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
-                .orElseThrow(() -> new NotFoundException("No schedule for doctor with id:" + doctorId));
-        var holiday = doctorScheduleRepository.findByHolidayId(holidayId)
-                .orElseThrow(() -> new NotFoundException("No holiday with id:" + holidayId));
-
-//        schedule.setHoliday(request.holidays());
+        doctorScheduleRepository.deleteHolidayDates(holidayId);
+        setHolidays(doctorId, roles, request);
     }
 
     private void checkForDoctorPermission(String roles) {
