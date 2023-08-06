@@ -19,12 +19,5 @@ public interface DoctorScheduleRepository extends JpaRepository<DoctorSchedule, 
   @Modifying
   @Query("DELETE FROM DoctorHoliday d WHERE d.id = :holidayId")
   void deleteHolidayDates(@Param("holidayId") Long holidayId);
-
-  @Modifying
-  @Query(
-         value = "UPDATE doctor_holiday_dates h SET h.holiday_date IN :newHolidayDates WHERE h.holiday_id = :holidayId",
-          nativeQuery = true
-  )
-  Optional<List<java.sql.Date>> updateHoliday(@Param("holidayId") Long holidayId,
-                                              @Param("newHolidayDates")List<LocalDate> newHolidayDates);
+  
 }
