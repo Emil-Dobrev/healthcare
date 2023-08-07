@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record CreateScheduleRequest(
+public record ScheduleRequest(
         @NonNull List<DayOfWeek> workingDays,
         @NonNull LocalTime startTime,
         @NonNull LocalTime endTime,
