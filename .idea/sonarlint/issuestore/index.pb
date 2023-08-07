@@ -133,7 +133,5 @@ z
 Jappointment/src/main/java/emil/dobrev/services/AppointmentApplication.java,0/5/05757e8567235accf8d4822c122c263940f1909d
 „
 Tappointment/src/main/java/emil/dobrev/services/repository/AppointmentRepository.java,0/3/03b2819656dc74c689af094e3f4c89eb4f13252e
-†
-Vappointment/src/main/java/emil/dobrev/services/controler/DoctorScheduleController.java,6/c/6ca7edd221b890d85ba0d30323aaf03a33a0b603
 w
 Gappointment/src/main/java/emil/dobrev/services/dto/HolidaysRequest.java,2/9/29d4fcebc82b4caa3e34e76c34775c45901d6145
