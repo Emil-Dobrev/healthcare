@@ -77,10 +77,6 @@ r
 Buser/src/main/java/emil/dobrev/services/config/SecurityConfig.java,0/5/057d7adef7c6151062800cdbebe7287101f128ea
 y
 Iuser/src/main/java/emil/dobrev/services/controller/PatientController.java,4/2/424a5caea3cf3a9d659b559df82a0a117476d214
-v
-Fappointment/src/main/java/emil/dobrev/services/constant/Constants.java,5/6/5687299f8db959a9ca8460aba13b21c76c54b543
-{
-Kappointment/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,e/4/e424571f047a249bf17ee0d0d1702884a8e1fb63
 m
 =user/src/main/java/emil/dobrev/services/config/AppConfig.java,e/8/e88cbe534b9d6b0effd0ed170dc93f9987d24367
 <

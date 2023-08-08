@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static emil.dobrev.services.constant.Constants.DOCTOR;
 import static emil.dobrev.services.constant.Constants.UNAUTHORIZED;
+import static emil.dobrev.services.shared.PermissionsUtils.checkForDoctorPermission;
 
 @Service
 @RequiredArgsConstructor
@@ -87,7 +87,7 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     @Override
     public List<HolidayResponse> getAllHolidaysForDoctor(Long doctorId, String roles) {
         checkForDoctorPermission(roles);
-        var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
+        var schedule =  doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
         var holidays = doctorScheduleRepository.getAllHolidays(schedule.getId())
                 .orElseThrow(() -> new NotFoundException("No available holidays for user with id:" + doctorId));
@@ -124,9 +124,5 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
         setHolidays(doctorId, roles, request);
     }
 
-    private void checkForDoctorPermission(String roles) {
-        if (!roles.contains(DOCTOR)) {
-            throw new UnauthorizedException(UNAUTHORIZED);
-        }
-    }
+
 }

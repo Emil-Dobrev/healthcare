@@ -3,6 +3,7 @@ package emil.dobrev.services.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Table(name = "appointments")
 public class Appointment {
 
@@ -20,6 +22,9 @@ public class Appointment {
 
     @Column(nullable = false)
     private LocalDateTime appointmentDateTime;
+
+    @Column(nullable = false)
+    private LocalDateTime endOFAppointmentDateTime;
 
     @Column(nullable = false)
     private Long doctorId; // Reference ID to the Doctor entity
