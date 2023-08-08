@@ -82,4 +82,16 @@ public record DoctorScheduleController(
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/holidays/{holidayId}")
+    public ResponseEntity<HolidayResponse> getHolidayById(
+            @RequestHeader("userId") Long userId,
+            @RequestHeader("roles") String roles,
+            @PathVariable Long holidayId
+    ) {
+        log.info("Get holiday by id: {}", holidayId);
+
+        return ResponseEntity.ok()
+                .body(doctorScheduleService.getHolidayById(userId, roles, holidayId));
+
+    }
 }

@@ -1,18 +1,19 @@
 package emil.dobrev.services.service;
 
 import emil.dobrev.services.dto.*;
+import emil.dobrev.services.exception.NotFoundException;
 import emil.dobrev.services.exception.UnauthorizedException;
 import emil.dobrev.services.model.DoctorHoliday;
 import emil.dobrev.services.model.DoctorSchedule;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.DoctorScheduleService;
-import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static emil.dobrev.services.constant.Constants.DOCTOR;
@@ -47,7 +48,7 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
         var schedule = doctorScheduleRepository.findById(scheduleId)
                 .orElseThrow(() -> new NotFoundException("No schedule with id: " + doctorId));
 
-        if (schedule.getDoctorId() != doctorId) {
+        if (!Objects.equals(schedule.getDoctorId(), doctorId)) {
             throw new UnauthorizedException(UNAUTHORIZED);
         }
 
@@ -65,7 +66,7 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     @Override
     public DoctorScheduleDTO getSchedule(Long doctorId) {
         var schedule = doctorScheduleRepository.findById(doctorId)
-                .orElseThrow(() -> new NotFoundException("No schedule with id: " + doctorId));
+                .orElseThrow(() -> new jakarta.ws.rs.NotFoundException("No schedule with id: " + doctorId));
         return modelMapper.map(schedule, DoctorScheduleDTO.class);
     }
 
@@ -88,11 +89,12 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
         checkForDoctorPermission(roles);
         var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
-        var holidays = doctorScheduleRepository.getAllHolidays(schedule.getId());
+        var holidays = doctorScheduleRepository.getAllHolidays(schedule.getId())
+                .orElseThrow(() -> new NotFoundException("No available holidays for user with id:" + doctorId));
         var mapOfHolidays = holidays.stream()
                 .collect(Collectors.groupingBy(
-                        Response::getHolidayId,
-                        Collectors.mapping(Response::getHolidayDate, Collectors.toList())
+                        Holiday::getHolidayId,
+                        Collectors.mapping(Holiday::getHolidayDate, Collectors.toList())
                 ));
 
         return mapOfHolidays
@@ -103,6 +105,15 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
                         entry.getValue()
                 ))
                 .toList();
+    }
+
+    @Override
+    public HolidayResponse getHolidayById(Long userId, String roles, Long holidayId) {
+        var holidays = doctorScheduleRepository.getHolidayById(holidayId)
+                .orElseThrow(() -> new NotFoundException("No holiday with id: " + holidayId));
+        var holidayDays = holidays.stream().map(Holiday::getHolidayDate).toList();
+
+        return new HolidayResponse(holidayId, holidayDays);
     }
 
     @Transactional

@@ -1,8 +1,7 @@
 package emil.dobrev.services.repository;
 
 import emil.dobrev.services.dto.DoctorScheduleDTO;
-import emil.dobrev.services.dto.HolidayResponse;
-import emil.dobrev.services.dto.Response;
+import emil.dobrev.services.dto.Holiday;
 import emil.dobrev.services.model.DoctorSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -40,10 +39,15 @@ public interface DoctorScheduleRepository extends JpaRepository<DoctorSchedule, 
                     " FROM doctor_holiday_dates dh WHERE dh.holiday_id IN " +
             "(SELECT id FROM doctor_holidays WHERE schedule_id = :scheduleId)",
             nativeQuery = true)
-    List<Response> getAllHolidays(@Param("scheduleId") Long scheduleId);
+    Optional<List<Holiday>> getAllHolidays(@Param("scheduleId") Long scheduleId);
 
     @Modifying
     @Query("DELETE FROM DoctorHoliday d WHERE d.id = :holidayId")
     void deleteHolidayDates(@Param("holidayId") Long holidayId);
+
+    @Query(value = "SELECT dh.holiday_id as holidayId, dh.holiday_date as holidayDate " +
+            "FROM doctor_holiday_dates dh where dh.holiday_id = :holidayId",
+    nativeQuery = true)
+    Optional<List<Holiday>> getHolidayById(@Param("holidayId") Long holidayId);
 
 }

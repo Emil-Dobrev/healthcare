@@ -23,7 +23,4 @@ public class AppointmentController {
      return ResponseEntity.noContent().build();
     }
 
-//    @PostMapping void createDoctorSchedule(Authentication authentication) {
-//
-//    }
 }

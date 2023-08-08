@@ -19,4 +19,6 @@ public interface DoctorScheduleService {
     DoctorScheduleDTO updateSchedule(Long userId, String roles, Long scheduleID, ScheduleRequest request);
 
     List<HolidayResponse> getAllHolidaysForDoctor(Long doctorId, String roles);
+
+    HolidayResponse getHolidayById(Long userId, String roles, Long holidayId);
 }

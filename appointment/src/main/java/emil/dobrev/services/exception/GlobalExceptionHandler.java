@@ -16,4 +16,28 @@ public class GlobalExceptionHandler {
                 UNAUTHORIZED);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleHolidaysNotFoundException(NotFoundException ex) {
+        var errorResponse = new ErrorResponse
+                (
+                        ex.getMessage(),
+                        HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase()
+                );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(DoctorIsNotAvailableAtThisTimeSlotException.class)
+    public ResponseEntity<ErrorResponse> handleDoctorIsNotAvailableAtThisTimeSlotException(
+            DoctorIsNotAvailableAtThisTimeSlotException ex
+    ) {
+        var errorResponse = new ErrorResponse
+                (
+                        ex.getMessage(),
+                        HttpStatus.CONFLICT.value(),
+                        HttpStatus.CONFLICT.getReasonPhrase()
+                );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
 }
