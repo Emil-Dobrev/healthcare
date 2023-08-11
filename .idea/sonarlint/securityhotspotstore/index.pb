@@ -11,8 +11,6 @@ Guser/src/main/java/emil/dobrev/services/dto/AuthenticationResponse.java,1/a/1a
 Kuser/src/main/java/emil/dobrev/services/dto/PatientRegistrationRequest.java,a/1/a1a70ca2732da081798a3b5516b102acb28d6c0a
 H
 discovery-server/pom.xml,2/c/2c58c7878e43d126fc56cae853d5b06de57d0b3e
-C
-docker-compose.yaml,e/f/ef8def03dc8f162799089e9b5f4321201c8810d5
 z
 Juser/src/main/java/emil/dobrev/services/dto/DoctorRegistrationRequest.java,e/c/ec6c1d650336825556e3b73e57432072dad068cf
 F
@@ -29,8 +27,6 @@ m
 =user/src/main/java/emil/dobrev/services/config/JwtSecret.java,9/2/922da804fba4d19ce664ef385b6eb4dba4155c2a
 l
 <user/src/main/java/emil/dobrev/services/UserApplication.java,2/8/28c7460222e74112c91b37f7480e7c15f46208ca
-ƒ
-Sdiscovery-server/src/main/java/emil/dobrev/services/DiscoveryServerApplication.java,2/e/2e9a1298630f6eb9fe0ef4d8852ebb44653cadb8
 x
 Huser/src/main/java/emil/dobrev/services/exception/NotFoundException.java,f/2/f2c62b234faefa1dc7b846d72d24a161d7680075
 t
@@ -63,10 +59,6 @@ m
 =user/src/main/java/emil/dobrev/services/config/AppConfig.java,e/8/e88cbe534b9d6b0effd0ed170dc93f9987d24367
 <
 user/pom.xml,c/d/cdfe2e323fad8b1bcfe52f68e21783f120cd711e
-C
-appointment/pom.xml,2/5/25f68ba7740b8455ae43e307f8e1644c9d314268
-t
-Dappointment/src/main/java/emil/dobrev/services/config/AppConfig.java,1/b/1bfe766f864271bedff9a869e4d9fd04c07d6dcf
 }
 Muser/src/main/java/emil/dobrev/services/service/AuthenticationServiceImp.java,8/e/8ed4d70d7625af38d48f0f9e7741e55025744092
 
@@ -99,8 +91,6 @@ w
 Gappointment/src/main/java/emil/dobrev/services/dto/HolidayResponse.java,c/b/cbc3bacd1563576a32a40d5bebb2b73f350266a8
 w
 Gappointment/src/main/java/emil/dobrev/services/dto/HolidaysRequest.java,2/9/29d4fcebc82b4caa3e34e76c34775c45901d6145
-z
-Jappointment/src/main/java/emil/dobrev/services/AppointmentApplication.java,0/5/05757e8567235accf8d4822c122c263940f1909d
 w
 Gappointment/src/main/java/emil/dobrev/services/model/DoctorHoliday.java,d/2/d2445e1aa3694e06dd77a6cb8fc596c71f7d8cec
 „

@@ -13,12 +13,12 @@ import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -33,6 +33,7 @@ public class AppointmentServiceImp implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
     private final DoctorScheduleRepository doctorScheduleRepository;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Override
     public AppointmentResponse create(CreateAppointmentRequest createAppointmentRequest, Long patientId, String roles) {
@@ -66,6 +67,7 @@ public class AppointmentServiceImp implements AppointmentService {
                 .build();
 
         appointment = appointmentRepository.save(appointment);
+        kafkaTemplate.send("appointment", "created appointment");
         return new AppointmentResponse(
                 appointment.getAppointmentDateTime(),
                 appointment.getEndOFAppointmentDateTime());
