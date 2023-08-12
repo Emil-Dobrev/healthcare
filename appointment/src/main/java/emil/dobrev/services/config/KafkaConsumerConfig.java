@@ -1,5 +1,6 @@
 package emil.dobrev.services.config;
 
+import emil.dobrev.services.dto.AppointmentNotification;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -25,22 +26,20 @@ public class KafkaConsumerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "my-group");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, String.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, AppointmentNotificationDeserializer.class);
         return props;
     }
 
     @Bean
-    public ConsumerFactory<String, String> consumerFactory() {
+    public ConsumerFactory<String, AppointmentNotification> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
     @Bean
     public KafkaListenerContainerFactory<
-            ConcurrentMessageListenerContainer<String, String>> factory(
-            ConsumerFactory<String, String> consumerFactory
-    ) {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+            ConcurrentMessageListenerContainer<String, AppointmentNotification>> factory() {
+        ConcurrentKafkaListenerContainerFactory<String, AppointmentNotification> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;

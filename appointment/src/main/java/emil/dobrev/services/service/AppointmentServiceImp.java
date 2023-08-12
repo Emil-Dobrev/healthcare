@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static emil.dobrev.services.constant.Constants.APPOINTMENT;
 import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientOrDoctorPermission;
 import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientPermission;
 
@@ -31,9 +32,10 @@ import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientPermis
 @RequiredArgsConstructor
 public class AppointmentServiceImp implements AppointmentService {
 
+
     private final AppointmentRepository appointmentRepository;
     private final DoctorScheduleRepository doctorScheduleRepository;
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaService kafkaService;
 
     @Override
     public AppointmentResponse create(CreateAppointmentRequest createAppointmentRequest, Long patientId, String roles) {
@@ -67,7 +69,9 @@ public class AppointmentServiceImp implements AppointmentService {
                 .build();
 
         appointment = appointmentRepository.save(appointment);
-        kafkaTemplate.send("appointment", "created appointment");
+
+        kafkaService.sendAppointmentNotification(appointment);
+
         return new AppointmentResponse(
                 appointment.getAppointmentDateTime(),
                 appointment.getEndOFAppointmentDateTime());

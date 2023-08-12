@@ -15,8 +15,6 @@ z
 Juser/src/main/java/emil/dobrev/services/dto/DoctorRegistrationRequest.java,e/c/ec6c1d650336825556e3b73e57432072dad068cf
 F
 user/user-service.yaml,f/7/f761f8d8de651b1c75e5698b412d0a4d4e873875
-j
-:user/src/main/java/emil/dobrev/services/model/Patient.java,1/d/1df78c270b0ccda9a160a6d5bed8384d331b1385
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 …
@@ -67,10 +65,6 @@ x
 Huser/src/main/java/emil/dobrev/services/controller/DoctorController.java,e/b/eb06f71a6fdb3749e97964d5820067e8eab0669a
 u
 Euser/src/main/java/emil/dobrev/services/service/DoctorServiceImp.java,f/0/f0f3df9c499094f5010567ea2c8ed3316293175d
-i
-9user/src/main/java/emil/dobrev/services/model/Doctor.java,2/7/27e1499edd9f727b6ff70063d7ea5e7574e1e5c4
-g
-7user/src/main/java/emil/dobrev/services/model/User.java,1/c/1c0cf07e05680a669840f44627cad5e6fdb57d51
 y
 Iapi-gateway/src/main/java/emil/dobrev/services/filter/RouteValidator.java,6/e/6e919ce38b6a60d838d2df4ea43296fdc947ce7b
 y
@@ -95,8 +89,6 @@ w
 Gappointment/src/main/java/emil/dobrev/services/model/DoctorHoliday.java,d/2/d2445e1aa3694e06dd77a6cb8fc596c71f7d8cec
 „
 Tappointment/src/main/java/emil/dobrev/services/exception/GlobalExceptionHandler.java,9/0/90a75c3addd45e0432c035a45f8ae2ed59268735
-v
-Fappointment/src/main/java/emil/dobrev/services/constant/Constants.java,5/6/5687299f8db959a9ca8460aba13b21c76c54b543
 ƒ
 Sappointment/src/main/java/emil/dobrev/services/exception/UnauthorizedException.java,3/a/3ac3695d9bd254c910dbce512dea59771fdc2154
 {
@@ -105,5 +97,3 @@ Kappointment/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,e/
 iappointment/src/main/java/emil/dobrev/services/exception/DoctorIsNotAvailableAtThisTimeSlotException.java,f/4/f4033fb800c81eee6a53ec49400104a72897400d
 €
 Pappointment/src/main/java/emil/dobrev/services/dto/CreateAppointmentRequest.java,5/9/59d5781ca5318c2077551d707f65bfd7e1921422
-{
-Kappointment/src/main/java/emil/dobrev/services/dto/AppointmentResponse.java,3/1/31945ea71ad8a52e3378b3124f6008179a88ce3f
