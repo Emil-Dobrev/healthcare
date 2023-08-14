@@ -21,6 +21,8 @@ public record PatientRegistrationRequest(
         String lastName,
         @NonNull
         @DateTimeFormat
-        Date birthdate
+        Date birthdate,
+        @NotBlank(message = "Phone number can't be blank")
+        String phoneNumber
 ) {
 }

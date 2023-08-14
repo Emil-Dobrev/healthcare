@@ -48,6 +48,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .birthdate(birthDate)
                 .age(age)
                 .password(passwordEncoder.encode(doctorRegistrationRequest.password()))
+                .address(doctorRegistrationRequest.address())
                 .roles(List.of(Role.DOCTOR))
                 .build();
 
@@ -73,6 +74,7 @@ public class AuthenticationServiceImp implements AuthenticationService {
                 .birthdate(birthDate)
                 .age(age)
                 .roles(List.of(Role.PATIENT))
+                .phoneNumber(patientRegistrationRequest.phoneNumber())
                 .build();
 
         userRepository.save(patient);

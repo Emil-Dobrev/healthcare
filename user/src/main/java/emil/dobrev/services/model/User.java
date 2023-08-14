@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -24,7 +23,6 @@ import java.util.List;
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 @MappedSuperclass
-
 public abstract class User implements UserDetails {
 
     @Id
@@ -51,6 +49,8 @@ public abstract class User implements UserDetails {
     @NonNull
     @DateTimeFormat
     protected LocalDate birthdate;
+    @Column
+    protected String phoneNumber;
     protected int age;
     @Enumerated(EnumType.STRING)
     @Column(

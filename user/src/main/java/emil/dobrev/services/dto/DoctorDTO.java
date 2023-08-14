@@ -25,4 +25,6 @@ public class DoctorDTO {
     private DoctorSpecialization specialization;
     @NotBlank
     private String phoneNumber;
+    @NotBlank
+    private String address;
 }

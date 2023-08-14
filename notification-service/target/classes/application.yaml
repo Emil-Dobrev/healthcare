@@ -1,0 +1,35 @@
+server:
+  port: 8096
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: notification
+      username: admin
+      password: admin
+      authentication-database: admin
+      auto-index-creation: true
+      uri: mongodb://admin:admin@localhost/db?authSource=admin
+  application:
+    name: notification
+  mail:
+    username:
+    password:
+    protocol: smtp
+    host: localhost
+    port: 3025
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+          ssl:
+            enable: false
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
+  kafka:
+    bootstrap-servers: localhost:9092

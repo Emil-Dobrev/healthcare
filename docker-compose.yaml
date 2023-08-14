@@ -27,14 +27,78 @@ services:
     networks:
       - postgres
     restart: unless-stopped
-  rabbitmq:
-    image: rabbitmq:3.9.11-management-alpine
-    container_name: rabbitmq
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - spring
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "test_topic1:3"
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: notification
+      MONGO_INITDB_AUTH_SOURCE: admin
+    command: --auth
+
+  greenmail:
+    image: greenmail/standalone:latest
+    environment:
+      - JAVA_OPTS=-Dgreenmail.verbose
+    ports:
+
+      - 3025:3025 # SMTP
+
+      - 3110:3110 # POP3
+
+      - 3143:3143 # IMAP
+
+      - 3465:3465 # SMTPS
+
+      - 3993:3993 # IMAPS
+
+      - 3995:3995 # POP3S
+
+      - 8081:8080 # API
+
+  maildev:
+
+    image: maildev/maildev:latest
+
+    depends_on:
+
+      - greenmail
+
+    ports:
+
+      - 25:1025
+      - 1080:1080
+
+    environment:
+
+      - MAILDEV_DEFAULT_HOST=greenmail  # IMAP server - tls:// prefix for STARTTLS, ssl:// for SSL/TLS
+
+      - MAILDEV_DEFAULT_PORT=3143       # IMAP port
+
+      - MAILDEV_SMTP_SERVER=greenmail   # SMTP server - tls:// prefix for STARTTLS, ssl:// for SSL/TLS
+
+      - MAILDEV_SMTP_PORT=1025          # SMTP port
+
+
 networks:
   postgres:
     driver: bridge
@@ -44,3 +108,4 @@ networks:
 volumes:
   postgres:
   pgadmin:
+

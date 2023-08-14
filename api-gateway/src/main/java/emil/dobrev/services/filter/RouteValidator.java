@@ -1,10 +1,9 @@
 package emil.dobrev.services.filter;
 
 
-
-
-import org.springframework.stereotype.Component;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -12,14 +11,14 @@ import java.util.function.Predicate;
 public class RouteValidator {
 
     public static final List<String> openApiEndPoints = List.of(
-            "GET:/api/v1/doctors",
-            "GET:/api/v1/doctors/{id}",
-            "GET:/api/v1/patients/{id}",
-            "GET:/api/v1/patients",
-            "POST:/api/v1/auth/register/doctor",
-            "POST:/api/v1/auth/register/patient",
-            "POST:/api/v1/auth/login",
-            "GET:/eureka"
+            "/api/v1/doctors",
+            "\\/api\\/v1\\/patients\\/\\d+$",
+            "\\/api\\/v1\\/doctors\\/\\d+$",
+            "/api/v1/patients",
+            "/api/v1/auth/register/doctor",
+            "/api/v1/auth/register/patient",
+            "/api/v1/auth/login",
+            "/eureka"
     );
 
 
@@ -27,6 +26,5 @@ public class RouteValidator {
             request -> openApiEndPoints
                     .stream()
                     .noneMatch(uri ->
-                            uri.contains(request.getURI().getPath()));
-//                            request.getURI().getPath().contains(uri));
+                            request.getURI().getPath().matches(uri));
 }

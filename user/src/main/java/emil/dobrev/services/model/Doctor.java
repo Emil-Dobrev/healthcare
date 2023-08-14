@@ -21,5 +21,5 @@ public class Doctor extends User {
     @Column
     private DoctorSpecialization specialization;
     @Column
-    private String phoneNumber;
+    private String address;
 }
