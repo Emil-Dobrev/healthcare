@@ -19,6 +19,7 @@ public class KafkaService {
     @Async
     public void sendAppointmentNotification(@NonNull Appointment appointment) {
         var appointmentNotification = new AppointmentNotification(
+                appointment.getId(),
                 appointment.getPatientId(),
                 appointment.getDoctorId(),
                 appointment.getAppointmentDateTime(),

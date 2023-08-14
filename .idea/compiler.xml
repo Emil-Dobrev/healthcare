@@ -11,6 +11,7 @@
         <module name="appointment" />
         <module name="discovery-server" />
         <module name="user" />
+        <module name="notification-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

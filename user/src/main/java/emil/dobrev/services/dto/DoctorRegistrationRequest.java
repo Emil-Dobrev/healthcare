@@ -29,6 +29,8 @@ public record DoctorRegistrationRequest(
         @Enumerated(EnumType.STRING)
         DoctorSpecialization specialization,
         @NotBlank(message = "Phone number can't be blank")
-        String phoneNumber
+        String phoneNumber,
+        @NotBlank(message = "Address  can't be blank")
+        String address
 ) {
 }

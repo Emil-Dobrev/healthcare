@@ -3,6 +3,7 @@ package emil.dobrev.services.filter;
 import emil.dobrev.services.exception.InvalidTokenException;
 import emil.dobrev.services.exception.MissingTokenException;
 import emil.dobrev.services.util.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import static org.apache.http.HttpHeaders.AUTHORIZATION;
 
 @Component
+@Slf4j
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
 
     private static final String BEARER = "Bearer ";
@@ -26,6 +28,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
+
             if (routeValidator.isSecured.test(exchange.getRequest())) {
                 //header contains token or not
                 if (!exchange.getRequest().getHeaders().containsKey(AUTHORIZATION)) {
@@ -42,7 +45,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
                         exchange.getRequest()
                                 .mutate()
-                                .header("userId", id )
+                                .header("userId", id)
                                 .header("roles", String.valueOf(roles));
 
                     } catch (Exception exception) {

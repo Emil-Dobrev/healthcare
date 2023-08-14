@@ -20,8 +20,6 @@ public class Doctor extends User {
     @Enumerated(EnumType.STRING)
     @Column
     private DoctorSpecialization specialization;
-    @Column(nullable = false)
-    private String phoneNumber;
-    @Column(nullable = false)
+    @Column
     private String address;
 }
