@@ -118,7 +118,7 @@ class AppointmentServiceImpTest {
 
         when(doctorScheduleRepository.findByDoctorId(doctorId))
                 .thenReturn(Optional.of(doctorSchedule));
-        when(doctorScheduleRepository.getAllHolidays(doctorSchedule.getId()))
+        when(doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId()))
                 .thenReturn(Optional.of(holidays));
 
         Appointment appointment = Appointment.builder()
@@ -167,7 +167,7 @@ class AppointmentServiceImpTest {
         when(doctorScheduleRepository.findByDoctorId(doctorId))
                 .thenReturn(Optional.of(doctorSchedule));
 
-        when(doctorScheduleRepository.getAllHolidays(doctorSchedule.getId()))
+        when(doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId()))
                 .thenReturn(Optional.of(holidays));
 
         Appointment appointment = Appointment.builder()

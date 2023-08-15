@@ -9,6 +9,7 @@ import emil.dobrev.services.exception.NotFoundException;
 import emil.dobrev.services.exception.NotValidWorkingDayException;
 import emil.dobrev.services.model.Appointment;
 import emil.dobrev.services.model.DoctorSchedule;
+import emil.dobrev.services.model.NationalHolidaysInGermany;
 import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
@@ -80,7 +81,7 @@ public class AppointmentServiceImp implements AppointmentService {
         checkForPatientOrDoctorPermission(roles);
         var doctorSchedule = doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
-        var holidays = doctorScheduleRepository.getAllHolidays(doctorSchedule.getId());
+        var holidays = doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId());
 
         if (!isValidWorkingDayForDoctor(
                 doctorSchedule,
@@ -194,6 +195,10 @@ public class AppointmentServiceImp implements AppointmentService {
             LocalDate requestedDate
     ) {
 
+        if (isNationalHoliday(requestedDate)) {
+            return false;
+        }
+        
         List<LocalDate> holidayDates = holidays.stream()
                 .map(Holiday::getHolidayLocalDate)
                 .toList();
@@ -204,5 +209,9 @@ public class AppointmentServiceImp implements AppointmentService {
         }
         return doctorSchedule.getWorkingDays()
                 .contains(requestedDate.getDayOfWeek());
+    }
+
+    private boolean isNationalHoliday(LocalDate date) {
+        return NationalHolidaysInGermany.getNationalHolidays().contains(date);
     }
 }

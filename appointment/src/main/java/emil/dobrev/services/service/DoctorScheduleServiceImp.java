@@ -87,9 +87,9 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     @Override
     public List<HolidayResponse> getAllHolidaysForDoctor(Long doctorId, String roles) {
         checkForDoctorPermission(roles);
-        var schedule =  doctorScheduleRepository.findByDoctorId(doctorId)
+        var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
-        var holidays = doctorScheduleRepository.getAllHolidays(schedule.getId())
+        var holidays = doctorScheduleRepository.getAllHolidaysForDoctor(schedule.getId())
                 .orElseThrow(() -> new NotFoundException("No available holidays for user with id:" + doctorId));
         var mapOfHolidays = holidays.stream()
                 .collect(Collectors.groupingBy(

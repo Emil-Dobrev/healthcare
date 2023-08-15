@@ -39,7 +39,7 @@ public interface DoctorScheduleRepository extends JpaRepository<DoctorSchedule, 
                     " FROM doctor_holiday_dates dh WHERE dh.holiday_id IN " +
             "(SELECT id FROM doctor_holidays WHERE schedule_id = :scheduleId)",
             nativeQuery = true)
-    Optional<List<Holiday>> getAllHolidays(@Param("scheduleId") Long scheduleId);
+    Optional<List<Holiday>> getAllHolidaysForDoctor(@Param("scheduleId") Long scheduleId);
 
     @Modifying
     @Query("DELETE FROM DoctorHoliday d WHERE d.id = :holidayId")
