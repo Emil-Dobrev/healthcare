@@ -35,8 +35,6 @@ Sappointment/src/main/java/emil/dobrev/services/exception/UnauthorizedException.
 Kappointment/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,e/4/e424571f047a249bf17ee0d0d1702884a8e1fb63
 ™
 iappointment/src/main/java/emil/dobrev/services/exception/DoctorIsNotAvailableAtThisTimeSlotException.java,f/4/f4033fb800c81eee6a53ec49400104a72897400d
-€
-Pappointment/src/main/java/emil/dobrev/services/dto/CreateAppointmentRequest.java,5/9/59d5781ca5318c2077551d707f65bfd7e1921422
 {
 Kappointment/src/main/java/emil/dobrev/services/shared/PermissionsUtils.java,2/2/22219bd21328070a1804b6bb7149462afefb0a17
 Œ
@@ -61,8 +59,6 @@ p
 @appointment/src/main/java/emil/dobrev/services/dto/TimeSlot.java,c/2/c28f4a51c0e0b38f00bde4ae8034320aa60c9ec4
 u
 Eappointment/src/main/java/emil/dobrev/services/model/Appointment.java,9/8/986b0f2067b8a4143d2a8a7fd1b8edde37f88447
-{
-Kappointment/src/main/java/emil/dobrev/services/dto/AppointmentResponse.java,3/1/31945ea71ad8a52e3378b3124f6008179a88ce3f
 ‡
 Wnotification-service/src/main/java/emil/dobrev/services/config/KafkaConsumerConfig.java,3/4/34bb633508328348e0bc6ca72dac98d82c72e3c2
 7
