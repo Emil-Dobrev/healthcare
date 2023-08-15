@@ -13,7 +13,6 @@ import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static emil.dobrev.services.constant.Constants.APPOINTMENT;
 import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientOrDoctorPermission;
 import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientPermission;
 
@@ -106,6 +104,7 @@ public class AppointmentServiceImp implements AppointmentService {
                         LocalDateTime.of(requestedDate, endTime)
                 );
 
+        boolean isRequestedDateIsToday = requestedDate.equals(today);
 
         LocalDateTime currentSlotStart = LocalDateTime.of(today, startTime);
         //takes available slots until end of the shift from doctor schedule
@@ -124,12 +123,15 @@ public class AppointmentServiceImp implements AppointmentService {
 
 
             if (isSlotAvailable
-                    && !isTimeBetween(currentSlotStart.toLocalTime(),
+                    && !isTimeBetween(
+                    currentSlotStart.toLocalTime(),
                     currentSlotEnd.toLocalTime(),
                     doctorSchedule.getBreakFrom(),
-                    doctorSchedule.getBreakTo())
-                    && currentSlotStart.toLocalTime().isAfter(currentTime)
+                    doctorSchedule.getBreakTo()
+            )
+                    && (!isRequestedDateIsToday || currentSlotStart.toLocalTime().isAfter(currentTime))
             ) {
+
                 availableSlots.add(new TimeSlot(currentSlotStart, currentSlotEnd));
             }
 
