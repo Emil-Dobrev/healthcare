@@ -1,14 +1,10 @@
 
-g
-7user/src/main/java/emil/dobrev/services/enums/Role.java,b/6/b62a8728095ac945de7ef9acf85c3603f282508c
 H
 discovery-server/pom.xml,2/c/2c58c7878e43d126fc56cae853d5b06de57d0b3e
 F
 user/user-service.yaml,f/7/f761f8d8de651b1c75e5698b412d0a4d4e873875
 C
 api-gateway/pom.xml,2/b/2bfa2b108f2439e99e004f4085b58c22cf995f73
-m
-=user/src/main/java/emil/dobrev/services/config/JwtSecret.java,9/2/922da804fba4d19ce664ef385b6eb4dba4155c2a
 x
 Huser/src/main/java/emil/dobrev/services/exception/NotFoundException.java,f/2/f2c62b234faefa1dc7b846d72d24a161d7680075
 t
@@ -79,8 +75,6 @@ u
 Eappointment/src/main/java/emil/dobrev/services/model/Appointment.java,9/8/986b0f2067b8a4143d2a8a7fd1b8edde37f88447
 {
 Kappointment/src/main/java/emil/dobrev/services/dto/AppointmentResponse.java,3/1/31945ea71ad8a52e3378b3124f6008179a88ce3f
-x
-Huser/src/main/java/emil/dobrev/services/controller/DoctorController.java,e/b/eb06f71a6fdb3749e97964d5820067e8eab0669a
 C
 appointment/pom.xml,2/5/25f68ba7740b8455ae43e307f8e1644c9d314268
 ‡
@@ -97,10 +91,6 @@ l
 Mnotification-service/src/main/java/emil/dobrev/services/config/AppConfig.java,1/a/1af14e9bb3c38f6916e7fd83cc9ed262e2108539
 r
 Buser/src/main/java/emil/dobrev/services/config/SecurityConfig.java,0/5/057d7adef7c6151062800cdbebe7287101f128ea
-y
-Iuser/src/main/java/emil/dobrev/services/controller/PatientController.java,4/2/424a5caea3cf3a9d659b559df82a0a117476d214
-m
-=user/src/main/java/emil/dobrev/services/config/AppConfig.java,e/8/e88cbe534b9d6b0effd0ed170dc93f9987d24367
 {
 Kappointment/src/main/java/emil/dobrev/services/config/KafkaTopicConfig.java,7/3/73212743c4b86c493715e8fb30758ce9ece8e600
 
@@ -117,8 +107,6 @@ Dappointment/src/main/java/emil/dobrev/services/config/AppConfig.java,1/b/1bfe7
 Nappointment/src/main/java/emil/dobrev/services/config/KafkaProducerConfig.java,4/c/4c25e4f7ffdd37b3b504a8433738f4bc6de2c447
 z
 Jappointment/src/main/java/emil/dobrev/services/AppointmentApplication.java,0/5/05757e8567235accf8d4822c122c263940f1909d
-{
-Kuser/src/main/java/emil/dobrev/services/config/JwtAuthenticationFilter.java,b/a/bae07f92ac67979f81bb065b5227223e8f1e8e2f
 k
 ;user/src/main/java/emil/dobrev/services/dto/PatientDTO.java,8/1/81fc4c8a6607cbe401d2381848857d24fceb15cc
 v
