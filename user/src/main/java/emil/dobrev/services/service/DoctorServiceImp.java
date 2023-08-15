@@ -2,6 +2,7 @@ package emil.dobrev.services.service;
 
 import emil.dobrev.services.dto.DoctorDTO;
 import emil.dobrev.services.dto.UpdateDoctorRequest;
+import emil.dobrev.services.enums.DoctorSpecialization;
 import emil.dobrev.services.exception.NoSuchElementException;
 import emil.dobrev.services.exception.NotFoundException;
 import emil.dobrev.services.repository.DoctorRepository;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -30,8 +32,9 @@ public class DoctorServiceImp implements DoctorService {
     }
 
     @Override
-    public List<DoctorDTO> getAllDoctors() {
-        var doctors = doctorRepository.findAll();
+    public List<DoctorDTO> getAllDoctors(DoctorSpecialization specialization) {
+        var spec = specialization != null ? specialization.toString() : null;
+        var doctors = doctorRepository.findAll(spec);
         return doctors
                 .stream()
                 .map(doctor -> modelMapper.map(doctor, DoctorDTO.class))

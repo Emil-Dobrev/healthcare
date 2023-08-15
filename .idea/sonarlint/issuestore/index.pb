@@ -15,8 +15,6 @@ p
 @user/src/main/java/emil/dobrev/services/constants/Constants.java,4/9/49169fdb054f83b7cfea2965f019b7d3b57238ab
 p
 @api-gateway/src/main/java/emil/dobrev/services/util/JwtUtil.java,0/f/0ff443280e371fbe5a8a66f73afbd523230a644c
-}
-Muser/src/main/java/emil/dobrev/services/service/interfaces/DoctorService.java,0/3/0378890f6e604063b69c622a3a266d396e859dd3
 ~
 Nuser/src/main/java/emil/dobrev/services/service/interfaces/PatientService.java,9/6/96613e6ade68b9ada987db14fb6e102b59703270
 ƒ
@@ -51,8 +49,6 @@ x
 Happointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java,d/b/dbad7289a1857cd6fabfea0f19fdd75a27c9c15d
 o
 ?appointment/src/main/java/emil/dobrev/services/dto/Holiday.java,e/6/e6f215fb6673f884765a9d676fcac35a075b0e23
-ƒ
-Sdiscovery-server/src/main/java/emil/dobrev/services/DiscoveryServerApplication.java,2/e/2e9a1298630f6eb9fe0ef4d8852ebb44653cadb8
 v
 Fappointment/src/main/java/emil/dobrev/services/constant/Constants.java,5/6/5687299f8db959a9ca8460aba13b21c76c54b543
 p
@@ -63,16 +59,12 @@ Eappointment/src/main/java/emil/dobrev/services/model/Appointment.java,9/8/986b
 Wnotification-service/src/main/java/emil/dobrev/services/config/KafkaConsumerConfig.java,3/4/34bb633508328348e0bc6ca72dac98d82c72e3c2
 7
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
-l
-<user/src/main/java/emil/dobrev/services/UserApplication.java,2/8/28c7460222e74112c91b37f7480e7c15f46208ca
 r
 Buser/src/main/java/emil/dobrev/services/config/SecurityConfig.java,0/5/057d7adef7c6151062800cdbebe7287101f128ea
 {
 Kappointment/src/main/java/emil/dobrev/services/config/KafkaTopicConfig.java,7/3/73212743c4b86c493715e8fb30758ce9ece8e600
 
 Oappointment/src/main/java/emil/dobrev/services/dto/AppointmentNotification.java,c/9/c919ae6628c98a1f7800088e3bd4ff550851b1fe
-y
-Iapi-gateway/src/main/java/emil/dobrev/services/ApiGatewayApplication.java,2/3/235c2c769b721241cb2751b9a282839ac95b85c9
 Œ
 \appointment/src/main/java/emil/dobrev/services/config/AppointmentNotificationSerializer.java,1/b/1bb463ecf3fc87f9a5f821d86b4ac45432f0de5d
 v

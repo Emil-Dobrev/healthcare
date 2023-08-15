@@ -181,6 +181,5 @@ class AppointmentServiceImpTest {
         assertThrows(NotValidWorkingDayException.class, () -> {
             appointmentServiceImp.getAllAvailableSlots(doctorId, roles, requestedDate);
         });
-
     }
 }

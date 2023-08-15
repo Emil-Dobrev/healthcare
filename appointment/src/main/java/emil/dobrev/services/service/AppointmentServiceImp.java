@@ -198,7 +198,7 @@ public class AppointmentServiceImp implements AppointmentService {
         if (isNationalHoliday(requestedDate)) {
             return false;
         }
-        
+
         List<LocalDate> holidayDates = holidays.stream()
                 .map(Holiday::getHolidayLocalDate)
                 .toList();

@@ -2,6 +2,7 @@ package emil.dobrev.services.controller;
 
 import emil.dobrev.services.dto.DoctorDTO;
 import emil.dobrev.services.dto.UpdateDoctorRequest;
+import emil.dobrev.services.enums.DoctorSpecialization;
 import emil.dobrev.services.service.interfaces.DoctorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,15 +28,17 @@ public class DoctorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DoctorDTO>> getAllDoctors() {
+    public ResponseEntity<List<DoctorDTO>> getAllDoctors(
+            @RequestParam(name = "filter", required = false) DoctorSpecialization specialization
+    ) {
         log.info("Get all doctors request");
-        return ResponseEntity.ok().body(doctorService.getAllDoctors());
+        return ResponseEntity.ok().body(doctorService.getAllDoctors(specialization));
     }
 
     @PatchMapping
     public ResponseEntity<DoctorDTO> updateDoctor(@RequestHeader("userId") Long id,
                                                   @RequestBody UpdateDoctorRequest updateDoctorRequest) {
         log.info("Update doctor request");
-        return ResponseEntity.ok().body(doctorService.updateDoctor(id,updateDoctorRequest));
+        return ResponseEntity.ok().body(doctorService.updateDoctor(id, updateDoctorRequest));
     }
 }
