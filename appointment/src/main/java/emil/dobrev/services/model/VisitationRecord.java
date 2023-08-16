@@ -13,22 +13,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "appointments")
-public class Appointment {
+@Table(name = "visitation_records")
+public class VisitationRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
-    private LocalDateTime appointmentDateTime;
-
+    private LocalDateTime visitDateTime;
     @Column(nullable = false)
-    private LocalDateTime endOFAppointmentDateTime;
-
-    @Column(nullable = false)
-    private Long doctorId;
-
+    private Long appointmentId;
     @Column(nullable = false)
     private Long patientId;
+    private Long doctorId;
+    private String diagnosis;
+    private String treatmentPlan;
 }
+

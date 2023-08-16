@@ -29,7 +29,7 @@ spring:
         - id: appointment-route
           uri: lb://appointment
           predicates:
-          - Path=/api/v1/schedule/**,/api/v1/appointment/**
+          - Path=/api/v1/schedule/**,/api/v1/appointment/**,/api/v1/visitation/**
           filters:
             - AuthenticationFilter
 

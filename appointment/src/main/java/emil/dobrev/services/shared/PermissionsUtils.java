@@ -19,9 +19,10 @@ public class PermissionsUtils {
         }
     }
 
-    public static void checkForDoctorPermission(@NonNull String roles) {
+    public static boolean checkForDoctorPermission(@NonNull String roles) {
         if (!roles.contains(DOCTOR)) {
             throw new UnauthorizedException(UNAUTHORIZED);
         }
+        return true;
     }
 }
