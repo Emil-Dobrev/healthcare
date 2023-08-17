@@ -25,12 +25,11 @@ public class Doctor extends User {
     @Enumerated(EnumType.STRING)
     @Column
     private DoctorSpecialization specialization;
+    private String postalCode;
     @Column
     private String address;
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
-
-
 
     @ElementCollection
     @MapKeyColumn(name="voted_user_id")
