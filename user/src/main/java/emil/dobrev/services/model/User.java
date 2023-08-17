@@ -52,6 +52,7 @@ public abstract class User implements UserDetails {
     @Column
     protected String phoneNumber;
     protected int age;
+    protected double rating = 0;
     @Enumerated(EnumType.STRING)
     @Column(
             name = "roles",

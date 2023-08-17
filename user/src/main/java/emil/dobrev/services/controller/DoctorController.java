@@ -1,11 +1,11 @@
 package emil.dobrev.services.controller;
 
-import emil.dobrev.services.dto.DoctorDTO;
-import emil.dobrev.services.dto.UpdateDoctorRequest;
+import emil.dobrev.services.dto.*;
 import emil.dobrev.services.enums.DoctorSpecialization;
 import emil.dobrev.services.service.interfaces.DoctorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +40,36 @@ public class DoctorController {
                                                   @RequestBody UpdateDoctorRequest updateDoctorRequest) {
         log.info("Update doctor request");
         return ResponseEntity.ok().body(doctorService.updateDoctor(id, updateDoctorRequest));
+    }
+
+    @GetMapping("/comment/{doctorId}")
+    public ResponseEntity<List<CommentDTO>> getAllCommentsForDoctor(
+            @PathVariable Long doctorId
+    ) {
+        log.info("Get comments for doctor with id: {}", doctorId);
+        return ResponseEntity.ok()
+                .body(doctorService.getAllCommentsForDoctor(doctorId));
+    }
+
+    @PostMapping("/vote")
+    public ResponseEntity<HttpStatus> voteForDoctor(
+            @RequestParam("doctorId") Long doctorId,
+            @RequestHeader("userId") Long patientId,
+            @RequestBody VoteRequest request
+    ) {
+        log.info("Voting for doctor with id: {}", doctorId);
+        doctorService.voteForDoctor(doctorId, patientId, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/comment")
+    public ResponseEntity<CommentDTO> addComment(
+            @RequestParam("doctorId") Long doctorId,
+            @RequestHeader("userId") Long patientId,
+            @RequestBody CommentRequest request
+
+    ) {
+        log.info("Add comment for doctor with id: {}", doctorId);
+        return ResponseEntity.ok().body(doctorService.addComment(doctorId, patientId, request));
     }
 }
