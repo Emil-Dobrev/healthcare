@@ -16,13 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
 @AllArgsConstructor
-@Slf4j
 public class DoctorServiceImp implements DoctorService {
 
     private final DoctorRepository doctorRepository;
@@ -113,8 +111,6 @@ public class DoctorServiceImp implements DoctorService {
 
     @Override
     public void voteForDoctor(Long doctorId, Long patientId, VoteRequest request) {
-        log.error(String.valueOf(doctorId));
-        log.error(String.valueOf(request));
         var doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new NotFoundException("Doctor not found"));
 
