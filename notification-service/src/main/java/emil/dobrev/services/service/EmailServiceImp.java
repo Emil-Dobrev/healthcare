@@ -59,7 +59,6 @@ public class EmailServiceImp implements EmailService {
         }
     }
 
-    @Override
     public EmailMetaInformation buildEmailMetaInformation(AppointmentNotification appointmentNotification) {
 
         var patient = restTemplate
@@ -74,13 +73,15 @@ public class EmailServiceImp implements EmailService {
         var text = String.format("You have an appointment at %s, with doctor: %s", appointmentNotification.appointmentDateTime(),
                 doctorFullName);
         var title = "Appointment at: " + appointmentNotification.appointmentDateTime();
+        var subject = "You have appointment at:" + appointmentNotification.appointmentDateTime();
         return new EmailMetaInformation(
                 patientFullName,
                 text,
                 title,
-                "Your appointment is registered",
+                subject,
                 patient.getEmail(),
-                ""
+                "",
+                appointmentNotification.appointmentDateTime()
         );
     }
 

@@ -63,10 +63,6 @@ v
 Fuser/src/main/java/emil/dobrev/services/dto/AuthenticationRequest.java,a/e/aecfceb62b9a7b3c2fab6bc5de7df8cb9c9020e7
 
 Oapi-gateway/src/main/java/emil/dobrev/services/filter/AuthenticationFilter.java,0/9/09d6ccc462bfc33ed50127973c9765cff50d9217
-y
-Iuser/src/main/java/emil/dobrev/services/repository/PatientRepository.java,e/1/e1df21a62fbe9e8864b180726b944bbb51e49d44
-v
-Fuser/src/main/java/emil/dobrev/services/repository/UserRepository.java,8/d/8d9bfb3ffc9dccd6c46f411018a773fc7b2dabd7
 z
 Juser/src/main/java/emil/dobrev/services/dto/DoctorRegistrationRequest.java,e/c/ec6c1d650336825556e3b73e57432072dad068cf
 w
@@ -96,8 +92,6 @@ C
 appointment/pom.xml,2/5/25f68ba7740b8455ae43e307f8e1644c9d314268
 x
 Happointment/src/main/java/emil/dobrev/services/service/KafkaService.java,3/8/38b628b711c1bf6b843566d381247413e78f0051
-„
-Tnotification-service/src/main/java/emil/dobrev/services/NotificationApplication.java,9/0/9025b141a85114c3cb5d1de21e69ec79b3eea26f
 }
 Mnotification-service/src/main/java/emil/dobrev/services/config/AppConfig.java,1/a/1af14e9bb3c38f6916e7fd83cc9ed262e2108539
 —
