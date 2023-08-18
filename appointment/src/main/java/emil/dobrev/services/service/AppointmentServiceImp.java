@@ -1,12 +1,10 @@
 package emil.dobrev.services.service;
 
-import emil.dobrev.services.dto.AppointmentResponse;
-import emil.dobrev.services.dto.CreateAppointmentRequest;
-import emil.dobrev.services.dto.Holiday;
-import emil.dobrev.services.dto.TimeSlot;
+import emil.dobrev.services.dto.*;
 import emil.dobrev.services.exception.DoctorIsNotAvailableAtThisTimeSlotException;
 import emil.dobrev.services.exception.NotFoundException;
 import emil.dobrev.services.exception.NotValidWorkingDayException;
+import emil.dobrev.services.exception.UnauthorizedException;
 import emil.dobrev.services.model.Appointment;
 import emil.dobrev.services.model.DoctorSchedule;
 import emil.dobrev.services.model.NationalHolidaysInGermany;
@@ -43,51 +41,27 @@ public class AppointmentServiceImp implements AppointmentService {
         var endOfAppointment = requestedDateTime.plusMinutes(30);
         var doctorId = createAppointmentRequest.doctorId();
 
-        var appointments = appointmentRepository
-                .findAppointmentsByDoctorIdAndAppointmentDateTimeGreaterThanEqualAndAppointmentDateTimeLessThanEqual(
-                        doctorId,
-                        requestedDateTime,
-                        endOfAppointment
-                );
-        if (!isDoctorAvailable(
-                createAppointmentRequest.appointmentDateTime(),
-                createAppointmentRequest.doctorId(),
-                appointments
-        )
-        ) {
-            throw new DoctorIsNotAvailableAtThisTimeSlotException(
-                    String.format("Doctor with ID %d is not available at %s.",
-                            doctorId, requestedDateTime));
+        var appointments = appointmentRepository.findAppointmentsByDoctorIdAndAppointmentDateTimeGreaterThanEqualAndAppointmentDateTimeLessThanEqual(doctorId, requestedDateTime, endOfAppointment);
+        if (!isDoctorAvailable(createAppointmentRequest.appointmentDateTime(), createAppointmentRequest.doctorId(), appointments)) {
+            throw new DoctorIsNotAvailableAtThisTimeSlotException(String.format("Doctor with ID %d is not available at %s.", doctorId, requestedDateTime));
         }
 
-        var appointment = Appointment.builder()
-                .appointmentDateTime(requestedDateTime)
-                .endOFAppointmentDateTime(endOfAppointment)
-                .doctorId(doctorId)
-                .patientId(patientId)
-                .build();
+        var appointment = Appointment.builder().appointmentDateTime(requestedDateTime).endOFAppointmentDateTime(endOfAppointment).doctorId(doctorId).patientId(patientId).build();
 
         appointment = appointmentRepository.save(appointment);
 
         kafkaService.sendAppointmentNotification(appointment);
 
-        return new AppointmentResponse(
-                appointment.getAppointmentDateTime(),
-                appointment.getEndOFAppointmentDateTime());
+        return new AppointmentResponse(appointment.getAppointmentDateTime(), appointment.getEndOFAppointmentDateTime());
     }
 
     @Override
     public List<TimeSlot> getAllAvailableSlots(Long doctorId, String roles, LocalDate requestedDate) {
         checkForPatientOrDoctorPermission(roles);
-        var doctorSchedule = doctorScheduleRepository.findByDoctorId(doctorId)
-                .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
+        var doctorSchedule = doctorScheduleRepository.findByDoctorId(doctorId).orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
         var holidays = doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId());
 
-        if (!isValidWorkingDayForDoctor(
-                doctorSchedule,
-                holidays.orElse(Collections.emptyList()),
-                requestedDate
-        )) {
+        if (!isValidWorkingDayForDoctor(doctorSchedule, holidays.orElse(Collections.emptyList()), requestedDate)) {
             throw new NotValidWorkingDayException(String.format("Doctor with id: %d is not working at this day", doctorId));
         }
 
@@ -98,12 +72,7 @@ public class AppointmentServiceImp implements AppointmentService {
         LocalDate today = currentDate.toLocalDate();
         LocalTime currentTime = currentDate.toLocalTime();
 
-        List<Appointment> appointments = appointmentRepository
-                .findAppointmentsByDoctorIdAndAppointmentDateTimeBetween(
-                        doctorId,
-                        LocalDateTime.of(requestedDate, startTime),
-                        LocalDateTime.of(requestedDate, endTime)
-                );
+        List<Appointment> appointments = appointmentRepository.findAppointmentsByDoctorIdAndAppointmentDateTimeBetween(doctorId, LocalDateTime.of(requestedDate, startTime), LocalDateTime.of(requestedDate, endTime));
 
         boolean isRequestedDateIsToday = requestedDate.equals(today);
 
@@ -112,26 +81,10 @@ public class AppointmentServiceImp implements AppointmentService {
         while (currentSlotStart.toLocalTime().isBefore(endTime)) {
             LocalDateTime currentSlotEnd = currentSlotStart.plusMinutes(30);
             LocalDateTime finalCurrentSlotStart = currentSlotStart;
-            boolean isSlotAvailable = appointments.stream()
-                    .noneMatch(appointment ->
-                            isTimeBetween(
-                                    finalCurrentSlotStart.toLocalTime(),
-                                    currentSlotEnd.toLocalTime(),
-                                    appointment.getAppointmentDateTime().toLocalTime(),
-                                    appointment.getEndOFAppointmentDateTime().toLocalTime()
-                            )
-                    );
+            boolean isSlotAvailable = appointments.stream().noneMatch(appointment -> isTimeBetween(finalCurrentSlotStart.toLocalTime(), currentSlotEnd.toLocalTime(), appointment.getAppointmentDateTime().toLocalTime(), appointment.getEndOFAppointmentDateTime().toLocalTime()));
 
 
-            if (isSlotAvailable
-                    && !isTimeBetween(
-                    currentSlotStart.toLocalTime(),
-                    currentSlotEnd.toLocalTime(),
-                    doctorSchedule.getBreakFrom(),
-                    doctorSchedule.getBreakTo()
-            )
-                    && (!isRequestedDateIsToday || currentSlotStart.toLocalTime().isAfter(currentTime))
-            ) {
+            if (isSlotAvailable && !isTimeBetween(currentSlotStart.toLocalTime(), currentSlotEnd.toLocalTime(), doctorSchedule.getBreakFrom(), doctorSchedule.getBreakTo()) && (!isRequestedDateIsToday || currentSlotStart.toLocalTime().isAfter(currentTime))) {
 
                 availableSlots.add(new TimeSlot(currentSlotStart, currentSlotEnd));
             }
@@ -143,10 +96,9 @@ public class AppointmentServiceImp implements AppointmentService {
     }
 
     @Override
-    public void cancelAppointment(Long appointmentId, Long patientId, String roles) {
+    public void deleteAppointment(Long appointmentId, Long patientId, String roles) {
         checkForPatientPermission(roles);
-        var appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() -> new NotFoundException("No appointment with id: " + appointmentId));
+        var appointment = appointmentRepository.findById(appointmentId).orElseThrow(() -> new NotFoundException("No appointment with id: " + appointmentId));
         if (appointment.getPatientId().equals(patientId)) {
             appointmentRepository.delete(appointment);
         }
@@ -154,21 +106,53 @@ public class AppointmentServiceImp implements AppointmentService {
 
     }
 
+    @Override
+    public AppointmentResponse updateAppointment(UpdateAppointmentRequest updateAppointmentRequest, Long patientId, String roles) {
+        checkForPatientPermission(roles);
+        var appointment = appointmentRepository.findById(updateAppointmentRequest.appointmentId())
+                .orElseThrow(() -> new NotFoundException(
+                        "No appointment with id: " + updateAppointmentRequest.appointmentId())
+                );
+
+        if (!appointment.getPatientId().equals(patientId)) {
+            throw new UnauthorizedException("You don't have permissions");
+        }
+
+        var newAppointmentTime = updateAppointmentRequest.newAppointmentTime();
+        var endOfAppointment = newAppointmentTime.plusMinutes(30);
+        var appointments = appointmentRepository.
+                findAppointmentsByDoctorIdAndAppointmentDateTimeGreaterThanEqualAndAppointmentDateTimeLessThanEqual
+                        (appointment.getDoctorId(), newAppointmentTime, endOfAppointment);
+
+        if (!isDoctorAvailable(updateAppointmentRequest.newAppointmentTime(), appointment.getDoctorId(), appointments)) {
+            throw new DoctorIsNotAvailableAtThisTimeSlotException(
+                    String.format("Doctor with ID %d is not available at %s."
+                            , appointment.getDoctorId(), newAppointmentTime));
+        }
+
+
+        appointment.setAppointmentDateTime(newAppointmentTime);
+        appointment.setEndOFAppointmentDateTime(endOfAppointment);
+
+        appointmentRepository.save(appointment);
+
+        kafkaService.sendAppointmentNotification(appointment);
+
+        return new AppointmentResponse(newAppointmentTime, endOfAppointment);
+    }
+
     private boolean isDoctorAvailable(LocalDateTime requestedTime, Long doctorId, List<Appointment> appointments) {
         if (!appointments.isEmpty()) {
             return false;
         }
-        var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
-                .orElseThrow(() -> new NotFoundException("No schedule for doctor with id: " + doctorId));
+        var schedule = doctorScheduleRepository.findByDoctorId(doctorId).orElseThrow(() -> new NotFoundException("No schedule for doctor with id: " + doctorId));
 
         var requestedDayOfTheWeek = requestedTime.getDayOfWeek();
         var requestedLocalTime = requestedTime.toLocalTime();
 
         boolean isDuringWorkingDay = schedule.getWorkingDays().contains(requestedDayOfTheWeek);
-        boolean isDuringWorkingHours = requestedLocalTime.isAfter(schedule.getStartTime())
-                && requestedLocalTime.isBefore(schedule.getEndTime());
-        boolean isDuringLunchBreak = requestedLocalTime.isAfter(schedule.getBreakFrom())
-                && requestedLocalTime.isBefore(schedule.getBreakTo());
+        boolean isDuringWorkingHours = requestedLocalTime.isAfter(schedule.getStartTime()) && requestedLocalTime.isBefore(schedule.getEndTime());
+        boolean isDuringLunchBreak = requestedLocalTime.isAfter(schedule.getBreakFrom()) && requestedLocalTime.isBefore(schedule.getBreakTo());
 
         return isDuringWorkingDay && isDuringWorkingHours && !isDuringLunchBreak;
     }
@@ -183,14 +167,8 @@ public class AppointmentServiceImp implements AppointmentService {
      * @param breakEnd         The end time of the  break.
      * @return True if the time slot is within the specified time period, false otherwise.
      */
-    private boolean isTimeBetween(LocalTime currentSlotStart,
-                                  LocalTime currentSlotEnd,
-                                  LocalTime breakStart,
-                                  LocalTime breakEnd) {
-        return (currentSlotStart.isAfter(breakStart) || currentSlotStart.equals(breakStart))
-                && currentSlotStart.isBefore(breakEnd)
-                || currentSlotEnd.isAfter(breakStart) &&
-                (currentSlotEnd.isBefore(breakEnd) || currentSlotEnd.equals(breakEnd));
+    private boolean isTimeBetween(LocalTime currentSlotStart, LocalTime currentSlotEnd, LocalTime breakStart, LocalTime breakEnd) {
+        return (currentSlotStart.isAfter(breakStart) || currentSlotStart.equals(breakStart)) && currentSlotStart.isBefore(breakEnd) || currentSlotEnd.isAfter(breakStart) && (currentSlotEnd.isBefore(breakEnd) || currentSlotEnd.equals(breakEnd));
     }
 
     /**
@@ -201,26 +179,19 @@ public class AppointmentServiceImp implements AppointmentService {
      * @param requestedDate  The date to be checked.
      * @return True if the requested date is a working day, considering the doctor's schedule and holidays; false otherwise.
      */
-    private boolean isValidWorkingDayForDoctor(
-            DoctorSchedule doctorSchedule,
-            List<Holiday> holidays,
-            LocalDate requestedDate
-    ) {
+    private boolean isValidWorkingDayForDoctor(DoctorSchedule doctorSchedule, List<Holiday> holidays, LocalDate requestedDate) {
 
         if (isNationalHoliday(requestedDate)) {
             return false;
         }
 
-        List<LocalDate> holidayDates = holidays.stream()
-                .map(Holiday::getHolidayLocalDate)
-                .toList();
+        List<LocalDate> holidayDates = holidays.stream().map(Holiday::getHolidayLocalDate).toList();
 
         var isOnHoliday = holidayDates.contains(requestedDate);
         if (isOnHoliday) {
             return false;
         }
-        return doctorSchedule.getWorkingDays()
-                .contains(requestedDate.getDayOfWeek());
+        return doctorSchedule.getWorkingDays().contains(requestedDate.getDayOfWeek());
     }
 
     private boolean isNationalHoliday(LocalDate date) {

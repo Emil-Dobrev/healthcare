@@ -3,6 +3,7 @@ package emil.dobrev.services.service.interfaces;
 import emil.dobrev.services.dto.AppointmentResponse;
 import emil.dobrev.services.dto.CreateAppointmentRequest;
 import emil.dobrev.services.dto.TimeSlot;
+import emil.dobrev.services.dto.UpdateAppointmentRequest;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,5 +13,7 @@ public interface AppointmentService {
 
     List<TimeSlot> getAllAvailableSlots(Long doctorId, String roles, LocalDate requestedDate);
 
-    void cancelAppointment(Long appointmentId, Long patientId, String roles);
+    void deleteAppointment(Long appointmentId, Long patientId, String roles);
+
+    AppointmentResponse updateAppointment(UpdateAppointmentRequest updateAppointmentRequest, Long patientId, String roles);
 }

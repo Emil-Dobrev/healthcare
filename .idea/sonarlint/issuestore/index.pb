@@ -114,8 +114,6 @@ Pappointment/src/main/java/emil/dobrev/services/dto/CreateAppointmentRequest.jav
 Sappointment/src/main/java/emil/dobrev/services/model/NationalHolidaysInGermany.java,4/7/47f04a02cdeb32d05eda5334c18f67572e2c195a
 C
 docker-compose.yaml,e/f/ef8def03dc8f162799089e9b5f4321201c8810d5
-…
-Uappointment/src/test/java/emil/dobrev/services/service/AppointmentServiceImpTest.java,c/a/ca6c2a7f617771bfd71712d7b56dd6c577faa4d2
 y
 Iapi-gateway/src/main/java/emil/dobrev/services/filter/RouteValidator.java,6/e/6e919ce38b6a60d838d2df4ea43296fdc947ce7b
 ƒ
@@ -128,8 +126,6 @@ Wappointment/src/main/java/emil/dobrev/services/repository/DoctorScheduleReposit
 Kappointment/src/main/java/emil/dobrev/services/shared/PermissionsUtils.java,2/2/22219bd21328070a1804b6bb7149462afefb0a17
 „
 Tappointment/src/main/java/emil/dobrev/services/service/DoctorScheduleServiceImp.java,4/f/4fe3f53a2e44a271cee7443fe85342a42c660531
-z
-Jappointment/src/main/java/emil/dobrev/services/AppointmentApplication.java,0/5/05757e8567235accf8d4822c122c263940f1909d
 z
 Jappointment/src/main/java/emil/dobrev/services/model/VisitationRecord.java,4/8/484b4323367c46b5bf7d0a2217581c75d0c4aaa8
 y

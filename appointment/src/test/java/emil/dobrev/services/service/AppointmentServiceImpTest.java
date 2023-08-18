@@ -182,4 +182,24 @@ class AppointmentServiceImpTest {
             appointmentServiceImp.getAllAvailableSlots(doctorId, roles, requestedDate);
         });
     }
+
+    @Test
+    void shouldDeleteAppointment() {
+        var appointmeId = 1L;
+        String roles = "ROLE_PATIENT";
+        Appointment appointment = Appointment.builder()
+                .id(appointmeId)
+                .doctorId(1L)
+                .patientId(23L)
+                .appointmentDateTime(LocalDateTime.of(2023, 8, 15, 15, 30))
+                .endOFAppointmentDateTime(LocalDateTime.of(2023, 8, 15, 16, 0))
+                .build();
+
+        when(appointmentRepository.findById(appointmeId))
+                .thenReturn(Optional.of(appointment));
+
+        appointmentServiceImp.deleteAppointment(appointmeId, appointment.getPatientId() , roles);
+
+        verify(appointmentRepository).delete(appointment);
+    }
 }
