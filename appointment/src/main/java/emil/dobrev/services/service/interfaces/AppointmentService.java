@@ -11,4 +11,6 @@ public interface AppointmentService {
     AppointmentResponse create(CreateAppointmentRequest createAppointmentRequest, Long patientId, String roles);
 
     List<TimeSlot> getAllAvailableSlots(Long doctorId, String roles, LocalDate requestedDate);
+
+    void cancelAppointment(Long appointmentId, Long patientId, String roles);
 }

@@ -4,8 +4,10 @@ import emil.dobrev.services.dto.AppointmentResponse;
 import emil.dobrev.services.dto.CreateAppointmentRequest;
 import emil.dobrev.services.dto.TimeSlot;
 import emil.dobrev.services.service.interfaces.AppointmentService;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +44,17 @@ public class AppointmentController {
 
         return ResponseEntity.ok()
                 .body(appointmentService.create(createAppointmentRequest, patientId, roles));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<HttpStatus> cancelAppointment(
+            @NonNull @RequestParam("appointmentId") Long appointmentId,
+            @RequestHeader("userId") Long patientId,
+            @RequestHeader("roles") String roles
+    ) {
+        log.info("Cancel appointment with id: {}", appointmentId);
+        appointmentService.cancelAppointment(appointmentId, patientId, roles);
+        return ResponseEntity.noContent().build();
     }
 
 }

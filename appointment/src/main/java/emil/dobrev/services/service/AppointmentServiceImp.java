@@ -142,6 +142,18 @@ public class AppointmentServiceImp implements AppointmentService {
         return availableSlots;
     }
 
+    @Override
+    public void cancelAppointment(Long appointmentId, Long patientId, String roles) {
+        checkForPatientPermission(roles);
+        var appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new NotFoundException("No appointment with id: " + appointmentId));
+        if (appointment.getPatientId().equals(patientId)) {
+            appointmentRepository.delete(appointment);
+        }
+
+
+    }
+
     private boolean isDoctorAvailable(LocalDateTime requestedTime, Long doctorId, List<Appointment> appointments) {
         if (!appointments.isEmpty()) {
             return false;
