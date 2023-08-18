@@ -6,7 +6,6 @@ import emil.dobrev.services.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -18,11 +17,14 @@ public class EmailListener {
     @EventListener
     public void emailFailed(EmailEvent emailEvent) {
         log.info("Failed to send email");
-        var notificationId = emailEvent.getNotification().getId();
-        Notification notification = notificationRepository
-                .findById(notificationId)
-                .orElseThrow(() -> new NotFoundException("No notification with id: " + notificationId));
-        notification.setSend(false);
-        notificationRepository.save(notification);
+        if(emailEvent.getValue() instanceof Notification notification) {
+            var notificationId = notification.getId();
+            Notification not = notificationRepository
+                    .findById(notificationId)
+                    .orElseThrow(() -> new NotFoundException("No notification with id: " + notificationId));
+            not.setEmailSend(false);
+            notificationRepository.save(not);
+        }
+
     }
 }

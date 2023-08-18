@@ -21,5 +21,5 @@ public class Notification {
     @NonNull
     EmailMetaInformation emailMetaInformation;
     @NonNull
-    boolean isSend = true;
+    boolean isEmailSend = true;
 }

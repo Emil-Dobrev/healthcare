@@ -43,8 +43,7 @@ public class EmailServiceImp implements EmailService {
 
 
     @Override
-    public void sendEmail(EmailMetaInformation emailMetaInformation) {
-        var notification = notificationRepository.save(new Notification(emailMetaInformation));
+    public <T> void sendEmail(EmailMetaInformation emailMetaInformation, T object) {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
@@ -55,11 +54,10 @@ public class EmailServiceImp implements EmailService {
             javaMailSender.send(mimeMessage);
         } catch (MessagingException | RuntimeException | IOException e) {
             log.error("Failed to send email: {}" + e.getMessage());
-            applicationEventPublisher.publishEvent(new EmailEvent<>(this, notification));
+            applicationEventPublisher.publishEvent(new EmailEvent<>(this, object));
         }
     }
 
-    @Override
     public EmailMetaInformation buildEmailMetaInformation(AppointmentNotification appointmentNotification) {
 
         var patient = restTemplate
@@ -74,14 +72,20 @@ public class EmailServiceImp implements EmailService {
         var text = String.format("You have an appointment at %s, with doctor: %s", appointmentNotification.appointmentDateTime(),
                 doctorFullName);
         var title = "Appointment at: " + appointmentNotification.appointmentDateTime();
-        return new EmailMetaInformation(
+        var subject = "You have appointment at:" + appointmentNotification.appointmentDateTime();
+
+
+        var emailMetaInformation =  new EmailMetaInformation(
                 patientFullName,
                 text,
                 title,
-                "Your appointment is registered",
+                subject,
                 patient.getEmail(),
-                ""
+                "",
+                appointmentNotification.appointmentDateTime()
         );
+
+        return emailMetaInformation;
     }
 
     private String buildEmail(EmailMetaInformation emailMetaInformation) throws IOException {
