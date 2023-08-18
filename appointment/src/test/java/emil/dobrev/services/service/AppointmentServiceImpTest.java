@@ -1,10 +1,8 @@
 package emil.dobrev.services.service;
 
-import emil.dobrev.services.dto.AppointmentResponse;
-import emil.dobrev.services.dto.CreateAppointmentRequest;
-import emil.dobrev.services.dto.Holiday;
-import emil.dobrev.services.dto.TimeSlot;
+import emil.dobrev.services.dto.*;
 import emil.dobrev.services.exception.NotValidWorkingDayException;
+import emil.dobrev.services.exception.UnauthorizedException;
 import emil.dobrev.services.model.Appointment;
 import emil.dobrev.services.model.DoctorSchedule;
 import emil.dobrev.services.repository.AppointmentRepository;
@@ -26,8 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AppointmentServiceImpTest {
@@ -198,8 +195,83 @@ class AppointmentServiceImpTest {
         when(appointmentRepository.findById(appointmeId))
                 .thenReturn(Optional.of(appointment));
 
-        appointmentServiceImp.deleteAppointment(appointmeId, appointment.getPatientId() , roles);
+        appointmentServiceImp.deleteAppointment(appointmeId, appointment.getPatientId(), roles);
 
         verify(appointmentRepository).delete(appointment);
+    }
+
+    @Test
+    void shouldUpdateAppointment() {
+
+        Long doctorId = 1L;
+        Long patientId = 1L;
+        Long appointmentId = 1L;
+        String role = "ROLE_PATIENT";
+        var newAppointmentTime = LocalDateTime.of(2023, 8, 15, 9, 30);
+        var endOfAppointment = newAppointmentTime.plusMinutes(30);
+        var request = new UpdateAppointmentRequest(
+                1L,
+                newAppointmentTime
+
+        );
+
+        Appointment appointment = Appointment.builder()
+                .doctorId(1L)
+                .patientId(1L)
+                .appointmentDateTime(LocalDateTime.of(2023, 8, 15, 15, 30))
+                .endOFAppointmentDateTime(LocalDateTime.of(2023, 8, 15, 16, 0))
+                .build();
+
+        when(appointmentRepository.findById(appointmentId))
+                .thenReturn(Optional.of(appointment));
+
+
+        when(doctorScheduleRepository.findByDoctorId(doctorId))
+                .thenReturn(Optional.of(doctorSchedule));
+
+        when(appointmentRepository
+                .findAppointmentsByDoctorIdAndAppointmentDateTimeGreaterThanEqualAndAppointmentDateTimeLessThanEqual(
+                        doctorId,
+                        newAppointmentTime,
+                        endOfAppointment
+                )).thenReturn(Collections.emptyList());
+
+        appointmentServiceImp.updateAppointment(request, patientId, role);
+
+        verify(appointmentRepository).save(any(Appointment.class));
+        assertNotNull(appointment);
+        assertEquals(appointment.getAppointmentDateTime(), newAppointmentTime);
+        assertEquals(appointment.getEndOFAppointmentDateTime(), endOfAppointment);
+    }
+
+    @Test
+    void shouldThrowUnauthorizedExceptionWhenWeTryToUpdateAppointmentWithOtherId() {
+        Long doctorId = 1L;
+        Long patientId = 1L;
+        Long appointmentId = 1L;
+        String role = "ROLE_PATIENT";
+        var newAppointmentTime = LocalDateTime.of(2023, 8, 15, 9, 30);
+        var endOfAppointment = newAppointmentTime.plusMinutes(30);
+        var request = new UpdateAppointmentRequest(
+                1L,
+                newAppointmentTime
+
+        );
+
+        Appointment appointment = Appointment.builder()
+                .doctorId(1L)
+                //different patient id
+                .patientId(2L)
+                .appointmentDateTime(LocalDateTime.of(2023, 8, 15, 15, 30))
+                .endOFAppointmentDateTime(LocalDateTime.of(2023, 8, 15, 16, 0))
+                .build();
+
+        when(appointmentRepository.findById(appointmentId))
+                .thenReturn(Optional.of(appointment));
+
+
+        assertThrows(UnauthorizedException.class, () ->
+                appointmentServiceImp.updateAppointment(request, patientId, role));
+        ;
     }
 }

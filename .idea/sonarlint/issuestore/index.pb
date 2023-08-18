@@ -35,8 +35,6 @@ x
 Happointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java,d/b/dbad7289a1857cd6fabfea0f19fdd75a27c9c15d
 o
 ?appointment/src/main/java/emil/dobrev/services/dto/Holiday.java,e/6/e6f215fb6673f884765a9d676fcac35a075b0e23
-v
-Fappointment/src/main/java/emil/dobrev/services/constant/Constants.java,5/6/5687299f8db959a9ca8460aba13b21c76c54b543
 p
 @appointment/src/main/java/emil/dobrev/services/dto/TimeSlot.java,c/2/c28f4a51c0e0b38f00bde4ae8034320aa60c9ec4
 ‡
@@ -104,8 +102,6 @@ y
 Iappointment/src/main/java/emil/dobrev/services/dto/DoctorScheduleDTO.java,f/2/f2124077bf0fd9d689522cfc44d0157240b538cf
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-ˆ
-Xappointment/src/test/java/emil/dobrev/services/service/DoctorScheduleServiceImpTest.java,0/4/04c94c46391cbaec58901eafc500c556b92f6ee1
 {
 Kappointment/src/main/java/emil/dobrev/services/dto/AppointmentResponse.java,3/1/31945ea71ad8a52e3378b3124f6008179a88ce3f
 €
@@ -122,8 +118,6 @@ w
 Guser/src/main/java/emil/dobrev/services/enums/DoctorSpecialization.java,8/7/878cb844473fc30462a737644ceae7ed1a1d1749
 ‡
 Wappointment/src/main/java/emil/dobrev/services/repository/DoctorScheduleRepository.java,8/5/857fc89a6f68a2568637553064f6611e3e442699
-{
-Kappointment/src/main/java/emil/dobrev/services/shared/PermissionsUtils.java,2/2/22219bd21328070a1804b6bb7149462afefb0a17
 „
 Tappointment/src/main/java/emil/dobrev/services/service/DoctorScheduleServiceImp.java,4/f/4fe3f53a2e44a271cee7443fe85342a42c660531
 z
