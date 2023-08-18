@@ -55,12 +55,12 @@ class RemainderNotificationJobTest {
         mockAppointments.add(notification);
         mockAppointments.add(notification);
 
-        when(notificationRepository.findAllByAppointmentDateTimeBetween(startOfDay, endOfDay))
+        when(notificationRepository.findAllByEmailMetaInformationTimeOfAppointmentBetween(startOfDay, endOfDay))
                 .thenReturn(mockAppointments);
 
         remainderNotificationJob.sendRemainderForAppointmentJob();
 
         // Verify that the emailService.sendEmail() method was called for each appointment
-        verify(emailService, times(mockAppointments.size())).sendEmail(any(EmailMetaInformation.class));
+        verify(emailService, times(mockAppointments.size())).sendEmail(any(EmailMetaInformation.class), any(Notification.class));
     }
 }
