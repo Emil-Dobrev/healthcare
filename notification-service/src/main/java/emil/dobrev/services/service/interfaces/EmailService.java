@@ -4,7 +4,7 @@ import emil.dobrev.services.model.AppointmentNotification;
 
 public interface EmailService {
 
-    void sendEmail(EmailMetaInformation emailMetaInformation);
+    <T> void sendEmail(EmailMetaInformation emailMetaInformation, T object);
 
     EmailMetaInformation buildEmailMetaInformation(AppointmentNotification appointmentNotification);
 }

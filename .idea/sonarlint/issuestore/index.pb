@@ -96,10 +96,6 @@ Happointment/src/main/java/emil/dobrev/services/service/KafkaService.java,3/8/3
 gnotification-service/src/main/java/emil/dobrev/services/config/AppointmentNotificationDeserializer.java,8/9/89fdd2c8b3563be904deeb3abdac99d18c68404d
 }
 Mnotification-service/src/main/java/emil/dobrev/services/config/AppConfig.java,1/a/1af14e9bb3c38f6916e7fd83cc9ed262e2108539
-Å
-Qnotification-service/src/main/java/emil/dobrev/services/config/EmailListener.java,f/2/f256bdb03bdaf0e3c44e3d610c4d3fd9fb7d05f1
-~
-Nnotification-service/src/main/java/emil/dobrev/services/config/EmailEvent.java,b/d/bdc7f485de3a5883cf59b954495fcc83a2a7010a
 â
 Yappointment/src/main/java/emil/dobrev/services/service/interfaces/AppointmentService.java,8/b/8b425f200714b856980cb3151dd9aee1cf063a1f
 w

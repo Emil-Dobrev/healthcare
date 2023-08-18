@@ -1,6 +1,5 @@
 package emil.dobrev.services.config;
 
-import emil.dobrev.services.model.Notification;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 import org.springframework.context.ApplicationEvent;
@@ -9,10 +8,10 @@ import org.springframework.context.ApplicationEvent;
 @EqualsAndHashCode(callSuper = true)
 public class EmailEvent<T> extends ApplicationEvent {
 
-    Notification notification;
+    T value;
 
-    public EmailEvent(Object source, Notification notification) {
+    public EmailEvent(Object source, T value) {
         super(source);
-        this.notification = notification;
+        this.value = value;
     }
 }

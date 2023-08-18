@@ -49,7 +49,7 @@ class RemainderNotificationJobTest {
         Notification notification = Notification.builder()
                 .id("test")
                 .emailMetaInformation(emailMetaInformation)
-                .isSend(true)
+                .isEmailSend(true)
                 .build();
 
         mockAppointments.add(notification);

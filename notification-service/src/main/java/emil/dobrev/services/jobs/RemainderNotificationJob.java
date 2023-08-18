@@ -19,14 +19,14 @@ public class RemainderNotificationJob {
     private final NotificationRepository notificationRepository;
     private final EmailService emailService;
 
-    @Scheduled(cron = "0 1 * * *") // 1am every day
+    @Scheduled(cron = "0 1 * * * *") // 1am every day
     void sendRemainderForAppointmentJob() {
         log.info("Starting job for sending reminders about appointments");
         var today = LocalDate.now();
         LocalDateTime startOfDay = today.atTime(LocalTime.MIN);
         LocalDateTime endOfDay = today.atTime(LocalTime.MAX);
-        var appointments = notificationRepository.findAllByAppointmentDateTimeBetween(startOfDay, endOfDay);
+        var appointments = notificationRepository.findAllByEmailMetaInformationTimeOfAppointmentBetween(startOfDay, endOfDay);
         appointments
-                .forEach(appointment -> emailService.sendEmail(appointment.getEmailMetaInformation()));
+                .forEach(appointment -> emailService.sendEmail(appointment.getEmailMetaInformation(), appointment));
     }
 }
