@@ -10,6 +10,7 @@ import emil.dobrev.services.model.DoctorSchedule;
 import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
+import jakarta.ws.rs.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +37,26 @@ public class AppointmentServiceImp implements AppointmentService {
     @Override
     public AppointmentResponse create(CreateAppointmentRequest createAppointmentRequest, Long patientId, String roles) {
         checkForPatientPermission(roles);
+        var now  = java.time.LocalDate.now();
         var requestedDateTime = createAppointmentRequest.appointmentDateTime();
         var endOfAppointment = requestedDateTime.plusMinutes(30);
         var doctorId = createAppointmentRequest.doctorId();
 
+        if(requestedDateTime.toLocalDate().isBefore(now)) {
+            throw new DoctorIsNotAvailableAtThisTimeSlotException("Appointment time can't be in the past");
+        }
+
+        var doctorSchedule = doctorScheduleRepository.findByDoctorId(doctorId).orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
+        var holidays = doctorScheduleRepository.getAllVacationsForDoctor(doctorSchedule.getId());
         var appointments = appointmentRepository.findAppointmentsByDoctorIdAndAppointmentDateTimeGreaterThanEqualAndAppointmentDateTimeLessThanEqual(doctorId, requestedDateTime, endOfAppointment);
+
+
         if (!isDoctorAvailable(createAppointmentRequest.appointmentDateTime(), createAppointmentRequest.doctorId(), appointments)) {
             throw new DoctorIsNotAvailableAtThisTimeSlotException(String.format("Doctor with ID %d is not available at %s.", doctorId, requestedDateTime));
+        }
+
+        if (!isValidWorkingDayForDoctor(doctorSchedule, holidays.orElse(Collections.emptyList()), requestedDateTime.toLocalDate())) {
+            throw new NotValidWorkingDayException(String.format("Doctor with id: %d is not working at this day", doctorId));
         }
 
         var appointment = Appointment.builder().appointmentDateTime(requestedDateTime).endOFAppointmentDateTime(endOfAppointment).doctorId(doctorId).patientId(patientId).build();
@@ -194,6 +208,9 @@ public class AppointmentServiceImp implements AppointmentService {
     }
 
     private boolean isNationalHoliday(LocalDate date) {
+        System.out.println(nationalHolidaysInGermany);
+        System.out.println(nationalHolidaysInGermany);
+        System.out.println(nationalHolidaysInGermany);
         return nationalHolidaysInGermany.contains(date);
     }
 }

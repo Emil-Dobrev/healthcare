@@ -94,8 +94,6 @@ y
 Iappointment/src/main/java/emil/dobrev/services/dto/VisitationRequest.java,2/c/2c454962441f59ecad09d006f22bd24382fa1c77
 {
 Kappointment/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,e/4/e424571f047a249bf17ee0d0d1702884a8e1fb63
-‰
-Yappointment/src/main/java/emil/dobrev/services/exception/NotValidWorkingDayException.java,5/e/5e4a4d7a728ccd6dea2cadce91eda3019ef88329
 ƒ
 Sappointment/src/main/java/emil/dobrev/services/exception/UnauthorizedException.java,3/a/3ac3695d9bd254c910dbce512dea59771fdc2154
 „

@@ -35,8 +35,8 @@ public interface DoctorScheduleRepository extends JpaRepository<DoctorSchedule, 
                                      @Param("breakTo") LocalTime breakTo);
 
     @Query(value =
-            "SELECT dh.holiday_id as holidayId, dh.holiday_date as holidayDate" +
-                    " FROM doctor_holiday_dates dh WHERE dh.holiday_id IN " +
+            "SELECT dh.vacation_id as holidayId, dh.vacation_date as holidayDate" +
+                    " FROM doctor_vacation_dates dh WHERE dh.vacation_id IN " +
             "(SELECT id FROM doctor_holidays WHERE schedule_id = :scheduleId)",
             nativeQuery = true)
     Optional<List<Vacation>> getAllVacationsForDoctor(@Param("scheduleId") Long scheduleId);
@@ -45,8 +45,8 @@ public interface DoctorScheduleRepository extends JpaRepository<DoctorSchedule, 
     @Query("DELETE FROM DoctorVacation d WHERE d.id = :holidayId")
     void deleteHolidayDates(@Param("holidayId") Long holidayId);
 
-    @Query(value = "SELECT dh.holiday_id as holidayId, dh.holiday_date as holidayDate " +
-            "FROM doctor_holiday_dates dh where dh.holiday_id = :holidayId",
+    @Query(value = "SELECT dh.vacation_id as holidayId, dh.vacation_date as holidayDate " +
+            "FROM doctor_vacation_dates dh where dh.vacation_id = :holidayId",
     nativeQuery = true)
     Optional<List<Vacation>> getVacationById(@Param("holidayId") Long holidayId);
 
