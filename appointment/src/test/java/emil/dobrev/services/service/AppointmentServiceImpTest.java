@@ -111,11 +111,11 @@ class AppointmentServiceImpTest {
         DoctorSchedule doctorSchedule = this.doctorSchedule;
 
         // Mock holidays
-        List<Holiday> holidays = Collections.emptyList();
+        List<Vacation> holidays = Collections.emptyList();
 
         when(doctorScheduleRepository.findByDoctorId(doctorId))
                 .thenReturn(Optional.of(doctorSchedule));
-        when(doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId()))
+        when(doctorScheduleRepository.getAllVacationsForDoctor(doctorSchedule.getId()))
                 .thenReturn(Optional.of(holidays));
 
         Appointment appointment = Appointment.builder()
@@ -158,14 +158,14 @@ class AppointmentServiceImpTest {
 
         // Mock doctor schedule
         DoctorSchedule doctorSchedule = this.doctorSchedule;
-        List<Holiday> holidays = Collections.emptyList();
+        List<Vacation> vacations = Collections.emptyList();
 
 
         when(doctorScheduleRepository.findByDoctorId(doctorId))
                 .thenReturn(Optional.of(doctorSchedule));
 
-        when(doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId()))
-                .thenReturn(Optional.of(holidays));
+        when(doctorScheduleRepository.getAllVacationsForDoctor(doctorSchedule.getId()))
+                .thenReturn(Optional.of(vacations));
 
         Appointment appointment = Appointment.builder()
                 .doctorId(1L)

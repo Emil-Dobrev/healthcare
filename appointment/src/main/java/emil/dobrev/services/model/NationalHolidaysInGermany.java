@@ -1,10 +1,28 @@
 package emil.dobrev.services.model;
 
+import emil.dobrev.services.enums.Country;
+import emil.dobrev.services.service.NationalHolidayService;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Component
 public class NationalHolidaysInGermany {
-    private NationalHolidaysInGermany(){}
+
+    private final NationalHolidayService nationalHolidayService;
+    public static List<LocalDate> nationalHolidaysInGermany;
+
+    private NationalHolidaysInGermany(NationalHolidayService nationalHolidayService) {
+        this.nationalHolidayService = nationalHolidayService;
+        setNationalHolidaysInGermany();
+    }
+
+
+    public void setNationalHolidaysInGermany() {
+        nationalHolidaysInGermany = this.nationalHolidayService.getNationalHolidays(Country.GERMANY)
+                .orElse(getNationalHolidays());
+    }
 
     public static List<LocalDate> getNationalHolidays() {
         return List.of(

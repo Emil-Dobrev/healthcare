@@ -7,7 +7,6 @@ import emil.dobrev.services.exception.NotValidWorkingDayException;
 import emil.dobrev.services.exception.UnauthorizedException;
 import emil.dobrev.services.model.Appointment;
 import emil.dobrev.services.model.DoctorSchedule;
-import emil.dobrev.services.model.NationalHolidaysInGermany;
 import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static emil.dobrev.services.model.NationalHolidaysInGermany.nationalHolidaysInGermany;
 import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientOrDoctorPermission;
 import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientPermission;
 
@@ -28,7 +28,6 @@ import static emil.dobrev.services.shared.PermissionsUtils.checkForPatientPermis
 @Service
 @RequiredArgsConstructor
 public class AppointmentServiceImp implements AppointmentService {
-
 
     private final AppointmentRepository appointmentRepository;
     private final DoctorScheduleRepository doctorScheduleRepository;
@@ -59,7 +58,7 @@ public class AppointmentServiceImp implements AppointmentService {
     public List<TimeSlot> getAllAvailableSlots(Long doctorId, String roles, LocalDate requestedDate) {
         checkForPatientOrDoctorPermission(roles);
         var doctorSchedule = doctorScheduleRepository.findByDoctorId(doctorId).orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
-        var holidays = doctorScheduleRepository.getAllHolidaysForDoctor(doctorSchedule.getId());
+        var holidays = doctorScheduleRepository.getAllVacationsForDoctor(doctorSchedule.getId());
 
         if (!isValidWorkingDayForDoctor(doctorSchedule, holidays.orElse(Collections.emptyList()), requestedDate)) {
             throw new NotValidWorkingDayException(String.format("Doctor with id: %d is not working at this day", doctorId));
@@ -175,17 +174,17 @@ public class AppointmentServiceImp implements AppointmentService {
      * Checks if a given date is a working day based on the doctor's schedule and holidays.
      *
      * @param doctorSchedule The doctor's schedule containing working days and break times.
-     * @param holidays       The list of holidays.
+     * @param vacations      The list of holidays.
      * @param requestedDate  The date to be checked.
      * @return True if the requested date is a working day, considering the doctor's schedule and holidays; false otherwise.
      */
-    private boolean isValidWorkingDayForDoctor(DoctorSchedule doctorSchedule, List<Holiday> holidays, LocalDate requestedDate) {
+    private boolean isValidWorkingDayForDoctor(DoctorSchedule doctorSchedule, List<Vacation> vacations, LocalDate requestedDate) {
 
         if (isNationalHoliday(requestedDate)) {
             return false;
         }
 
-        List<LocalDate> holidayDates = holidays.stream().map(Holiday::getHolidayLocalDate).toList();
+        List<LocalDate> holidayDates = vacations.stream().map(Vacation::getVacationLocalDate).toList();
 
         var isOnHoliday = holidayDates.contains(requestedDate);
         if (isOnHoliday) {
@@ -195,6 +194,6 @@ public class AppointmentServiceImp implements AppointmentService {
     }
 
     private boolean isNationalHoliday(LocalDate date) {
-        return NationalHolidaysInGermany.getNationalHolidays().contains(date);
+        return nationalHolidaysInGermany.contains(date);
     }
 }

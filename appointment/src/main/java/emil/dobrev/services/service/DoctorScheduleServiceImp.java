@@ -3,8 +3,8 @@ package emil.dobrev.services.service;
 import emil.dobrev.services.dto.*;
 import emil.dobrev.services.exception.NotFoundException;
 import emil.dobrev.services.exception.UnauthorizedException;
-import emil.dobrev.services.model.DoctorHoliday;
 import emil.dobrev.services.model.DoctorSchedule;
+import emil.dobrev.services.model.DoctorVacation;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.DoctorScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -71,13 +71,24 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     }
 
     @Override
-    public void setHolidays(Long doctorId, String roles, HolidaysRequest request) {
+    public void setVacation(Long doctorId, String roles, VacationRequest request) {
         checkForDoctorPermission(roles);
         var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
-        schedule.getHoliday().add(
-                DoctorHoliday.builder()
-                        .holidayDate(request.holidays())
+
+        var allConfirmedVacations = schedule.getVacation().stream()
+                .flatMap(vacation -> vacation.getVacationDate().stream())
+                .toList();
+
+        //check if some date already is required for vacation and if yes , removes it from the list
+        var vacation = request.holidays()
+                .stream()
+                .filter(vacationDate -> !allConfirmedVacations.contains(vacationDate))
+                .toList();
+
+        schedule.getVacation().add(
+                DoctorVacation.builder()
+                        .vacationDate(vacation)
                         .doctor(schedule)
                         .build()
         );
@@ -85,22 +96,22 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     }
 
     @Override
-    public List<HolidayResponse> getAllHolidaysForDoctor(Long doctorId, String roles) {
+    public List<VacationResponse> getALlVacationsForDoctor(Long doctorId, String roles) {
         checkForDoctorPermission(roles);
         var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
-        var holidays = doctorScheduleRepository.getAllHolidaysForDoctor(schedule.getId())
+        var holidays = doctorScheduleRepository.getAllVacationsForDoctor(schedule.getId())
                 .orElseThrow(() -> new NotFoundException("No available holidays for user with id:" + doctorId));
         var mapOfHolidays = holidays.stream()
                 .collect(Collectors.groupingBy(
-                        Holiday::getHolidayId,
-                        Collectors.mapping(Holiday::getHolidayDate, Collectors.toList())
+                        Vacation::getVacationId,
+                        Collectors.mapping(Vacation::getVacationDate, Collectors.toList())
                 ));
 
         return mapOfHolidays
                 .entrySet()
                 .stream()
-                .map(entry -> new HolidayResponse(
+                .map(entry -> new VacationResponse(
                         entry.getKey(),
                         entry.getValue()
                 ))
@@ -108,20 +119,20 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     }
 
     @Override
-    public HolidayResponse getHolidayById(Long userId, String roles, Long holidayId) {
-        var holidays = doctorScheduleRepository.getHolidayById(holidayId)
+    public VacationResponse getVacationById(Long userId, String roles, Long holidayId) {
+        var holidays = doctorScheduleRepository.getVacationById(holidayId)
                 .orElseThrow(() -> new NotFoundException("No holiday with id: " + holidayId));
-        var holidayDays = holidays.stream().map(Holiday::getHolidayDate).toList();
+        var holidayDays = holidays.stream().map(Vacation::getVacationDate).toList();
 
-        return new HolidayResponse(holidayId, holidayDays);
+        return new VacationResponse(holidayId, holidayDays);
     }
 
     @Transactional
     @Override
-    public void updateHolidays(Long doctorId, String roles, Long holidayId, HolidaysRequest request) {
+    public void updateVacation(Long doctorId, String roles, Long holidayId, VacationRequest request) {
         checkForDoctorPermission(roles);
         doctorScheduleRepository.deleteHolidayDates(holidayId);
-        setHolidays(doctorId, roles, request);
+        setVacation(doctorId, roles, request);
     }
 
 

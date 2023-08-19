@@ -1,8 +1,8 @@
 package emil.dobrev.services.controler;
 
 import emil.dobrev.services.dto.DoctorScheduleDTO;
-import emil.dobrev.services.dto.HolidayResponse;
-import emil.dobrev.services.dto.HolidaysRequest;
+import emil.dobrev.services.dto.VacationResponse;
+import emil.dobrev.services.dto.VacationRequest;
 import emil.dobrev.services.dto.ScheduleRequest;
 import emil.dobrev.services.service.interfaces.DoctorScheduleService;
 import lombok.extern.slf4j.Slf4j;
@@ -49,41 +49,41 @@ public record DoctorScheduleController(
     }
 
     @GetMapping("/holidays")
-    public ResponseEntity<List<HolidayResponse>> getAllHolidaysForDoctor(
+    public ResponseEntity<List<VacationResponse>> getALlVacationsForDoctor(
             @RequestHeader("userId") Long userId,
             @RequestHeader("roles") String roles
     ) {
         log.info("Get all holidays for doctor with id: {}", userId);
 
         return ResponseEntity.ok()
-                .body(doctorScheduleService.getAllHolidaysForDoctor(userId, roles));
+                .body(doctorScheduleService.getALlVacationsForDoctor(userId, roles));
     }
 
     @PostMapping("/holidays")
-    public ResponseEntity<Void> setHolidays(
+    public ResponseEntity<Void> setVacation(
             @RequestHeader("userId") Long userId,
             @RequestHeader("roles") String roles,
-            @RequestBody HolidaysRequest request
+            @RequestBody VacationRequest request
     ) {
         log.info("Add doctor holiday request");
-        doctorScheduleService.setHolidays(userId, roles, request);
+        doctorScheduleService.setVacation(userId, roles, request);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/holidays/{holidayId}")
-    public ResponseEntity<Void> updateHolidays(
+    public ResponseEntity<Void> updateVacation(
             @RequestHeader("userId") Long userId,
             @RequestHeader("roles") String roles,
             @PathVariable Long holidayId,
-            @RequestBody HolidaysRequest request
+            @RequestBody VacationRequest request
     ) {
         log.info("Update holiday request with id: {}", holidayId);
-        doctorScheduleService.updateHolidays(userId, roles, holidayId, request);
+        doctorScheduleService.updateVacation(userId, roles, holidayId, request);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/holidays/{holidayId}")
-    public ResponseEntity<HolidayResponse> getHolidayById(
+    public ResponseEntity<VacationResponse> getVacationById(
             @RequestHeader("userId") Long userId,
             @RequestHeader("roles") String roles,
             @PathVariable Long holidayId
@@ -91,7 +91,7 @@ public record DoctorScheduleController(
         log.info("Get holiday by id: {}", holidayId);
 
         return ResponseEntity.ok()
-                .body(doctorScheduleService.getHolidayById(userId, roles, holidayId));
+                .body(doctorScheduleService.getVacationById(userId, roles, holidayId));
 
     }
 }
