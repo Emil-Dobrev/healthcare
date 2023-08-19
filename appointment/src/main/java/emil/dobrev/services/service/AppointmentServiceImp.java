@@ -208,9 +208,6 @@ public class AppointmentServiceImp implements AppointmentService {
     }
 
     private boolean isNationalHoliday(LocalDate date) {
-        System.out.println(nationalHolidaysInGermany);
-        System.out.println(nationalHolidaysInGermany);
-        System.out.println(nationalHolidaysInGermany);
         return nationalHolidaysInGermany.contains(date);
     }
 }

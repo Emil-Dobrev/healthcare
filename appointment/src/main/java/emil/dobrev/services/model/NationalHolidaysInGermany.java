@@ -24,7 +24,7 @@ public class NationalHolidaysInGermany {
                 .orElse(getNationalHolidays());
     }
 
-    public static List<LocalDate> getNationalHolidays() {
+    private   List<LocalDate> getNationalHolidays() {
         return List.of(
                 LocalDate.of(2023, 1, 1),   // New Year's Day
                 LocalDate.of(2023, 4, 17),  // Easter Monday

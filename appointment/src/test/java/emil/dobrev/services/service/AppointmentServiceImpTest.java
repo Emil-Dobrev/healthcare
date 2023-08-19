@@ -1,10 +1,12 @@
 package emil.dobrev.services.service;
 
 import emil.dobrev.services.dto.*;
+import emil.dobrev.services.enums.Country;
 import emil.dobrev.services.exception.NotValidWorkingDayException;
 import emil.dobrev.services.exception.UnauthorizedException;
 import emil.dobrev.services.model.Appointment;
 import emil.dobrev.services.model.DoctorSchedule;
+import emil.dobrev.services.model.NationalHolidaysInGermany;
 import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,12 +40,13 @@ class AppointmentServiceImpTest {
     private DoctorScheduleRepository doctorScheduleRepository;
     @Mock
     private KafkaService kafkaService;
+    @Mock
+    private NationalHolidayService nationalHolidayService;
+    @InjectMocks
+    private NationalHolidaysInGermany nationalHolidaysInGermany;
     private DoctorSchedule doctorSchedule;
     private String roles;
 
-    @Test
-    void create() {
-    }
 
     @BeforeEach
     void setUp() {
@@ -62,7 +65,7 @@ class AppointmentServiceImpTest {
         long patientId = 1L;
         String role = "ROLE_PATIENT";
         var request = new CreateAppointmentRequest(
-                LocalDateTime.of(2023, 8, 15, 15, 30),
+                LocalDateTime.of(2090, 8, 15, 15, 30),
                 doctorId
         );
 
@@ -156,6 +159,7 @@ class AppointmentServiceImpTest {
         String roles = "ROLE_DOCTOR";
         LocalDate requestedDate = LocalDate.of(2023, 8, 17);
 
+
         // Mock doctor schedule
         DoctorSchedule doctorSchedule = this.doctorSchedule;
         List<Vacation> vacations = Collections.emptyList();
@@ -163,6 +167,11 @@ class AppointmentServiceImpTest {
 
         when(doctorScheduleRepository.findByDoctorId(doctorId))
                 .thenReturn(Optional.of(doctorSchedule));
+
+        when(nationalHolidayService.getNationalHolidays(Country.GERMANY))
+                .thenReturn(Optional.of(Collections.emptyList()));
+
+        nationalHolidaysInGermany.setNationalHolidaysInGermany();
 
         when(doctorScheduleRepository.getAllVacationsForDoctor(doctorSchedule.getId()))
                 .thenReturn(Optional.of(vacations));
