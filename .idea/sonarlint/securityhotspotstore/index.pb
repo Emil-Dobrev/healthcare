@@ -90,8 +90,6 @@ y
 Iapi-gateway/src/main/java/emil/dobrev/services/ApiGatewayApplication.java,2/3/235c2c769b721241cb2751b9a282839ac95b85c9
 u
 Eappointment/src/main/java/emil/dobrev/services/dto/VisitationDTO.java,6/4/6477b28ec5f6efedfc89db9c9c3fb467f67ff9ba
-y
-Iappointment/src/main/java/emil/dobrev/services/dto/VisitationRequest.java,2/c/2c454962441f59ecad09d006f22bd24382fa1c77
 {
 Kappointment/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,e/4/e424571f047a249bf17ee0d0d1702884a8e1fb63
 „
