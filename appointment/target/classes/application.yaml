@@ -21,3 +21,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+holidays:
+  api:
+    key: ae3614d7-4073-423c-bf70-c913307514e1

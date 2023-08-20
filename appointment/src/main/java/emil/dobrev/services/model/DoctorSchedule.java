@@ -46,6 +46,6 @@ public class DoctorSchedule {
     private LocalTime breakTo;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DoctorHoliday> holiday = new ArrayList<>();
+    private List<DoctorVacation> vacation = new ArrayList<>();
 
 }

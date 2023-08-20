@@ -7,12 +7,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "doctor_holidays")
+@Table(name = "doctor_vacation")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorHoliday {
+public class DoctorVacation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +23,9 @@ public class DoctorHoliday {
     private DoctorSchedule doctor;
 
     @ElementCollection
-    @CollectionTable(name = "doctor_holiday_dates", joinColumns = @JoinColumn(name = "holiday_id"))
-    @Column(name = "holiday_date")
-    private List<LocalDate> holidayDate;
+    @CollectionTable(name = "doctor_vacation_dates", joinColumns = @JoinColumn(name = "vacation_id"))
+    @Column(name = "vacation_date")
+    private List<LocalDate> vacationDate;
 
 }
 
