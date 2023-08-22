@@ -12,7 +12,7 @@ public interface DoctorScheduleService {
 
     DoctorScheduleDTO getSchedule(Long id);
 
-    void setVacation(Long id, String roles, VacationRequest holidays);
+    void createVacation(Long id, String roles, VacationRequest holidays);
 
     void updateVacation(Long userId, String roles, Long holidayId, VacationRequest request);
 

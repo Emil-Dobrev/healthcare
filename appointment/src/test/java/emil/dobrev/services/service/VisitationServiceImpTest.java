@@ -73,7 +73,7 @@ class VisitationServiceImpTest {
         when(appointmentRepository.findById(appointmentId))
                 .thenReturn(Optional.ofNullable(appointment));
 
-        visitationService.addVisitation(request, doctorId, roles);
+        visitationService.createVisitation(request, doctorId, roles);
 
         verify(visitationRepository).save(response);
     }

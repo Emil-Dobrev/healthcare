@@ -18,6 +18,7 @@
         <module>api-gateway</module>
         <module>discovery-server</module>
         <module>notification-service</module>
+        <module>medication-service</module>
     </modules>
 
     <properties>

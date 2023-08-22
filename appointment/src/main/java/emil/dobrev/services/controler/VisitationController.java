@@ -16,12 +16,12 @@ public class VisitationController {
 
     private final VisitationService visitationService;
     @PostMapping
-    public ResponseEntity<VisitationDTO> addVisitation(
+    public ResponseEntity<VisitationDTO> createVisitation(
             @RequestBody VisitationRequest request,
             @RequestHeader("userId") Long userId,
             @RequestHeader("roles") String roles
     ) {
-        return ResponseEntity.ok().body(visitationService.addVisitation(request,userId, roles));
+        return ResponseEntity.ok().body(visitationService.createVisitation(request,userId, roles));
     }
 
     @GetMapping
@@ -34,5 +34,4 @@ public class VisitationController {
                visitationService.getAllVisitationsForPatient(userId, roles, patientId)
         );
     }
-
 }
