@@ -1,6 +1,6 @@
 package emil.dobrev.services.service;
 
-import emil.dobrev.services.dto.MedicationScheduleDTO;
+import emil.dobrev.services.dto.MedicationNotification;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -13,10 +13,10 @@ import static emil.dobrev.services.constant.Constants.MEDICATION;
 @RequiredArgsConstructor
 public class KafkaService {
 
-    private final KafkaTemplate<String, MedicationScheduleDTO> kafkaTemplate;
+    private final KafkaTemplate<String, MedicationNotification> kafkaTemplate;
 
     @Async
-    public void sendMedicationNotification(@NonNull MedicationScheduleDTO medicationScheduleDTO) {
-        kafkaTemplate.send(MEDICATION, medicationScheduleDTO);
+    public void sendMedicationNotification(@NonNull MedicationNotification medicationNotification) {
+        kafkaTemplate.send(MEDICATION, medicationNotification);
     }
 }

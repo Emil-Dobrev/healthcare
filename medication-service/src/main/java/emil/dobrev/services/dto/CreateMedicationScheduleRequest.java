@@ -7,13 +7,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MedicationScheduleDTO {
-    @NonNull
-    private Long userId;
+public class CreateMedicationScheduleRequest {
+
     @NonNull
     private String name;
     @NonNull
@@ -28,6 +27,5 @@ public class MedicationScheduleDTO {
     private LocalDate endDate;
     @NonNull
     private int durationBetweenDoses;
-    private int dosageTakenToday;
     private LocalDateTime timeFirstDosageTaken;
 }

@@ -32,6 +32,12 @@ spring:
           - Path=/api/v1/schedule/**,/api/v1/appointment/**,/api/v1/visitation/**
           filters:
             - AuthenticationFilter
+        - id: medication-route
+          uri: lb://medication-service
+          predicates:
+            - Path=/api/v1/medication
+          filters:
+            - AuthenticationFilter
 
 logging:
   level:

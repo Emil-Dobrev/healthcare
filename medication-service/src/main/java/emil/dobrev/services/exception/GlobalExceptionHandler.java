@@ -18,4 +18,15 @@ public class GlobalExceptionHandler {
                 UNAUTHORIZED);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleHolidaysNotFoundException(NotFoundException ex) {
+        var errorResponse = new ErrorResponse
+                (
+                        ex.getMessage(),
+                        HttpStatus.NOT_FOUND.value(),
+                        HttpStatus.NOT_FOUND.getReasonPhrase()
+                );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
 }

@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.DayOfWeek;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -29,17 +29,16 @@ public class MedicationSchedule {
     @Column(nullable = false)
     private String dosageUnit; // e.g., mg, mL
     @Column(nullable = false)
-    private int frequency; // e.g., "Once daily", "Twice daily"
+    private int frequencyPerDay; // e.g., "Once daily", "Twice daily"
     @Column(nullable = false)
-    private String startDate;
+    private LocalDate startDate;
     @Column(nullable = false)
-    private String endDate;
-
-    @Column(name = "daysOfWeek", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private List<DayOfWeek> daysOfWeek; // List of days when the medication should be taken
+    private LocalDate endDate;
     @Column(nullable = false)
-    private int durationBetweenDoses; // Duration in hours between consecutive doses
+    private int durationInHoursBetweenDoses; // Duration in hours between consecutive doses
+    private LocalDateTime firstDosage;
+    private LocalDateTime timeForNextDosage;
+    private int dosageTakenToday = 0;
     @Column(nullable = false)
     private boolean isActive = true;
 }

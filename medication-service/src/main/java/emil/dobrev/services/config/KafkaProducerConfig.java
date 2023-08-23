@@ -1,5 +1,6 @@
 package emil.dobrev.services.config;
 
+import emil.dobrev.services.dto.MedicationNotification;
 import emil.dobrev.services.dto.MedicationScheduleDTO;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -22,17 +23,17 @@ public class KafkaProducerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, MedicationScheduleDTO.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, MedicationNotification.class);
         return props;
     }
 
     @Bean
-    public ProducerFactory<String, MedicationScheduleDTO> producerFactory() {
+    public ProducerFactory<String, MedicationNotification> producerFactory() {
         return new DefaultKafkaProducerFactory<>(produceConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, MedicationScheduleDTO> kafkaTemplate() {
+    public KafkaTemplate<String, MedicationNotification> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }
