@@ -5,6 +5,7 @@ import emil.dobrev.services.enums.DoctorSpecialization;
 import emil.dobrev.services.service.interfaces.DoctorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +23,7 @@ public class DoctorController {
 
 
     @GetMapping("/{id}")
+    @Cacheable(value = "doctors")
     public ResponseEntity<DoctorDTO> getDoctorById(@PathVariable Long id) {
         log.info("Get doctor by id: {}", id);
         return ResponseEntity.ok().body(doctorService.getDoctorById(id));

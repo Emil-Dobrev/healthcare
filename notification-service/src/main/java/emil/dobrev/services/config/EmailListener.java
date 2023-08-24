@@ -17,7 +17,7 @@ public class EmailListener {
     @EventListener
     public void emailFailed(EmailEvent emailEvent) {
         log.info("Failed to send email");
-        if(emailEvent.getValue() instanceof Notification notification) {
+        if (emailEvent.getValue() instanceof Notification notification) {
             var notificationId = notification.getId();
             Notification not = notificationRepository
                     .findById(notificationId)
@@ -25,6 +25,5 @@ public class EmailListener {
             not.setEmailSend(false);
             notificationRepository.save(not);
         }
-
     }
 }

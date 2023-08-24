@@ -60,13 +60,13 @@ public record DoctorScheduleController(
     }
 
     @PostMapping("/holidays")
-    public ResponseEntity<Void> setVacation(
+    public ResponseEntity<Void> createVacation(
             @RequestHeader("userId") Long userId,
             @RequestHeader("roles") String roles,
             @RequestBody VacationRequest request
     ) {
         log.info("Add doctor holiday request");
-        doctorScheduleService.setVacation(userId, roles, request);
+        doctorScheduleService.createVacation(userId, roles, request);
         return ResponseEntity.noContent().build();
     }
 

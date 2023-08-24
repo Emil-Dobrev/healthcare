@@ -71,7 +71,7 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     }
 
     @Override
-    public void setVacation(Long doctorId, String roles, VacationRequest request) {
+    public void createVacation(Long doctorId, String roles, VacationRequest request) {
         checkForDoctorPermission(roles);
         var schedule = doctorScheduleRepository.findByDoctorId(doctorId)
                 .orElseThrow(() -> new NotFoundException("No schedule for doctor with doctorId:" + doctorId));
@@ -132,7 +132,7 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     public void updateVacation(Long doctorId, String roles, Long holidayId, VacationRequest request) {
         checkForDoctorPermission(roles);
         doctorScheduleRepository.deleteHolidayDates(holidayId);
-        setVacation(doctorId, roles, request);
+        createVacation(doctorId, roles, request);
     }
 
 

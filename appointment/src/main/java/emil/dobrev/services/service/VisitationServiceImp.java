@@ -26,7 +26,7 @@ public class VisitationServiceImp implements VisitationService {
     private final ModelMapper modelMapper;
 
     @Override
-    public VisitationDTO addVisitation(
+    public VisitationDTO createVisitation(
             VisitationRequest visitationRequest,
             Long doctorId,
             String roles

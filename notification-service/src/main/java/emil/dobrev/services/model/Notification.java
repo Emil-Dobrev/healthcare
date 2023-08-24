@@ -5,6 +5,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document("notification")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,8 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 public class Notification {
 
-    public Notification(EmailMetaInformation emailMetaInformation) {
+    public Notification(EmailMetaInformation emailMetaInformation, LocalDateTime timeOfAppointment) {
         this.emailMetaInformation = emailMetaInformation;
+        this.timeOfAppointment = timeOfAppointment;
     }
 
     @Id
@@ -22,4 +25,5 @@ public class Notification {
     EmailMetaInformation emailMetaInformation;
     @NonNull
     boolean isEmailSend = true;
+    LocalDateTime timeOfAppointment;
 }
