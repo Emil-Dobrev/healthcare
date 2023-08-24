@@ -53,7 +53,6 @@ class MedicationScheduleServiceImpTest {
                 .durationBetweenDoses(20)
                 .dosage(4.2)
                 .dosageUnit("ml")
-                .userId(userId)
                 .timeFirstDosageTaken(LocalDateTime.of(2023, 8, 15, 9, 30)).build();
 
         medicationScheduleServiceImp.createMedicationSchedule(userId, roles, request);

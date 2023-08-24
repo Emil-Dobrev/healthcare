@@ -28,6 +28,7 @@ class SendRemainderForNextDosageJobTest {
     void sendRemainderForNextDosageJob() {
 
         LocalDate now = LocalDate.now();
+        LocalDateTime nowPlusTenDays = LocalDateTime.now().plusDays(10);
 
         MedicationSchedule medicationSchedule = MedicationSchedule.builder()
                 .id(1L)
@@ -40,7 +41,7 @@ class SendRemainderForNextDosageJobTest {
                 .dosageUnit("ml")
                 .userId(1L)
                 .isActive(true)
-                .firstDosage(LocalDateTime.of(2023, 8, 15, 9, 30))
+                .firstDosage(nowPlusTenDays)
                 .build();
 
         MedicationSchedule medicationSchedule2= MedicationSchedule.builder()
@@ -54,7 +55,7 @@ class SendRemainderForNextDosageJobTest {
                 .dosageUnit("ml")
                 .userId(1L)
                 .isActive(true)
-                .firstDosage(LocalDateTime.of(2023, 8, 15, 9, 30))
+                .firstDosage(nowPlusTenDays)
                 .timeForNextDosage(LocalDateTime.of(2023, 8, 15, 9, 30)).build();
 
 
@@ -70,14 +71,14 @@ class SendRemainderForNextDosageJobTest {
                 .dosageTakenToday(2)
                 .userId(1L)
                 .isActive(true)
-                .firstDosage(LocalDateTime.of(2023, 8, 15, 9, 30))
+                .firstDosage(nowPlusTenDays)
                 .timeForNextDosage(LocalDateTime.of(2023, 8, 15, 9, 30)).build();
 
 
         when(medicationScheduleRepository.findAllByIsActive(true))
                 .thenReturn(List.of(medicationSchedule,medicationSchedule2));
 
-        sendRemainderForNextDosageJob.SendRemainderForNextDosageJob();
+        sendRemainderForNextDosageJob.sendRemindersForNextDosage();
 
         verify(medicationScheduleRepository, times(1)).findAllByIsActive(true);
         verify(medicationScheduleRepository, times(2)).save(any(MedicationSchedule.class));

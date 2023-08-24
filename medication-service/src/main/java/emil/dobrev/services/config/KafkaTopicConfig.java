@@ -10,7 +10,6 @@ import static emil.dobrev.services.constant.Constants.MEDICATION;
 @Configuration
 public class KafkaTopicConfig {
 
-
     @Bean
     public NewTopic appointmentTopic() {
         return TopicBuilder.name(MEDICATION)

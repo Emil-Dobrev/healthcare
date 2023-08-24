@@ -23,7 +23,7 @@ public class KafkaProducerConfig {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, MedicationNotification.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, MedicationNotificationSerializer.class);
         return props;
     }
 

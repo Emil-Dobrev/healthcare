@@ -47,6 +47,7 @@ public class MedicationScheduleServiceImp implements MedicationScheduleService {
         }
 
         medicationScheduleRepository.save(medicationSchedule);
+
     }
 
     @Override
@@ -75,6 +76,4 @@ public class MedicationScheduleServiceImp implements MedicationScheduleService {
         medicationSchedules.setActive(true);
         medicationScheduleRepository.save(medicationSchedules);
     }
-
-
 }

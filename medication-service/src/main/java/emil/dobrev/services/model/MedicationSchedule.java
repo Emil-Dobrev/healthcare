@@ -39,6 +39,7 @@ public class MedicationSchedule {
     private LocalDateTime firstDosage;
     private LocalDateTime timeForNextDosage;
     private int dosageTakenToday = 0;
+    private LocalDateTime timeForLastDosageNotificationSend;
     @Column(nullable = false)
-    private boolean isActive = true;
+    private boolean isActive = false;
 }

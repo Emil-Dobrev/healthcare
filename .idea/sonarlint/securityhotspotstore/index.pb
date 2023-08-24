@@ -23,8 +23,6 @@ Sapi-gateway/src/main/java/emil/dobrev/services/exception/InvalidTokenException.
 iappointment/src/main/java/emil/dobrev/services/exception/DoctorIsNotAvailableAtThisTimeSlotException.java,f/4/f4033fb800c81eee6a53ec49400104a72897400d
 p
 @appointment/src/main/java/emil/dobrev/services/dto/TimeSlot.java,c/2/c28f4a51c0e0b38f00bde4ae8034320aa60c9ec4
-‡
-Wnotification-service/src/main/java/emil/dobrev/services/config/KafkaConsumerConfig.java,3/4/34bb633508328348e0bc6ca72dac98d82c72e3c2
 r
 Buser/src/main/java/emil/dobrev/services/config/SecurityConfig.java,0/5/057d7adef7c6151062800cdbebe7287101f128ea
 k
@@ -55,10 +53,6 @@ n
 >user/src/main/java/emil/dobrev/services/config/JwtService.java,0/d/0d9ac323bdb0d8ec0c6982ec9fa95000bb470e04
 <
 user/pom.xml,c/d/cdfe2e323fad8b1bcfe52f68e21783f120cd711e
-}
-Mnotification-service/src/main/java/emil/dobrev/services/config/AppConfig.java,1/a/1af14e9bb3c38f6916e7fd83cc9ed262e2108539
-—
-gnotification-service/src/main/java/emil/dobrev/services/config/AppointmentNotificationDeserializer.java,8/9/89fdd2c8b3563be904deeb3abdac99d18c68404d
 w
 Gappointment/src/main/java/emil/dobrev/services/dto/ScheduleRequest.java,8/c/8c4961194f030a041b1b1ce0ee980d4e82751e51
 y
@@ -127,12 +121,8 @@ Onotification-service/src/main/java/emil/dobrev/services/model/Notification.java
 dnotification-service/src/main/java/emil/dobrev/services/service/interfaces/EmailMetaInformation.java,1/9/19db83ad41ba07f7db8eee5ad0880209734815ea
 ~
 Nnotification-service/src/main/java/emil/dobrev/services/config/EmailEvent.java,b/d/bdc7f485de3a5883cf59b954495fcc83a2a7010a
-
-Qnotification-service/src/main/java/emil/dobrev/services/config/EmailListener.java,f/2/f256bdb03bdaf0e3c44e3d610c4d3fd9fb7d05f1
 Œ
 \notification-service/src/main/java/emil/dobrev/services/service/interfaces/EmailService.java,8/4/84da1ce582b2a9caccf55cef97b3029e58c4175d
-
-Qnotification-service/src/main/java/emil/dobrev/services/config/KafkaListener.java,2/9/2931e28b35930bd9af6a3130417bd7d337dbf289
 „
 Tnotification-service/src/main/java/emil/dobrev/services/service/EmailServiceImp.java,b/4/b4f5d8d3f7064249ed86a8686e20a47f45a5f612
 x
@@ -153,8 +143,6 @@ Pappointment/src/main/java/emil/dobrev/services/dto/UpdateAppointmentRequest.jav
 Tappointment/src/main/java/emil/dobrev/services/repository/AppointmentRepository.java,0/3/03b2819656dc74c689af094e3f4c89eb4f13252e
 Œ
 \appointment/src/main/java/emil/dobrev/services/service/interfaces/DoctorScheduleService.java,1/d/1dc19f8c137f8b8c57b26467026fe62eb66e3ebb
-Œ
-\appointment/src/main/java/emil/dobrev/services/config/AppointmentNotificationSerializer.java,1/b/1bb463ecf3fc87f9a5f821d86b4ac45432f0de5d
 ‡
 Wappointment/src/main/java/emil/dobrev/services/repository/DoctorScheduleRepository.java,8/5/857fc89a6f68a2568637553064f6611e3e442699
 ‰
@@ -204,10 +192,6 @@ f
 6medication-service/src/main/resources/application.yaml,7/5/75a2a614cd96286640c097302fe0376588e3b60a
 `
 0medication-service/src/main/resources/banner.txt,8/7/87c092628ebd3ca5a0f0c81768c9a69c7b86259c
-u
-Eappointment/src/main/java/emil/dobrev/services/model/Appointment.java,9/8/986b0f2067b8a4143d2a8a7fd1b8edde37f88447
-x
-Happointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java,d/b/dbad7289a1857cd6fabfea0f19fdd75a27c9c15d
 ƒ
 Sappointment/src/main/java/emil/dobrev/services/controler/AppointmentController.java,a/5/a5d1b8cc88613988bccbe349f6393caf7ca31316
 †
@@ -226,20 +210,12 @@ C
 pom.xml,4/4/442292b8a7efeabbe4cc176709b833b1792140ec
 ‚
 Rmedication-service/src/main/java/emil/dobrev/services/shared/PermissionsUtils.java,2/f/2fefc10cb67a3c43666439bc30f11a09709fb164
-t
-Dappointment/src/main/java/emil/dobrev/services/config/AppConfig.java,1/b/1bfe766f864271bedff9a869e4d9fd04c07d6dcf
-v
-Fappointment/src/main/java/emil/dobrev/services/config/AsyncConfig.java,c/6/c6dfbfef8c7fcf826c2b6fb8a196424f59cc7444
 ƒ
 Sappointment/src/main/java/emil/dobrev/services/model/NationalHolidaysInGermany.java,4/7/47f04a02cdeb32d05eda5334c18f67572e2c195a
 €
 Pappointment/src/main/java/emil/dobrev/services/service/VisitationServiceImp.java,3/1/31080fb44741f47ef2086f342867e326d1d2b122
 ‚
 Rappointment/src/main/java/emil/dobrev/services/service/NationalHolidayService.java,a/2/a2ef48e4308d12dfae102b9dbfaf6dbe8a822d8d
-~
-Nappointment/src/main/java/emil/dobrev/services/config/KafkaProducerConfig.java,4/c/4c25e4f7ffdd37b3b504a8433738f4bc6de2c447
-{
-Kappointment/src/main/java/emil/dobrev/services/config/KafkaTopicConfig.java,7/3/73212743c4b86c493715e8fb30758ce9ece8e600
 {
 Kappointment/src/main/java/emil/dobrev/services/shared/PermissionsUtils.java,2/2/22219bd21328070a1804b6bb7149462afefb0a17
 v

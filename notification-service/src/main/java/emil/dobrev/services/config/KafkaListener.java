@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import emil.dobrev.services.model.AppointmentNotification;
+import emil.dobrev.services.model.MedicationNotification;
 import emil.dobrev.services.model.Notification;
 import emil.dobrev.services.repository.NotificationRepository;
 import emil.dobrev.services.service.interfaces.EmailMetaInformation;
@@ -32,6 +33,19 @@ public class KafkaListener {
             EmailMetaInformation emailMetaInformation = emailService.buildEmailMetaInformation(appointment);
             var notification = notificationRepository.save(new Notification(emailMetaInformation));
             emailService.sendEmail(emailMetaInformation, notification);
+        } catch (JsonProcessingException e) {
+            log.error("Error processing appointment notification: " + e.getMessage(), e);
+        }
+    }
+
+    @org.springframework.kafka.annotation.KafkaListener(
+            topics = "medication",
+            groupId = "medication-group"
+    )
+    void medicationListener(String data) {
+        try {
+            MedicationNotification medicationNotification = objectMapper.readValue(data, MedicationNotification.class);
+            log.info("Sending email for medication remainder for user with id: {}", medicationNotification.userId());
         } catch (JsonProcessingException e) {
             log.error("Error processing appointment notification: " + e.getMessage(), e);
         }
