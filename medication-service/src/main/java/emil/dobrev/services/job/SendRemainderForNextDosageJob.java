@@ -21,8 +21,7 @@ public class SendRemainderForNextDosageJob {
     private final MedicationScheduleRepository medicationScheduleRepository;
     private final KafkaService kafkaService;
 
-    @Scheduled(cron = "0 */10 * * * *") // every 10 minutes
-        // Run every 10 minutes
+    @Scheduled(cron = "0 */10 * * * *")// runs every 10 minutes
     void sendRemindersForNextDosage() {
         log.info("Job for sending remainders for next dosage started");
         var medicationSchedules = medicationScheduleRepository.findAllByIsActive(true);

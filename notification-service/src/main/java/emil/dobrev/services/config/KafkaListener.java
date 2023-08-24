@@ -31,7 +31,7 @@ public class KafkaListener {
             AppointmentNotification appointment = objectMapper.readValue(data, AppointmentNotification.class);
             log.info("Sending email for appointment {}", appointment.appointmentId());
             EmailMetaInformation emailMetaInformation = emailService.buildEmailMetaInformation(appointment);
-            var notification = notificationRepository.save(new Notification(emailMetaInformation));
+            var notification = notificationRepository.save(new Notification(emailMetaInformation, appointment.appointmentDateTime()));
             emailService.sendEmail(emailMetaInformation, notification);
         } catch (JsonProcessingException e) {
             log.error("Error processing appointment notification: " + e.getMessage(), e);
@@ -46,6 +46,8 @@ public class KafkaListener {
         try {
             MedicationNotification medicationNotification = objectMapper.readValue(data, MedicationNotification.class);
             log.info("Sending email for medication remainder for user with id: {}", medicationNotification.userId());
+            var emailMetaInformation = emailService.buildEmailMetaInformation(medicationNotification);
+            emailService.sendEmail(emailMetaInformation, medicationNotification);
         } catch (JsonProcessingException e) {
             log.error("Error processing appointment notification: " + e.getMessage(), e);
         }

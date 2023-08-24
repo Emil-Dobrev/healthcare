@@ -18,10 +18,12 @@ spring:
     password:
     protocol: smtp
     host: localhost
-    port: 3025
+    port: 25
     properties:
       mail:
+        protocol: smtp
         smtp:
+          from: test@test.com
           auth: false
           starttls:
             enable: false
@@ -30,6 +32,5 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
-
   kafka:
     bootstrap-servers: localhost:9092

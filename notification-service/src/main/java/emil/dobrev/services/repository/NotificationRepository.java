@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface NotificationRepository extends MongoRepository<Notification, String> {
 
-    List<Notification> findAllByEmailMetaInformationTimeOfAppointmentBetween(LocalDateTime start, LocalDateTime end);
+//    List<Notification> findAllByEmailMetaInformationTimeOfAppointmentBetween(LocalDateTime start, LocalDateTime end);
+    List<Notification> findAllByTimeOfAppointmentBetween(LocalDateTime start, LocalDateTime end);
     List<Notification> findByIsEmailSendFalse();
 }

@@ -25,7 +25,7 @@ public class RemainderNotificationJob {
         var today = LocalDate.now();
         LocalDateTime startOfDay = today.atTime(LocalTime.MIN);
         LocalDateTime endOfDay = today.atTime(LocalTime.MAX);
-        var appointments = notificationRepository.findAllByEmailMetaInformationTimeOfAppointmentBetween(startOfDay, endOfDay);
+        var appointments = notificationRepository.findAllByTimeOfAppointmentBetween(startOfDay, endOfDay);
         appointments
                 .forEach(appointment -> emailService.sendEmail(appointment.getEmailMetaInformation(), appointment));
     }
