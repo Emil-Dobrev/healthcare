@@ -8,9 +8,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
-        <module name="appointment" />
         <module name="discovery-server" />
-        <module name="user" />
+        <module name="user-service" />
+        <module name="appointment-service" />
         <module name="medication-service" />
         <module name="notification-service" />
       </profile>

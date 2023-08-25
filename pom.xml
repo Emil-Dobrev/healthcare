@@ -13,8 +13,8 @@
 
     <url>http://www.example.com</url>
     <modules>
-        <module>user</module>
-        <module>appointment</module>
+        <module>user-service</module>
+        <module>appointment-service</module>
         <module>api-gateway</module>
         <module>discovery-server</module>
         <module>notification-service</module>

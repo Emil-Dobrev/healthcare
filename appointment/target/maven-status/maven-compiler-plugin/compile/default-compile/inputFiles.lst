@@ -1,9 +1,0 @@
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/AppointmentApplication.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/controler/AppointmentController.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/service/interfaces/AppointmentService.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/model/DoctorSchedule.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/service/AppointmentServiceImp.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/model/Appointment.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/dto/CreateAppointmentRequest.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/repository/AppointmentRepository.java
-/Users/dobreve/healthcare/healtcare/appointment/src/main/java/emil/dobrev/services/config/AppConfig.java
