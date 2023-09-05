@@ -121,4 +121,6 @@ class DoctorScheduleServiceImpTest {
         assertEquals(request.startTime(), doctorScheduleDTO.getStartTime());
         assertEquals(request.endTime(), doctorScheduleDTO.getEndTime());
     }
+
+
 }

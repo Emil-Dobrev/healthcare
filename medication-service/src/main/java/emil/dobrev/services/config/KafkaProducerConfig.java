@@ -1,7 +1,6 @@
 package emil.dobrev.services.config;
 
 import emil.dobrev.services.dto.MedicationNotification;
-import emil.dobrev.services.dto.MedicationScheduleDTO;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;

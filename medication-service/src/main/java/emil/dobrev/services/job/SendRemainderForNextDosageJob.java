@@ -1,6 +1,5 @@
 package emil.dobrev.services.job;
 
-import emil.dobrev.services.dto.MedicationNotification;
 import emil.dobrev.services.model.MedicationSchedule;
 import emil.dobrev.services.repository.MedicationScheduleRepository;
 import emil.dobrev.services.service.KafkaService;
@@ -21,7 +20,8 @@ public class SendRemainderForNextDosageJob {
     private final MedicationScheduleRepository medicationScheduleRepository;
     private final KafkaService kafkaService;
 
-    @Scheduled(cron = "0 */10 * * * *")// runs every 10 minutes
+    @Scheduled(cron = "0 */10 * * * *")
+// runs every 10 minutes
     void sendRemindersForNextDosage() {
         log.info("Job for sending remainders for next dosage started");
         var medicationSchedules = medicationScheduleRepository.findAllByIsActive(true);
@@ -44,27 +44,11 @@ public class SendRemainderForNextDosageJob {
 
                         medicationScheduleRepository.save(medicationSchedule);
 
-                        var medicationNotification = setMedicationNotification(medicationSchedule);
-                        kafkaService.sendMedicationNotification(medicationNotification);
-
+                        kafkaService.sendMedicationNotification(medicationSchedule);
                     }
                 });
     }
 
-    private MedicationNotification setMedicationNotification(MedicationSchedule medicationSchedule) {
-        return new MedicationNotification(
-                medicationSchedule.getUserId(),
-                medicationSchedule.getName(),
-                medicationSchedule.getDosage(),
-                medicationSchedule.getDosageUnit(),
-                medicationSchedule.getFrequencyPerDay(),
-                medicationSchedule.getStartDate(),
-                medicationSchedule.getEndDate(),
-                medicationSchedule.getDurationInHoursBetweenDoses(),
-                medicationSchedule.getFirstDosage(),
-                medicationSchedule.getTimeForNextDosage()
-        );
-    }
 
     private LocalDateTime calculateTimeForNextDosage(MedicationSchedule medicationSchedule) {
         if (medicationSchedule.getTimeForNextDosage() == null) {

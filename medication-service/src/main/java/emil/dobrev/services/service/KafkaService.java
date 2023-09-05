@@ -1,6 +1,7 @@
 package emil.dobrev.services.service;
 
 import emil.dobrev.services.dto.MedicationNotification;
+import emil.dobrev.services.model.MedicationSchedule;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +19,24 @@ public class KafkaService {
     private final KafkaTemplate<String, MedicationNotification> kafkaTemplate;
 
     @Async
-    public void sendMedicationNotification(@NonNull MedicationNotification medicationNotification) {
-        System.out.println(medicationNotification);
-        log.error("test");
+    public void sendMedicationNotification(@NonNull MedicationSchedule medicationSchedule) {
+        MedicationNotification medicationNotification = setMedicationNotification(medicationSchedule);
+
         kafkaTemplate.send(MEDICATION, medicationNotification);
+    }
+
+    private MedicationNotification setMedicationNotification(MedicationSchedule medicationSchedule) {
+        return new MedicationNotification(
+                medicationSchedule.getUserId(),
+                medicationSchedule.getName(),
+                medicationSchedule.getDosage(),
+                medicationSchedule.getDosageUnit(),
+                medicationSchedule.getFrequencyPerDay(),
+                medicationSchedule.getStartDate(),
+                medicationSchedule.getEndDate(),
+                medicationSchedule.getDurationInHoursBetweenDoses(),
+                medicationSchedule.getFirstDosage(),
+                medicationSchedule.getTimeForNextDosage()
+        );
     }
 }

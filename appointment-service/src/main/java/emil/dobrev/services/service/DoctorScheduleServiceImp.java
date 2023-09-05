@@ -134,6 +134,4 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
         doctorScheduleRepository.deleteHolidayDates(holidayId);
         createVacation(doctorId, roles, request);
     }
-
-
 }

@@ -46,8 +46,8 @@ public class MedicationScheduleServiceImp implements MedicationScheduleService {
             medicationSchedule.setActive(true);
         }
 
-        medicationScheduleRepository.save(medicationSchedule);
-
+        MedicationSchedule schedule = medicationScheduleRepository.save(medicationSchedule);
+        kafkaService.sendMedicationNotification(schedule);
     }
 
     @Override
