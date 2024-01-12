@@ -92,6 +92,5 @@ public record DoctorScheduleController(
 
         return ResponseEntity.ok()
                 .body(doctorScheduleService.getVacationById(userId, roles, holidayId));
-
     }
 }

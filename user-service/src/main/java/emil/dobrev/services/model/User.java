@@ -3,10 +3,7 @@ package emil.dobrev.services.model;
 import emil.dobrev.services.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,7 +55,8 @@ public abstract class User implements UserDetails {
             name = "roles",
             columnDefinition = "text[]"
     )
-    protected List<Role> roles;
+    private List<Role> roles;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

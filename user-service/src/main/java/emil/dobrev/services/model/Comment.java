@@ -35,7 +35,8 @@ public class Comment {
     @ManyToOne
     private Doctor doctor;
     private String createdBy;
-    private LocalDateTime createdAt;
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
     @NotBlank
     private String description;
 }

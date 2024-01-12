@@ -22,7 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
 
-    private final JwtAuthenticationFilter jwtAuthFilter;
+//    private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
 
@@ -35,11 +35,11 @@ public class SecurityConfig {
                         authz
                                 .requestMatchers(API_V_1_AUTH_REGISTER, API_V_1_AUTH_LOGIN, "/api/v1/doctors/**",
                                         "/api/v1/patients/**").permitAll()
-                                .anyRequest().permitAll()
+                                .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .authenticationProvider(authenticationProvider);
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

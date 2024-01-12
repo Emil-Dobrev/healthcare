@@ -1,7 +1,6 @@
 package emil.dobrev.services.repository;
 
 
-import emil.dobrev.services.dto.VisitationDTO;
 import emil.dobrev.services.model.VisitationRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -66,7 +66,7 @@ public class DoctorScheduleServiceImp implements DoctorScheduleService {
     @Override
     public DoctorScheduleDTO getSchedule(Long doctorId) {
         var schedule = doctorScheduleRepository.findById(doctorId)
-                .orElseThrow(() -> new jakarta.ws.rs.NotFoundException("No schedule with id: " + doctorId));
+                .orElseThrow(() -> new NotFoundException("No schedule for doctor with id: " + doctorId));
         return modelMapper.map(schedule, DoctorScheduleDTO.class);
     }
 

@@ -10,7 +10,6 @@ import emil.dobrev.services.model.DoctorSchedule;
 import emil.dobrev.services.repository.AppointmentRepository;
 import emil.dobrev.services.repository.DoctorScheduleRepository;
 import emil.dobrev.services.service.interfaces.AppointmentService;
-import jakarta.ws.rs.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +51,11 @@ public class AppointmentServiceImp implements AppointmentService {
 
 
         if (!isDoctorAvailable(createAppointmentRequest.appointmentDateTime(), createAppointmentRequest.doctorId(), appointments)) {
-            throw new DoctorIsNotAvailableAtThisTimeSlotException(String.format("Doctor with ID %d is not available at %s.", doctorId, requestedDateTime));
+            throw new DoctorIsNotAvailableAtThisTimeSlotException(doctorId, requestedDateTime);
         }
 
         if (!isValidWorkingDayForDoctor(doctorSchedule, holidays.orElse(Collections.emptyList()), requestedDateTime.toLocalDate())) {
-            throw new NotValidWorkingDayException(String.format("Doctor with id: %d is not working at this day", doctorId));
+            throw new NotValidWorkingDayException(doctorId);
         }
 
         var appointment = Appointment.builder().appointmentDateTime(requestedDateTime).endOFAppointmentDateTime(endOfAppointment).doctorId(doctorId).patientId(patientId).build();
@@ -75,7 +74,7 @@ public class AppointmentServiceImp implements AppointmentService {
         var holidays = doctorScheduleRepository.getAllVacationsForDoctor(doctorSchedule.getId());
 
         if (!isValidWorkingDayForDoctor(doctorSchedule, holidays.orElse(Collections.emptyList()), requestedDate)) {
-            throw new NotValidWorkingDayException(String.format("Doctor with id: %d is not working at this day", doctorId));
+            throw new NotValidWorkingDayException(doctorId);
         }
 
         List<TimeSlot> availableSlots = new ArrayList<>();
@@ -115,8 +114,6 @@ public class AppointmentServiceImp implements AppointmentService {
         if (appointment.getPatientId().equals(patientId)) {
             appointmentRepository.delete(appointment);
         }
-
-
     }
 
     @Override
@@ -128,7 +125,7 @@ public class AppointmentServiceImp implements AppointmentService {
                 );
 
         if (!appointment.getPatientId().equals(patientId)) {
-            throw new UnauthorizedException("You don't have permissions");
+            throw new UnauthorizedException();
         }
 
         var newAppointmentTime = updateAppointmentRequest.newAppointmentTime();
@@ -138,9 +135,7 @@ public class AppointmentServiceImp implements AppointmentService {
                         (appointment.getDoctorId(), newAppointmentTime, endOfAppointment);
 
         if (!isDoctorAvailable(updateAppointmentRequest.newAppointmentTime(), appointment.getDoctorId(), appointments)) {
-            throw new DoctorIsNotAvailableAtThisTimeSlotException(
-                    String.format("Doctor with ID %d is not available at %s."
-                            , appointment.getDoctorId(), newAppointmentTime));
+            throw new DoctorIsNotAvailableAtThisTimeSlotException(appointment.getDoctorId(), newAppointmentTime);
         }
 
 
