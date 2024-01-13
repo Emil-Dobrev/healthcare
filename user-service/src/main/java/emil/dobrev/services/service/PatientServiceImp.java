@@ -1,17 +1,15 @@
 package emil.dobrev.services.service;
 
 import emil.dobrev.services.dto.PatientDTO;
-import emil.dobrev.services.exception.NoSuchElementException;
 import emil.dobrev.services.repository.PatientRepository;
 import emil.dobrev.services.service.interfaces.PatientService;
 import lombok.RequiredArgsConstructor;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.yaml.snakeyaml.nodes.Tag.STR;
+import static emil.dobrev.services.utils.JpaRepositoryUtils.getOrThrow;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +20,7 @@ public class PatientServiceImp implements PatientService {
 
     @Override
     public PatientDTO getPatientById(Long id) {
-        var patient = patientRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("No patient with id: " + id));
+        var patient = getOrThrow(patientRepository, id);
         return modelMapper.map(patient, PatientDTO.class);
     }
 

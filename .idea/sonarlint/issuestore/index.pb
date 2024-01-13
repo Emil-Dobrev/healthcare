@@ -254,3 +254,7 @@ qappointment-service/src/main/java/emil/dobrev/services/exception/DoctorIsNotAva
 Sappointment-service/src/main/java/emil/dobrev/services/exception/ErrorResponse.java,a/0/a0902dc8064e72a65e4e7fbee17ab6bb347b4a6e
 ‹
 [appointment-service/src/main/java/emil/dobrev/services/exception/AlreadyExistException.java,9/4/9413e6ef60605d8e82deb21f5c0745813c669060
+p
+@user-service/src/main/java/emil/dobrev/services/utils/utils.java,c/2/c210e7c1a97e023e5d584c30493d2b3883330176
+}
+Muser-service/src/main/java/emil/dobrev/services/utils/JpaRepositoryUtils.java,0/a/0af66421983506b9f0df36d68f9e98f143797a6b

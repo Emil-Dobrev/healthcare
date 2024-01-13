@@ -17,10 +17,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+import static emil.dobrev.services.utils.JpaRepositoryUtils.getOrThrow;
+
 @Service
 @AllArgsConstructor
 public class DoctorServiceImp implements DoctorService {
-
     private final DoctorRepository doctorRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
@@ -29,8 +30,7 @@ public class DoctorServiceImp implements DoctorService {
 
     @Override
     public DoctorDTO getDoctorById(Long id) {
-        var doctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("No doctor with id: " + id));
+        var doctor = getOrThrow(doctorRepository, id);
 
         return modelMapper.map(doctor, DoctorDTO.class);
     }
@@ -47,8 +47,7 @@ public class DoctorServiceImp implements DoctorService {
 
     @Override
     public DoctorDTO updateDoctor(Long id, UpdateDoctorRequest updateDoctorRequest) {
-        var existingDoctor = doctorRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+        var existingDoctor = getOrThrow(doctorRepository, id);
 
         if (!existingDoctor.getFirstName().equals(updateDoctorRequest.firstName())) {
             existingDoctor.setFirstName(updateDoctorRequest.firstName());
@@ -75,10 +74,8 @@ public class DoctorServiceImp implements DoctorService {
     @Override
     public CommentDTO addComment(Long doctorId, Long patientId, CommentRequest request) {
 
-        var patient = patientRepository.findById(patientId)
-                .orElseThrow(() -> new NoSuchElementException("No patient with id: " + patientId));
-        var doctor = doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new NoSuchElementException("No doctor with id: " + doctorId));
+        var patient = getOrThrow(patientRepository, patientId);
+        var doctor = getOrThrow(doctorRepository, doctorId);
         String patientFullName = String.format("%s %s", patient.getFirstName(), patient.getLastName()).trim();
         Comment comment = Comment.builder()
                 .doctor(doctor)
@@ -108,8 +105,7 @@ public class DoctorServiceImp implements DoctorService {
 
     @Override
     public void voteForDoctor(Long doctorId, Long patientId, VoteRequest request) {
-        var doctor = doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new NotFoundException("Doctor not found"));
+        var doctor = getOrThrow(doctorRepository, doctorId);
 
         doctor.setVotedUsers(patientId, request.rating());
         doctor.setRating(calculateAverageRating(doctor.getVotedUsers()));
